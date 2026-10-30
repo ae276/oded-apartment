@@ -410,12 +410,14 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
     pbox('bathtub_floor', M.ceramic, 459.5, 777.5, 551, 818, 0, 0.12, t);
     pbox('bathtub_side_front', M.ceramic, 459.5, 814, 551, 818, 0.12, 0.56, t); pbox('bathtub_side_back', M.ceramic, 459.5, 777.5, 551, 781, 0.12, 0.56, t);
     pbox('bathtub_end_w', M.ceramic, 459.5, 781, 463, 814, 0.12, 0.56, t); pbox('bathtub_end_e', M.ceramic, 547.5, 781, 551, 814, 0.12, 0.56, t); }
+  tbox('bath_tub_end_ledge', M.clad, 551, 777.6, 560.2, 818, 0, 0.56, bth); // tiled ledge between the 160 cm tub and the east wall (plan: 173 cm room)
   pbox('bath_mixer_multiway', M.chrome, 495, 777.6, 505, 779, 0.7, 0.78, bth);
   pbox('bath_hand_shower_bar', M.chrome, 520, 777.6, 521, 779, 0.9, 1.9, bth);
-  tbox('bath_installation_wall', M.clad, 532, 822, 544, 905.8, 0, 1.12, bth);
-  pbox('bath_shaft_behind_wc', M.plaster, 544, 822, 557.6, 905.8, 0, CEIL, shell);
-  pbox('bath_flush_plate', M.chrome, 531.6, 871, 532, 881, 0.95, 1.05, bth);
-  rbox('bath_wc_wallhung', M.ceramic, 512, 867, 532, 885, 0.2, 0.42, 0.08, bth);
+  // concealed-cistern ledge on the east wall (plan: thin outline 544–557 × 847–906, below the plan cut)
+  tbox('bath_installation_wall', M.clad, 544, 847.5, 557.6, 905.8, 0, 1.12, bth);
+  tbox('bath_installation_top', M.clad, 544, 847.5, 557.6, 905.8, 1.12, 1.14, bth);
+  pbox('bath_flush_plate', M.chrome, 543.6, 871, 544, 881, 0.95, 1.05, bth);
+  rbox('bath_wc_wallhung', M.ceramic, 513, 866, 544, 886, 0.2, 0.42, 0.08, bth);
   pbox('bath_vanity', M.oak, 459.5, 906, 505.5, 931.7, 0.48, 0.82, bth);
   pbox('bath_vanity_integral_basin', M.ceramic, 459.5, 905.5, 505.5, 931.7, 0.82, 0.86, bth);
   pbox('bath_basin_mixer', M.chrome, 481, 929, 483, 931.7, 0.86, 1.02, bth);
@@ -425,34 +427,40 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   pbox('master_shower_mixer', M.chrome, 459.5, 960, 461, 970, 1.0, 1.1, mb);
   pbox('master_shower_bar', M.chrome, 459.5, 950, 461, 951, 1.0, 2.0, mb);
   pcyl('master_hand_shower', M.chrome, 462, 950.5, 0.035, 1.75, 1.95, mb, 20);
-  pbox('master_vanity', M.oak, 530, 998, 557, 1042, 0.48, 0.82, mb);
-  pbox('master_vanity_integral_basin', M.ceramic, 529, 998, 557, 1042, 0.82, 0.86, mb);
-  pbox('master_basin_mixer', M.chrome, 554, 1019, 557, 1021, 0.86, 1.02, mb);
-  pbox('master_mirror', M.mirror, 556.4, 1000, 557, 1040, 1.05, 1.85, mb);
-  tbox('master_installation_wall', M.clad, 545, 1042, 557, 1088, 0, 1.12, mb);
-  pbox('master_flush_plate', M.chrome, 544.6, 1058, 545, 1068, 0.95, 1.05, mb);
-  rbox('master_wc_wallhung', M.ceramic, 524, 1054, 545, 1072, 0.2, 0.42, 0.08, mb);
+  pbox('master_vanity', M.oak, 535.5, 992.6, 557.8, 1037, 0.48, 0.82, mb);
+  pbox('master_vanity_integral_basin', M.ceramic, 535, 992.6, 557.8, 1037, 0.82, 0.86, mb);
+  pbox('master_basin_mixer', M.chrome, 554.8, 1013.8, 557.8, 1015.8, 0.86, 1.02, mb);
+  pbox('master_mirror', M.mirror, 557.2, 995, 557.8, 1035, 1.05, 1.85, mb);
+  tbox('master_installation_wall', M.clad, 545, 1037, 557.8, 1087.7, 0, 1.12, mb);
+  pbox('master_flush_plate', M.chrome, 544.6, 1054, 545, 1064, 0.95, 1.05, mb);
+  rbox('master_wc_wallhung', M.ceramic, 515, 1049, 545, 1069, 0.2, 0.42, 0.08, mb);
   const b4 = grp('bath_4', wet);
   pbox('bath4_shower_drain_linear', M.blackMetal, 803, 541, 900, 543, 0, 0.003, b4);
   pbox('bath4_shower_mixer', M.chrome, 845, 492.4, 855, 494, 1.0, 1.1, b4);
   pbox('bath4_shower_bar', M.chrome, 870, 492.4, 871, 494, 1.0, 2.0, b4);
-  pbox('bath4_vanity', M.oak, 876, 550, 902, 592, 0.48, 0.82, b4);
-  pbox('bath4_vanity_integral_basin', M.ceramic, 875, 550, 902, 592, 0.82, 0.86, b4);
-  pbox('bath4_basin_mixer', M.chrome, 899, 570, 902, 572, 0.86, 1.02, b4);
-  pbox('bath4_mirror', M.mirror, 901.4, 552, 902, 590, 1.05, 1.85, b4);
-  pbox('bath4_concealed_cistern', M.clad, 832, 638, 868, 646, 0, 1.12, b4);
-  rbox('bath4_wc_wallhung', M.ceramic, 841, 617, 859, 638, 0.2, 0.42, 0.08, b4);
+  pbox('bath4_vanity', M.oak, 879.5, 543.5, 902, 589, 0.48, 0.82, b4);
+  pbox('bath4_vanity_integral_basin', M.ceramic, 879, 543.5, 902, 589, 0.82, 0.86, b4);
+  pbox('bath4_basin_mixer', M.chrome, 899, 565.3, 902, 567.3, 0.86, 1.02, b4);
+  pbox('bath4_mirror', M.mirror, 901.4, 546, 902, 586, 1.05, 1.85, b4);
+  // concealed-cistern ledge across the south wall (plan: thin outline 825–901 × 631–646)
+  tbox('bath4_concealed_cistern', M.clad, 825, 631, 902, 646, 0, 1.12, b4);
+  tbox('bath4_cistern_ledge_top', M.clad, 825, 631, 902, 646, 1.12, 1.14, b4);
+  pbox('bath4_flush_plate', M.chrome, 845, 630.6, 855, 631, 0.95, 1.05, b4);
+  rbox('bath4_wc_wallhung', M.ceramic, 840, 600, 860, 631, 0.2, 0.42, 0.08, b4);
   // laundry + mistor: water heater 150 L in the mistor (spec 3.6.2), drying rack (3.4), A/C condensers (assumed)
   const svc = grp('laundry_and_mistor', wet);
-  pcyl('water_heater_150L', M.appliance, 200, 1032, 0.24, 1.0, 2.2, svc);
-  pbox('ac_condenser_a', M.appliance, 166, 1058, 222, 1080, 0.05, 0.8, svc);
-  pbox('ac_condenser_b', M.appliance, 166, 1058, 222, 1080, 0.85, 1.6, svc);
-  [1018, 1095].forEach((y, i) => pbox('drying_rack_post_' + i, M.alu, 236, y - 1, 238, y + 1, 1.7, 2.3, svc));
-  for (let i = 0; i < 5; i++) pbox('drying_line_' + i, M.alu, 236.5, 1018, 237.5, 1095, 2.0 - i * 0.002, 2.004 - i * 0.002, svc).position.x += (i - 2) * 0.12;
-  pbox('washing_machine', M.appliance, 336, 1060, 362, 1092, 0, 0.85, staging);
-  pcyl('washing_machine_door', M.blackGlass, 349, 1059.5, 0.15, 0.4, 0.42, staging).rotation.x = PI / 2;
-  staging.children[staging.children.length - 1].position.set(ux(349), 0.5, uz(1059.6));
-  pbox('dryer', M.appliance, 364, 1060, 390, 1092, 0, 0.85, staging);
+  // plan: water heater circle at (201,1084); A/C condenser dashed (wall-hung, above the cut) 168–198 × 1013–1063; 4 drying lines x 222–237
+  pcyl('water_heater_150L', M.appliance, 201, 1084, 0.25, 0.6, 1.9, svc);
+  pbox('ac_condenser', M.appliance, 168, 1014, 198, 1062, 1.45, 2.25, svc);
+  pbox('ac_condenser_bracket', M.alu, 196, 1016, 198, 1060, 1.4, 1.45, svc);
+  [1012, 1096].forEach((y, i) => pbox('drying_rack_post_' + i, M.alu, 219, y - 1, 240, y + 1, 2.0, 2.04, svc));
+  [222, 227, 232, 237].forEach((x, i) => pbox('drying_line_' + i, M.alu, x - 0.4, 1012, x + 0.4, 1096, 2.0, 2.006, svc));
+  pbox('washing_machine', M.appliance, 320.5, 1056, 354.5, 1091, 0, 0.85, staging);
+  pcyl('washing_machine_door', M.blackGlass, 337.5, 1055.5, 0.16, 0.4, 0.42, staging).rotation.x = PI / 2;
+  staging.children[staging.children.length - 1].position.set(ux(337.5), 0.48, uz(1055.6));
+  pbox('dryer', M.appliance, 355.5, 1056, 390, 1091, 0, 0.85, staging);
+  pcyl('dryer_door', M.blackGlass, 372.7, 1055.5, 0.16, 0.4, 0.42, staging).rotation.x = PI / 2;
+  staging.children[staging.children.length - 1].position.set(ux(372.7), 0.48, uz(1055.6));
   pbox('laundry_shelf', M.oak, 300, 1078, 391, 1092, 1.6, 1.63, staging);
 
   // =====================================================================
@@ -714,6 +722,93 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
       for (let i = 0; i < n; i++) { const x = x0 + r2() * (x1 - x0), z = z0 + r2() * (z1 - z0); let c = false; for (let a = 0, b = P.length - 1; a < P.length; b = a++) { if (((P[a][1] > z) != (P[b][1] > z)) && (x < (P[b][0] - P[a][0]) * (z - P[a][1]) / (P[b][1] - P[a][1]) + P[a][0])) c = !c; } if (c) pts.push([x, z, 2.2 + r2() * 2.2]); } }
     ctxGeo.trees = pts;
   }
+  // ---- live sea: wind-driven swell + chop as per-pixel Gerstner normals, whitecaps, and surf that rolls onto the real shoreline ----
+  // The shoreline mask is rasterised from the same ocean polygon (OSM coastline), blurred into a ~40 m band, so the breaking lines
+  // follow Bat Galim's actual beach and breakwaters. Waves travel from the west-north-west (the prevailing Mediterranean swell).
+  let shoreTex = null; const SHORE_EXT = 1600, SHORE_N = 512;
+  const makeShore = () => {
+    if (shoreTex || !ctxData || !ctxData.ocean) return shoreTex;
+    const c = document.createElement('canvas'); c.width = c.height = SHORE_N; const x = c.getContext('2d');
+    const T = (v) => [(v[0] + SHORE_EXT) / (2 * SHORE_EXT) * SHORE_N, (v[1] + SHORE_EXT) / (2 * SHORE_EXT) * SHORE_N];
+    x.fillStyle = '#000'; x.fillRect(0, 0, SHORE_N, SHORE_N); x.fillStyle = '#fff';
+    for (const q of ctxData.ocean) { const pth = new Path2D(); [q.o, ...(q.h || [])].forEach((r) => { decode(r).forEach((v, i) => { const [px, py] = T(v); i ? pth.lineTo(px, py) : pth.moveTo(px, py); }); pth.closePath(); }); x.fill(pth, 'evenodd'); }
+    const im = x.getImageData(0, 0, SHORE_N, SHORE_N).data, N = SHORE_N; let A = new Float32Array(N * N), B = new Float32Array(N * N);
+    for (let i = 0; i < N * N; i++) A[i] = im[i * 4] / 255;
+    const R = 5; // box blur ×3 ≈ gaussian, ~35 m
+    for (let pass = 0; pass < 3; pass++) {
+      for (let j = 0; j < N; j++) { let acc = 0; for (let i = -R; i <= R; i++) acc += A[j * N + Math.min(N - 1, Math.max(0, i))]; for (let i = 0; i < N; i++) { B[j * N + i] = acc / (2 * R + 1); acc += A[j * N + Math.min(N - 1, i + R + 1)] - A[j * N + Math.max(0, i - R)]; } }
+      for (let i = 0; i < N; i++) { let acc = 0; for (let j = -R; j <= R; j++) acc += B[Math.min(N - 1, Math.max(0, j)) * N + i]; for (let j = 0; j < N; j++) { A[j * N + i] = acc / (2 * R + 1); acc += B[Math.min(N - 1, j + R + 1) * N + i] - B[Math.max(0, j - R) * N + i]; } }
+    }
+    const out = new Uint8Array(N * N); for (let i = 0; i < N * N; i++) out[i] = Math.round(Math.min(1, Math.max(0, A[i])) * 255);
+    shoreTex = new THREE.DataTexture(out, N, N, THREE.RedFormat, THREE.UnsignedByteType); shoreTex.magFilter = shoreTex.minFilter = THREE.LinearFilter; shoreTex.needsUpdate = true;
+    return shoreTex;
+  };
+  const liveSea = (mat) => {
+    const U = mat.uniforms;
+    U.tsec = { value: 0 }; U.seaState = { value: 0.55 }; U.shoreMap = { value: makeShore() }; U.shoreOn = { value: shoreTex ? 1 : 0 };
+    U.shoreXf = { value: new THREE.Vector3(SHORE_EXT, SHORE_EXT, 1 / (2 * SHORE_EXT)) };
+    mat.vertexShader = mat.vertexShader.replace('varying vec4 worldPosition;', 'varying vec4 worldPosition;\nvarying vec2 vLoc;').replace('void main() {', 'void main() {\n vLoc = position.xy;');
+    mat.fragmentShader = mat.fragmentShader
+      .replace('varying vec4 worldPosition;', `varying vec4 worldPosition;
+        varying vec2 vLoc;
+        uniform float tsec; uniform float seaState; uniform sampler2D shoreMap; uniform float shoreOn; uniform vec3 shoreXf;
+        // 12 directional waves, 36 m swell down to ~0.5 m chop, deep-water dispersion w = sqrt(g k); octaves fade out below the pixel footprint
+        float hash12(vec2 p) { vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+        float vnoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash12(i), hash12(i + vec2(1, 0)), f.x), mix(hash12(i + vec2(0, 1)), hash12(i + vec2(1, 1)), f.x), f.y); }
+        vec3 seaWaves(vec2 p, float t, float foot) {
+          vec3 acc = vec3(0.0); float L = 36.0;
+          vec2 warp = vec2(vnoise(p * 0.012 + 3.1), vnoise(p * 0.012 + 17.7)) - 0.5; p += warp * 14.0; // break up straight crests
+          for (int i = 0; i < 12; i++) {
+            float fi = float(i);
+            float ang = 0.05 + sin(fi * 2.399) * (0.25 + fi * 0.09); // directional spread grows with frequency
+            vec2 d = vec2(cos(ang), sin(ang));
+            float k = 6.2831853 / L, w = sqrt(9.81 * k);
+            float steep = mix(0.04, 0.10, seaState) * (fi < 2.0 ? 0.6 : 1.0);
+            float a = steep / k;
+            float fade = 1.0 - smoothstep(L * 0.18, L * 0.6, foot);
+            float grp = 0.45 + 1.1 * vnoise(p * (0.9 / L) + vec2(fi * 7.3, -t * 0.03 * (1.0 + fi * 0.2))); // wave groups
+            float ph = k * dot(d, p) - w * t + fi * 1.913;
+            acc.xy += d * (a * k * cos(ph)) * fade * grp;
+            acc.z += a * sin(ph) * fade * grp / max(L, 1.0);
+            L *= 0.7;
+          }
+          return acc;
+        }
+`)
+      .replace(`vec4 noise = getNoise( worldPosition.xz * size );
+					vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.5, 1.0, 1.5 ) );`, `vec4 noise = getNoise( worldPosition.xz * size );
+          float camDist = length(eye - worldPosition.xyz);
+          vec3 eyeDirW = (eye - worldPosition.xyz) / max(camDist, 0.001);
+          float foot = camDist * 0.0018 / max(abs(eyeDirW.y), 0.04); // pixel footprint along the view (grazing angles stretch it)
+          vec2 lp = vec2(vLoc.x, -vLoc.y);
+          vec3 wv = seaWaves(lp, tsec, foot);
+          float micro = 1.0 - smoothstep(0.4, 3.0, foot);
+          vec3 nMicro = noise.xzy * vec3(1.0, 1.0, 1.0);
+          vec3 surfaceNormal = normalize(vec3(-wv.x, 1.0, -wv.y) + vec3(nMicro.x, 0.0, nMicro.z) * (0.05 + 0.3 * micro));
+          // shoreline band (1 = open sea, 0.5 = waterline)
+          vec2 suv = (lp + shoreXf.xy) * shoreXf.z;
+          float sh = (shoreOn > 0.5 && suv.x > 0.0 && suv.x < 1.0 && suv.y > 0.0 && suv.y < 1.0) ? texture2D(shoreMap, suv).r : 1.0;
+          float nearShore = 1.0 - smoothstep(0.55, 0.985, sh);`)
+      .replace('vec3 outgoingLight = albedo;', `// shallow water near the beach reads turquoise
+          albedo = mix(albedo, albedo * 0.6 + vec3(0.06, 0.20, 0.20) * (0.4 + 0.6 * max(sunDirection.y, 0.0)), nearShore * 0.55 * (1.0 - reflectance));
+          // whitecaps on the crests of the bigger waves
+          float n1 = vnoise(lp * 0.09 + vec2(tsec * 0.05, -tsec * 0.03)), n2 = vnoise(lp * 0.6 - vec2(tsec * 0.2, tsec * 0.11));
+          float crest = wv.z * 18.0 + n1 * 0.9 + n2 * 0.35;
+          float caps = smoothstep(mix(1.75, 1.05, seaState), mix(2.1, 1.35, seaState), crest) * (1.0 - smoothstep(400.0, 2600.0, camDist)) * 0.85;
+          // surf: lines of broken water rolling in toward the waterline, plus the wash on the sand
+          float dShore = (1.0 - sh) * 2.0; // 0 offshore → 1 at the waterline
+          float ph = dShore * 26.0 - tsec * 0.9 + n1 * 2.2 + n2 * 0.6;
+          float rolls = pow(max(0.0, sin(ph)), 5.0) * smoothstep(0.02, 0.3, dShore) * (1.0 - smoothstep(0.85, 1.0, dShore));
+          float wash = smoothstep(0.78, 0.97, dShore) * (0.55 + 0.45 * sin(tsec * 0.7 + n1 * 4.0));
+          float patchy = smoothstep(0.25, 0.75, vnoise(lp * 0.05 + vec2(0.0, tsec * 0.04)) * 0.7 + n2 * 0.45);
+          float surf = clamp((rolls * (0.5 + 0.7 * seaState) * patchy + wash * (0.6 + 0.4 * patchy)), 0.0, 1.0) * step(0.001, 1.0 - sh);
+          float foam = clamp(max(caps * (1.0 - nearShore * 0.5), surf), 0.0, 1.0);
+          vec3 foamCol = vec3(0.95, 0.97, 0.98) * (0.55 + 0.75 * max(sunDirection.y, 0.0)) * mix(vec3(1.0), sunColor, 0.35);
+          albedo = mix(albedo, foamCol, foam);
+          vec3 outgoingLight = albedo;`);
+    mat.needsUpdate = true;
+  };
   const makeContext = (name) => {
     const g = new THREE.Group(); g.name = name; if (!ctxData) return g;
     const add = (geo, mat, n, shadow = true) => { if (!geo) return null; const m = new THREE.Mesh(geo, mat); m.name = n; m.castShadow = shadow; m.receiveShadow = true; g.add(m); return m; };
@@ -737,20 +832,22 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
       keep, demo, plan,
       setPlanned(on) { if (plan) plan.visible = on; demo.visible = !on; },
       // reflective animated water for the balcony view; the plain surface stays for the walk-through and photoreal
-      setWater(on, sunDir) {
+      setWater(on, sunDir, res = 512) {
         if (!sea) return null;
         if (on && !water) {
           const c = document.createElement('canvas'); c.width = c.height = 256; const x = c.getContext('2d'), img = x.createImageData(256, 256);
           const hgt = (u, v) => { let s2 = 0; [[3, 2, 0.5], [5, -4, 0.3], [9, 7, 0.18], [-13, 11, 0.12], [21, -17, 0.07]].forEach(([a, b, amp], i) => (s2 += amp * Math.sin(2 * PI * (a * u + b * v) + i * 1.7))); return s2; };
           for (let j = 0; j < 256; j++) for (let i = 0; i < 256; i++) { const u = i / 256, v = j / 256, e = 1 / 256, dx = (hgt(u + e, v) - hgt(u - e, v)) * 6, dy = (hgt(u, v + e) - hgt(u, v - e)) * 6; const l = Math.hypot(dx, dy, 1), k2 = (j * 256 + i) * 4; img.data[k2] = (-dx / l * 0.5 + 0.5) * 255; img.data[k2 + 1] = (-dy / l * 0.5 + 0.5) * 255; img.data[k2 + 2] = (1 / l * 0.5 + 0.5) * 255; img.data[k2 + 3] = 255; }
           x.putImageData(img, 0, 0); const nt = new THREE.CanvasTexture(c); nt.wrapS = nt.wrapT = THREE.RepeatWrapping;
-          water = new Water(ctxGeo.ocean, { textureWidth: 512, textureHeight: 512, waterNormals: nt, sunDirection: new THREE.Vector3(0, 1, 0), sunColor: 0xfff4e0, waterColor: 0x0e4a66, distortionScale: 2.6, fog: true });
-          water.name = 'context_sea_water'; water.rotation.x = -PI / 2; water.position.y = -0.7; water.material.uniforms.size.value = 0.6; g.add(water);
+          water = new Water(ctxGeo.ocean, { textureWidth: res, textureHeight: res, waterNormals: nt, sunDirection: new THREE.Vector3(0, 1, 0), sunColor: 0xfff4e0, waterColor: 0x0b4660, distortionScale: 3.6, fog: true });
+          water.name = 'context_sea_water'; water.rotation.x = -PI / 2; water.position.y = -0.7; water.material.uniforms.size.value = 5.0; g.add(water);
+          liveSea(water.material);
         }
         if (water) { water.visible = !!on; if (sunDir) water.material.uniforms.sunDirection.value.set(...sunDir).normalize(); }
         sea.visible = !on || !water; return water;
       },
-      tick(dt) { if (water && water.visible) water.material.uniforms.time.value += dt * 0.6; },
+      tick(dt) { if (water && water.visible) { const u = water.material.uniforms; u.time.value += dt * 0.6; if (u.tsec) u.tsec.value += dt; } },
+      setSea(state) { if (water && water.material.uniforms.seaState) water.material.uniforms.seaState.value = state; },
     };
     return g;
   };

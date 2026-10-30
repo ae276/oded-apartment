@@ -59,7 +59,7 @@ export function createWalk(THREE, stage, M, unitPt, mapCanvas, opts = {}) {
   const cam = stage.camera;
   const st = { x: 0, z: 0, yaw: 0, pitch: -0.05, keys: new Set(), goal: null, bob: 0, stick: [0, 0] };
   const lookAtPt = (px, py) => { const dx = ux(px) - st.x, dz = uz(py) - st.z; st.yaw = Math.atan2(-dx, -dz); };
-  const place = (px, py, lx, ly) => { const [x, z] = nearestFree(ux(px), uz(py)); st.x = x; st.z = z; st.goal = null; st.pitch = -0.06; lookAtPt(lx, ly); };
+  const place = (px, py, lx, ly, pitch = -0.06) => { const [x, z] = nearestFree(ux(px), uz(py)); st.x = x; st.z = z; st.goal = null; st.pitch = pitch; lookAtPt(lx, ly); }; // optional 5th: pitch (small rooms look down to show the fixtures)
   const tryMove = (dx, dz) => {
     let moved = false;
     if (free(st.x + dx, st.z)) { st.x += dx; moved = true; }
@@ -141,9 +141,14 @@ export function createWalk(THREE, stage, M, unitPt, mapCanvas, opts = {}) {
   const base = document.createElement('canvas'); base.width = mapCanvas.width; base.height = mapCanvas.height;
   const drawBase = () => { const g = base.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, MW, MH);
     g.fillStyle = '#f6f4ef'; g.beginPath(); fp.forEach((p, i) => (i ? g.lineTo(mx(ux(p[0])), mz(uz(p[1]))) : g.moveTo(mx(ux(p[0])), mz(uz(p[1]))))); g.closePath(); g.fill();
-    g.fillStyle = '#ddd7cc'; furn.forEach((b) => (b[4] === 3 && empty) || g.fillRect(mx(b[0]), mz(b[1]), (b[2] - b[0]) * sx, (b[3] - b[1]) * sx));
-    g.fillStyle = '#3a3833'; unitPt.walls.forEach((poly) => { g.beginPath(); poly.forEach((p, i) => (i ? g.lineTo(mx(ux(p[0])), mz(uz(p[1]))) : g.moveTo(mx(ux(p[0])), mz(uz(p[1]))))); g.closePath(); g.fill(); });
+    if (sheet) { // the sale-plan sheet itself (p23, crop 140,230 → 925,1295 pt) under the walls, so the dot moves on the real drawing
+      g.save(); g.beginPath(); fp.forEach((p, i) => (i ? g.lineTo(mx(ux(p[0])), mz(uz(p[1]))) : g.moveTo(mx(ux(p[0])), mz(uz(p[1]))))); g.closePath(); g.clip();
+      g.globalAlpha = 0.9; g.drawImage(sheet, mx(ux(SHEET[0])), mz(uz(SHEET[1])), (ux(SHEET[2]) - ux(SHEET[0])) * sx, (uz(SHEET[3]) - uz(SHEET[1])) * sx); g.restore();
+    } else { g.fillStyle = '#ddd7cc'; furn.forEach((b) => (b[4] === 3 && empty) || g.fillRect(mx(b[0]), mz(b[1]), (b[2] - b[0]) * sx, (b[3] - b[1]) * sx)); }
+    g.fillStyle = sheet ? 'rgba(58,56,51,0.55)' : '#3a3833'; unitPt.walls.forEach((poly) => { g.beginPath(); poly.forEach((p, i) => (i ? g.lineTo(mx(ux(p[0])), mz(uz(p[1]))) : g.moveTo(mx(ux(p[0])), mz(uz(p[1]))))); g.closePath(); g.fill(); });
   };
+  const SHEET = [140, 230, 925, 1295]; let sheet = null;
+  if (opts.planSheet) { const im = new Image(); im.onload = () => { sheet = im; drawBase(); drawMap(); }; im.src = opts.planSheet; }
   drawBase();
   function drawMap() {
     if (!active) return;
@@ -171,7 +176,7 @@ export function createWalk(THREE, stage, M, unitPt, mapCanvas, opts = {}) {
     start(room = 'entrance') {
       active = true; st.keys.clear(); const R = ROOMS[room]; place(...R);
       stage.setFx(M.fx); M.fx.visible = true; M.ceil.visible = true;
-      cam.fov = innerHeight > innerWidth ? 90 : 72; // portrait phones need a taller vertical FOV
+      cam.fov = innerHeight > innerWidth ? 78 : 60; // ~90° horizontal like a real eye/phone camera, so rooms read at true size; portrait phones need a taller vertical FOV
       cam.near = 0.05; cam.far = 3000; cam.updateProjectionMatrix();
       stage.setWalk(step); drawMap();
     },
@@ -183,6 +188,6 @@ export function createWalk(THREE, stage, M, unitPt, mapCanvas, opts = {}) {
     get grid() { return { grid, W, H, X0, Z0, RES }; },
     setStick(f, s) { st.stick = [f, s]; },
     setEmpty(on) { empty = !!on; drawBase(); if (active && !free(st.x, st.z)) { const [x, z] = nearestFree(st.x, st.z); st.x = x; st.z = z; } drawMap(); },
-    fitFov() { if (active) { cam.fov = innerHeight > innerWidth ? 90 : 72; cam.updateProjectionMatrix(); } },
+    fitFov() { if (active) { cam.fov = innerHeight > innerWidth ? 78 : 60; cam.updateProjectionMatrix(); } },
   };
 }
