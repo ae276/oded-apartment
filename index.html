@@ -45,7 +45,7 @@
     --bg: #eceae5; --panel: rgba(250, 249, 246, 0.95); --ink: #1d1c19; --ink-2: #4b4943; --ink-3: #7c786f;
     --line: rgba(29, 28, 25, 0.12); --chip: rgba(29, 28, 25, 0.06); --chip-hover: rgba(29, 28, 25, 0.11);
     --accent: oklch(0.64 0.15 45); --accent-ink: #ffffff; --accent-soft: oklch(0.64 0.15 45 / 0.14);
-    --stage-cut: #ebe9e3; --stage-walk: #e7ecef; --stage-bld: #e5e8e9; --scrim: rgba(29, 28, 25, 0.84); --scrim-ink: #f4f2ec;
+    --stage-cut: #ebe9e3; --stage-walk: #e7ecef; --stage-bld: #e5e8e9; --scrim: rgba(29, 28, 25, 0.84); --scrim-ink: #f4f2ec; --sea: #3f86ad; --sea-ink: #2b6f95;
     --font-ui: "IBM Plex Sans Hebrew", "Assistant", "Arial Hebrew", Arial, sans-serif;
     --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   }
@@ -53,12 +53,12 @@
     --bg: #1b1c1d; --panel: rgba(32, 33, 34, 0.94); --ink: #ecebe7; --ink-2: #c3c0b8; --ink-3: #8f8c84;
     --line: rgba(236, 235, 231, 0.12); --chip: rgba(236, 235, 231, 0.07); --chip-hover: rgba(236, 235, 231, 0.13);
     --accent: oklch(0.7 0.15 48); --accent-ink: #1b1c1d; --accent-soft: oklch(0.7 0.15 48 / 0.18);
-    --stage-cut: #262728; --stage-walk: #2a2f33; --stage-bld: #24282a; --scrim: rgba(236, 235, 231, 0.9); --scrim-ink: #1b1c1d; color-scheme: dark; } }
+    --stage-cut: #262728; --stage-walk: #2a2f33; --stage-bld: #24282a; --scrim: rgba(236, 235, 231, 0.9); --scrim-ink: #1b1c1d; --sea: #4f9cc6; --sea-ink: #7dbbe0; color-scheme: dark; } }
   :root[data-theme="dark"] {
     --bg: #1b1c1d; --panel: rgba(32, 33, 34, 0.94); --ink: #ecebe7; --ink-2: #c3c0b8; --ink-3: #8f8c84;
     --line: rgba(236, 235, 231, 0.12); --chip: rgba(236, 235, 231, 0.07); --chip-hover: rgba(236, 235, 231, 0.13);
     --accent: oklch(0.7 0.15 48); --accent-ink: #1b1c1d; --accent-soft: oklch(0.7 0.15 48 / 0.18);
-    --stage-cut: #262728; --stage-walk: #2a2f33; --stage-bld: #24282a; --scrim: rgba(236, 235, 231, 0.9); --scrim-ink: #1b1c1d; color-scheme: dark; }
+    --stage-cut: #262728; --stage-walk: #2a2f33; --stage-bld: #24282a; --scrim: rgba(236, 235, 231, 0.9); --scrim-ink: #1b1c1d; --sea: #4f9cc6; --sea-ink: #7dbbe0; color-scheme: dark; }
   html, body { height: 100%; }
   body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 14px; overflow: hidden; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   button { font: inherit; color: inherit; }
@@ -208,6 +208,26 @@
   :root[data-device="mobile"] .tag { font-size: 10.5px; padding: 2px 7px; }
   :root[data-device="mobile"] .mbar { top: auto; bottom: calc(126px + env(safe-area-inset-bottom, 0px)); }
   :root[data-device="tablet"] .rail button, :root[data-device="tablet"] .walkcard button { min-height: 36px; }
+  .seastat { font-size: 12.5px; line-height: 1.55; }
+  .seastat b { font-family: var(--font-data); font-weight: 500; }
+  .seastat .lost { color: var(--accent); font-weight: 600; }
+  .strip svg { display: block; width: 100%; height: auto; direction: ltr; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 11px; color: var(--ink-3); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-inline-end: 4px; vertical-align: -1px; }
+  .k-vis { background: var(--sea); } .k-lost { background: var(--accent); } .k-blk { background: var(--ink-3); opacity: 0.55; } .k-own { background: var(--ink); }
+  #blockers { font-size: 12px; color: var(--ink-2); display: grid; gap: 2px; }
+  #blockers div { display: flex; justify-content: space-between; gap: 8px; }
+  #blockers b { font-family: var(--font-data); font-weight: 500; color: var(--ink); }
+  table.ss { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  table.ss th, table.ss td { padding: 3px 4px; border-bottom: 1px solid var(--line); text-align: right; }
+  table.ss th { color: var(--ink-3); font-weight: 500; font-size: 10.5px; }
+  table.ss td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; direction: ltr; text-align: left; }
+  table.ss tr[aria-current="true"] td { background: var(--accent-soft); }
+  .yes { color: var(--sea-ink); font-weight: 600; } .no { color: var(--ink-3); }
+  .ltag { pointer-events: none; font-size: 11px; padding: 2px 8px; }
+  .ltag.pl { border-style: dashed; color: var(--accent); }
+  .ltag.sea { background: var(--sea); color: #fff; border-color: transparent; font-weight: 600; }
+  .ltag.sun { background: var(--accent); color: var(--accent-ink); border-color: transparent; font-weight: 600; }
   @media (max-height: 500px) { :root[data-device="mobile"] .rail:not(.expanded) .head { display: none; } :root[data-device="mobile"] .rstatus, :root[data-device="mobile"] body.walking .joy { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); } }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -232,8 +252,20 @@
   <div class="views" id="views">
     <button type="button" data-view="cutaway" aria-pressed="true">חתך אקסונומטרי <span>תוכנית</span></button>
     <button type="button" data-view="walk" aria-pressed="false">סיור בתוך הדירה <span>גוף ראשון</span></button>
+    <button type="button" data-view="balcony" aria-pressed="false">הנוף מהמרפסת <span>360° · ים · שקיעות</span></button>
     <button type="button" data-view="building" aria-pressed="false">הדירה במגדל <span>מגדל 1 וסביבה</span></button>
     <button type="button" data-view="parking" aria-pressed="false">חניה ומחסן <span>349 + 349B · מחסן</span></button>
+  </div>
+  <div class="box" id="balcbox" hidden>
+    <div class="label">הנוף ממרפסת דירה 120 · קומה 27</div>
+    <div class="seg" id="scenSeg"><button type="button" data-v="ex">המצב היום</button><button type="button" data-v="fu">אחרי התוכניות</button></div>
+    <div class="seastat" id="seastat"></div>
+    <div class="strip" id="strip" aria-label="קשת הנוף מהמרפסת"></div>
+    <div class="legend"><span><i class="k-vis"></i>ים נראה</span><span><i class="k-lost"></i>ייחסם בעתיד</span><span><i class="k-blk"></i>חסום היום</span><span><i class="k-own"></i>הבניין עצמו</span></div>
+    <div id="blockers"></div>
+    <div class="label" style="margin:4px 0 0">שקיעות</div>
+    <div class="sunsets wrapx" id="sunsets"></div>
+    <div class="actions"><button type="button" class="btn primary" id="toSunset">לשקיעה בתאריך שבחרתי</button><button type="button" class="btn" id="toSea">מבט לים</button></div>
   </div>
   <div class="box" id="plevels" hidden>
     <div class="label">מפלס חניון</div>
@@ -472,6 +504,7 @@
   const VIEWS = {
     cutaway: { obj: 'unit', ceiling: false, fov: 30, dirFrame: [-0.55, 1.35, 0.85], mult: 0.92, bg: '--stage-cut' },
     walk: { obj: 'unit', ceiling: true, walk: true, bg: '--stage-walk' },
+    balcony: { obj: 'unit', ceiling: true, look: true, bg: '--stage-walk' },
     building: { obj: 'bld', fov: 30, bg: '--stage-bld' },
     parking: { obj: 'park', fov: 32, bg: '--stage-bld' },
   };
@@ -481,25 +514,27 @@
   function setOutlook(on) {
     outlookOn = on && !!ctxData; store.set('outlook', outlookOn ? '1' : '0');
     document.getElementById('outlookBtn').setAttribute('aria-pressed', String(outlookOn));
-    const inWalk = currentView === 'walk';
-    if (inWalk && outlookOn) { stage._scene.add(outlook); stage._scene.fog = fog; stage._ground.visible = false; }
+    const inWalk = currentView === 'walk' || currentView === 'balcony';
+    outlook.userData.setPlanned?.(currentView === 'balcony' ? scen === 'fu' : planOn.checked && prof.tier !== 'low');
+    if ((currentView === 'walk' && outlookOn) || (currentView === 'balcony' && ctxData)) { stage._scene.add(outlook); stage._scene.fog = fog; stage._ground.visible = false; }
     else { stage._scene.remove(outlook); stage._scene.fog = null; stage._ground.visible = true; }
     pipe.stopPhoto();
   }
   function show(name) {
     const v = VIEWS[name];
     currentView = name; if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
-    walker.stop(); stopMeasure();
+    walker.stop(); stopMeasure(); stopLook();
     document.body.classList.toggle('walking', name === 'walk');
     document.querySelectorAll('#views button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === name)));
     document.getElementById('floors').hidden = name !== 'building';
     document.getElementById('plevels').hidden = name !== 'parking';
     document.getElementById('sunbox').hidden = name === 'parking';
-    document.getElementById('tools').hidden = name === 'building' || name === 'parking';
-    document.getElementById('opts').hidden = name === 'building' || name === 'parking';
+    document.getElementById('tools').hidden = name === 'building' || name === 'parking' || name === 'balcony';
+    document.getElementById('opts').hidden = name === 'building' || name === 'parking' || name === 'balcony';
+    document.getElementById('balcbox').hidden = name !== 'balcony';
     document.getElementById('areasBtn').hidden = name !== 'cutaway';
     document.getElementById('outlookBtn').hidden = name !== 'walk' || !ctxData;
-    tagsEl.hidden = name !== 'cutaway' && name !== 'parking';
+    tagsEl.hidden = name !== 'cutaway' && name !== 'parking' && name !== 'balcony';
     tagsEl.dataset.set = name;
     stage.setBackground(css(v.bg));
     if (v.obj === 'unit') {
@@ -509,8 +544,9 @@
       stage.setFx(M.fx); M.fx.visible = v.ceiling;
       stage._scene.environmentIntensity = v.ceiling ? 0.32 : 0.5;
       stage._hemi.intensity = v.ceiling ? 0.3 : 0.4;
-      pipe.setScene(v.ceiling ? 'unit-walk' + (outlookOn ? '-ctx' : '') : 'unit-cut', { photo: prof.photo, skyBackground: !!v.ceiling, exposure: v.ceiling ? 1.08 : 1.0, skyTilt: -0.12, skyIntensity: 0.9 });
+      pipe.setScene(v.look ? 'unit-balc-' + scen : v.ceiling ? 'unit-walk' + (outlookOn ? '-ctx' : '') : 'unit-cut', { photo: prof.photo, skyBackground: !!v.ceiling, exposure: v.ceiling ? 1.08 : 1.0, skyTilt: -0.12, skyIntensity: 0.9 });
       if (v.walk) { walker.start('entrance'); markRoom('entrance'); walker.setEmpty(empty); showHint(); }
+      else if (v.look) { startLook(); }
       else {
         const box = new THREE.Box3().setFromObject(M.unit), c = box.getCenter(new THREE.Vector3()), r = box.getBoundingSphere(new THREE.Sphere()).radius;
         const d = (r / Math.tan((v.fov * Math.PI) / 360)) * v.mult, dir = new THREE.Vector3(...v.dirFrame).normalize();
@@ -667,8 +703,10 @@
     const cam = stage.camera, w = stage.clientWidth, h = stage.clientHeight;
     if (!tagsEl.hidden) {
       const inPark = currentView === 'parking';
-      for (const k of ROOM_ORDER) { if (inPark) { tagBtns[k].hidden = true; continue; } const [x, y] = ROOMS[k].pos; put(tagBtns[k], (x - UCX) * K, 0.25, (y - UCY) * K, cam, w, h); }
+      for (const k of ROOM_ORDER) { if (inPark || currentView === 'balcony') { tagBtns[k].hidden = true; continue; } const [x, y] = ROOMS[k].pos; put(tagBtns[k], (x - UCX) * K, 0.25, (y - UCY) * K, cam, w, h); }
       for (const [el, l] of parkTags) { if (!inPark || l.level !== PK.level) { el.hidden = true; continue; } put(el, l.p[0], l.p[1], l.p[2], cam, w, h); }
+      const inBalc = currentView === 'balcony';
+      for (const t of balcTags) { if (!inBalc || (t.pl && scen !== 'fu') || t.off) { t.el.hidden = true; continue; } putFront(t.el, t.p[0], t.p[1], t.p[2], cam, w, h); }
     }
     if (!mLabel.hidden && mPts.length === 2) { const m = mPts[0].clone().add(mPts[1]).multiplyScalar(0.5); put(mLabel, m.x, m.y, m.z, cam, w, h); }
     spinCompass();
@@ -715,6 +753,7 @@
           <li>חץ הצפון בגיליון נוטה 20° שמאלה; כיוון השמש מחושב לפיו (דיוק כ-1°) ואינו כולל הצללה מבניינים שכנים.</li>
           <li>מיקום מגדל 1 בתוך מודל השכונה סכמטי (כ-10 מ׳); גובה מבנים קיימים משוער, ומבנים מתוכננים הם מסות אינדיקטיביות.</li>
           <li>הריהוט, מכונות הכביסה והמקרר להמחשה בלבד.</li>
+          <li>הנוף מהמרפסת מחושב מנקודת עין בפינה המעוגלת, 1.60 מ׳ מעל רצפת קומה 27, אל קו המים, בצעד של חצי מעלה. מבנים מתוכננים חוסמים לפי הגובה בטבלאות התוכניות, ומיקומם בתוך תאי השטח סכמטי, ולכן האחוזים הם הערכה. "אחרי התוכניות" כולל תוכניות מאושרות ומוגשות, ומניח שהמבנים המיועדים להריסה נהרסו.</li>
           <li>המחסנים אינם ממוספרים בגיליון; סומן המחסן שדלתו פונה לחניה 335 (כ-2.3×2.3 מ׳). מפלסי החניון ביחס למגדל: 4.00- (לפי גיליון 3), 0.00, 4.50+, 7.75+.</li></ul></div>`;
     }
   }
@@ -736,6 +775,120 @@
     if (k && k !== lastHere) { lastHere = k; hereName.textContent = ROOMS[k].n; if (!ledger.hidden && tab === 'rooms') { room = k; render(); } }
   }, 250);
   document.getElementById('hereSpec').onclick = () => openSpec('rooms', lastHere || 'entrance');
+
+  // ===================== the view from the balcony =====================
+  // Eye on the rounded corner of the balcony, 1.60 m above the floor of level 27 (+94.00).
+  const EYE_PT = [215, 305], EYE_H = 1.6, eyeAbs = M.base(27) + EYE_H;
+  const eyeW = new THREE.Vector3((EYE_PT[0] - UCX) * K, EYE_H, (EYE_PT[1] - UCY) * K);
+  const eyeB = M.unitInBld(EYE_PT[0], EYE_PT[1], 27, EYE_H); // building frame
+  const toUnit = (x, y, z) => [x + M.unitOffset[0], y - M.base(27), z + M.unitOffset[1]];
+  let scen = store.get('scen', 'ex') === 'fu' ? 'fu' : 'ex';
+  // ---- sight-line analysis on the neighbourhood data ----
+  const decR = (r) => { const o = []; let x = 0, y = 0; for (let i = 0; i < r.length; i += 2) { x += r[i]; y += r[i + 1]; o.push([x / 10, y / 10]); } return o; };
+  const mkPoly = (pts) => { let cx = 0, cz = 0; pts.forEach((p) => { cx += p[0]; cz += p[1]; }); cx /= pts.length; cz /= pts.length; let r = 0; pts.forEach((p) => (r = Math.max(r, Math.hypot(p[0] - cx, p[1] - cz)))); return { pts, cx, cz, r }; };
+  const SEA = ctxData ? ctxData.sea.map((r) => mkPoly(decR(r))) : [];
+  const BLD = { keep: [], demo: [], plan: [] };
+  if (ctxData) { ctxData.existing.forEach((b) => BLD[b.d ? 'demo' : 'keep'].push({ ...mkPoly(decR(b.r)), h: b.h })); ctxData.planned.forEach((b) => BLD.plan.push({ ...mkPoly(decR(b.r)), h: b.h + (b.z0 || 0), plan: b.p })); }
+  const ENV = mkPoly(bldPt.env.map((p) => [(p[0] - bldPt.BCX) * bldPt.K5, (p[1] - bldPt.BCY) * bldPt.K5]));
+  const rayHit = (ox, oz, dx, dz, P, maxD) => { // nearest distance along the ray to polygon P's outline, or Infinity
+    const px = P.cx - ox, pz = P.cz - oz, along = px * dx + pz * dz;
+    if (along < -P.r || along - P.r > maxD || Math.abs(px * dz - pz * dx) > P.r) return Infinity;
+    let best = Infinity; const pts = P.pts;
+    for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+      const ax = pts[j][0] - ox, az = pts[j][1] - oz, bx = pts[i][0] - ox, bz = pts[i][1] - oz, ex = bx - ax, ez = bz - az;
+      const den = dx * ez - dz * ex; if (Math.abs(den) < 1e-9) continue;
+      const t = (ax * ez - az * ex) / den, u = (ax * dz - az * dx) / den;
+      if (t > 0.05 && u >= 0 && u <= 1 && t < best) best = t;
+    }
+    return best;
+  };
+  const azDir = (az) => { const a = (az + NORTH) * Math.PI / 180; return [Math.sin(a), -Math.cos(a)]; };
+  function analyse() {
+    const N = 720, out = { ex: new Int8Array(N), fu: new Int8Array(N), lostBy: {}, seaD: new Float32Array(N) };
+    const [ox, , oz] = eyeB;
+    for (let i = 0; i < N; i++) {
+      const az = i / 2, [dx, dz] = azDir(az);
+      let dsea = Infinity; for (const P of SEA) dsea = Math.min(dsea, rayHit(ox, oz, dx, dz, P, 2500));
+      out.seaD[i] = dsea;
+      if (!isFinite(dsea)) { out.ex[i] = out.fu[i] = 0; continue; }
+      if (isFinite(rayHit(ox, oz, dx, dz, ENV, dsea))) { out.ex[i] = out.fu[i] = -1; continue; }
+      const blocks = (list) => { let hit = null, hd = Infinity; for (const b of list) { const d = rayHit(ox, oz, dx, dz, b, dsea); if (d < dsea && b.h > eyeAbs * (1 - d / dsea) && d < hd) { hd = d; hit = b; } } return hit; };
+      const k = blocks(BLD.keep), dm = blocks(BLD.demo), pl = blocks(BLD.plan);
+      out.ex[i] = k || dm ? 2 : 1;
+      out.fu[i] = k || pl ? (out.ex[i] === 1 ? 3 : 2) : 1;
+      if (out.fu[i] === 3 && pl) out.lostBy[pl.plan] = (out.lostBy[pl.plan] || 0) + 0.5;
+    }
+    return out;
+  }
+  const SA = analyse();
+  const deg = (arr, v) => arr.reduce((s, x) => s + (x === v ? 0.5 : 0), 0);
+  const arc = 360 - deg(SA.ex, 0) - deg(SA.ex, -1);
+  const visEx = deg(SA.ex, 1), visFu = deg(SA.fu, 1);
+  // the widest visible sea direction (for "look at the sea" and the sea label)
+  const bestDir = (arr) => { let best = [0, 0], cur = null; for (let k = 0; k < 1440; k++) { const i = k % 720; if (arr[i] === 1) { if (!cur) cur = [k, k]; else cur[1] = k; if (cur[1] - cur[0] > best[1] - best[0]) best = cur.slice(); } else cur = null; } return ((best[0] + best[1]) / 4) % 360; };
+  // ---- sunsets on the 21st of each month ----
+  const sunsetAt = (month, day) => { let lo = 15, hi = 21.5; const alt = (h) => sunDir({ lat: LAT, lon: LON, month, day, hour: h, northDeg: NORTH }).alt;
+    if (alt(lo) < 0) return null; for (let k = 0; k < 30; k++) { const m = (lo + hi) / 2; alt(m) > -0.83 ? (lo = m) : (hi = m); }
+    return { hour: lo, az: sunDir({ lat: LAT, lon: LON, month, day, hour: lo, northDeg: NORTH }).az }; };
+  const seaAt = (arr, az) => arr[Math.round((((az % 360) + 360) % 360) * 2) % 720] === 1;
+  const hm = (x) => { const H = Math.floor(x), m = Math.round((x - H) * 60); return String(H + (m === 60 ? 1 : 0)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+  const MONTHS = ['ינו׳', 'פבר׳', 'מרץ', 'אפר׳', 'מאי', 'יוני', 'יולי', 'אוג׳', 'ספט׳', 'אוק׳', 'נוב׳', 'דצמ׳'];
+  const SUNSETS = MONTHS.map((n, i) => ({ n, m: i + 1, ...sunsetAt(i + 1, 21) }));
+  // ---- labels ----
+  const balcTags = [];
+  const addTag = (text, cls, pB, extra = {}) => { const el = document.createElement('div'); el.className = 'tag ltag ' + cls; el.textContent = text; el.hidden = true; tagsEl.appendChild(el); const t = { el, p: toUnit(pB[0], pB[1], pB[2]), ...extra }; balcTags.push(t); return t; };
+  (ctxData?.landmarks || []).forEach((l) => addTag(l.t, l.k === 'pl' ? 'pl' : '', [l.p[0], l.h + 4, l.p[1]], { pl: l.k === 'pl' }));
+  const seaTag = addTag('הים התיכון', 'sea', [0, 0, 0]);
+  const placeSeaTag = () => { const az = bestDir(scen === 'fu' ? SA.fu : SA.ex), [dx, dz] = azDir(az), d = Math.min(900, SA.seaD[Math.round(az * 2) % 720] + 300); seaTag.p = toUnit(eyeB[0] + dx * d, 2, eyeB[2] + dz * d); };
+  const sunTag = addTag('השקיעה', 'sun', [0, 0, 0], { off: true });
+  const putFront = (el, wx, wy, wz, cam, w, h) => { v3.set(wx, wy, wz).project(cam); el.hidden = v3.z > 1 || v3.z < -1 || Math.abs(v3.x) > 1.05 || Math.abs(v3.y) > 1.05; if (!el.hidden) { el.style.left = ((v3.x + 1) / 2 * w).toFixed(1) + 'px'; el.style.top = ((1 - v3.y) / 2 * h).toFixed(1) + 'px'; } };
+  // ---- the panel ----
+  const scenSeg = document.getElementById('scenSeg');
+  function drawBalc() {
+    pickSeg(scenSeg, scen);
+    const arr = scen === 'fu' ? SA.fu : SA.ex;
+    document.getElementById('seastat').innerHTML = scen === 'ex'
+      ? `קשת הים מהמרפסת: <b>${Math.round(arc)}°</b>. היום רואים ים ב-<b>${Math.round(visEx)}°</b> מתוכה (<b>${Math.round(visEx / arc * 100)}%</b>).`
+      : `אחרי התוכניות רואים ים ב-<b>${Math.round(visFu)}°</b> מתוך <b>${Math.round(arc)}°</b> (<b>${Math.round(visFu / arc * 100)}%</b>), <span class="lost">${Math.round(visEx - visFu)}° פחות</span> מהיום.`;
+    // strip: azimuth from south (left) through west, north, east
+    const W = 360, H = 46, x = (az) => (((az - 180) % 360) + 360) % 360;
+    let r = '';
+    for (let i = 0; i < 720; i++) { const v = arr[i], c = v === 1 ? 'var(--sea)' : v === 3 ? 'var(--accent)' : v === 2 ? 'var(--ink-3)' : v === -1 ? 'var(--ink)' : 'var(--chip)'; const op = v === 2 ? 0.55 : 1; r += `<rect x="${x(i / 2).toFixed(1)}" y="8" width="0.6" height="22" fill="${c}" opacity="${op}"/>`; }
+    const ticks = [[0, 'צ׳'], [90, 'מז׳'], [180, 'ד׳'], [270, 'מע׳']].map(([az, t]) => `<text x="${x(az) + (az === 180 ? 0 : 0)}" y="43" font-size="9" text-anchor="middle" fill="var(--ink-3)">${t}</text><line x1="${x(az)}" x2="${x(az)}" y1="30" y2="33" stroke="var(--ink-3)"/>`).join('');
+    document.getElementById('strip').innerHTML = `<svg viewBox="-6 0 ${W + 12} ${H}" role="img" aria-label="ים נראה בכל כיוון מהמרפסת">${r}${ticks}<path id="headMark" d="M0 1 L4 7 L-4 7 Z" fill="var(--ink)"/></svg>`;
+    const by = Object.entries(SA.lostBy).sort((a, b) => b[1] - a[1]).filter(([, d]) => d >= 2);
+    document.getElementById('blockers').innerHTML = scen === 'fu' && by.length ? '<div style="color:var(--ink-3);font-size:11px">מי חוסם את הים בעתיד:</div>' + by.slice(0, 5).map(([p, d]) => `<div><span>${esc(ctxData.plans[p] || p)}</span><b>${Math.round(d)}°</b></div>`).join('') : '';
+    const [cm, cd] = md();
+    document.getElementById('sunsets').innerHTML = `<table class="ss"><thead><tr><th>21 ב…</th><th>שקיעה</th><th>כיוון</th><th>לים היום</th><th>בעתיד</th></tr></thead><tbody>${SUNSETS.map((s) => `<tr aria-current="${s.m === cm}"><td>${s.n}</td><td class="n">${s.hour ? hm(s.hour) : '—'}</td><td class="n">${s.az ? Math.round(s.az) + '°' : ''}</td><td class="${seaAt(SA.ex, s.az) ? 'yes">כן' : 'no">לא'}</td><td class="${seaAt(SA.fu, s.az) ? 'yes">כן' : 'no">לא'}</td></tr>`).join('')}</tbody></table>`;
+    placeSeaTag(); outlook.userData.setPlanned?.(scen === 'fu'); pipe.stopPhoto();
+  }
+  scenSeg.querySelectorAll('button').forEach((b) => (b.onclick = () => { scen = b.dataset.v; store.set('scen', scen); drawBalc(); if (currentView === 'balcony') pipe.setScene('unit-balc-' + scen, { photo: prof.photo, skyBackground: true, exposure: 1.05, skyTilt: -0.12, skyIntensity: 0.9 }); }));
+  // ---- look-around camera (drag, wheel / pinch to zoom, arrows) ----
+  const look = { yaw: 0, pitch: -0.04, fov: 62, on: false, drag: null, pts: new Map() };
+  const faceAz = (az, pitch = -0.04) => { const [dx, dz] = azDir(az); look.yaw = Math.atan2(-dx, -dz); look.pitch = pitch; };
+  const lookStep = () => { const cam = stage.camera; cam.position.copy(eyeW); cam.rotation.order = 'YXZ'; cam.rotation.set(look.pitch, look.yaw, 0); if (cam.fov !== look.fov) { cam.fov = look.fov; cam.updateProjectionMatrix(); }
+    const hm2 = document.getElementById('headMark'); if (hm2) { const f = new THREE.Vector3(); cam.getWorldDirection(f); const a = Math.atan2(f.x, -f.z) * 180 / Math.PI - NORTH; const az = ((a % 360) + 360) % 360; hm2.setAttribute('transform', `translate(${(((az - 180) % 360) + 360) % 360} 0)`); } };
+  const keysL = new Set();
+  function startLook() { look.on = true; const cam = stage.camera; cam.near = 0.05; cam.far = 4000; look.fov = innerHeight > innerWidth ? 80 : 62; cam.updateProjectionMatrix(); stage.setFx(M.fx); M.fx.visible = true; if (!look.init) { faceAz(bestDir(SA.ex)); look.init = true; } stage.setWalk((dt) => { if (keysL.has('arrowleft')) look.yaw += dt * 0.9; if (keysL.has('arrowright')) look.yaw -= dt * 0.9; lookStep(); }); drawBalc(); }
+  function stopLook() { if (!look.on) return; look.on = false; keysL.clear(); stage.setWalk(null); }
+  const cv = stage.canvas;
+  cv.addEventListener('pointerdown', (e) => { if (!look.on) return; look.pts.set(e.pointerId, [e.clientX, e.clientY]); look.drag = [e.clientX, e.clientY]; cv.setPointerCapture?.(e.pointerId); });
+  addEventListener('pointermove', (e) => { if (!look.on || !look.pts.has(e.pointerId)) return;
+    if (look.pts.size === 2) { const [a, b] = [...look.pts.values()], d0 = Math.hypot(a[0] - b[0], a[1] - b[1]); look.pts.set(e.pointerId, [e.clientX, e.clientY]); const [c, d] = [...look.pts.values()], d1 = Math.hypot(c[0] - d[0], c[1] - d[1]); if (d0 > 0) look.fov = Math.max(18, Math.min(85, look.fov * d0 / d1)); return; }
+    const [x0, y0] = look.pts.get(e.pointerId); look.pts.set(e.pointerId, [e.clientX, e.clientY]); const k = look.fov / 62;
+    look.yaw += (e.clientX - x0) * 0.0042 * k; look.pitch = Math.max(-1.0, Math.min(0.8, look.pitch + (e.clientY - y0) * 0.0036 * k)); });
+  ['pointerup', 'pointercancel'].forEach((t) => addEventListener(t, (e) => look.pts.delete(e.pointerId)));
+  cv.addEventListener('wheel', (e) => { if (!look.on) return; e.preventDefault(); e.stopImmediatePropagation(); look.fov = Math.max(18, Math.min(85, look.fov * (e.deltaY > 0 ? 1.08 : 0.93))); }, { passive: false, capture: true });
+  addEventListener('keydown', (e) => { if (look.on && /^arrow(left|right)$/i.test(e.key)) { e.preventDefault(); keysL.add(e.key.toLowerCase()); } });
+  addEventListener('keyup', (e) => keysL.delete(e.key.toLowerCase()));
+  document.getElementById('toSea').onclick = () => { faceAz(bestDir(scen === 'fu' ? SA.fu : SA.ex)); sunTag.off = true; };
+  document.getElementById('toSunset').onclick = () => {
+    const [m, d] = md(), s = sunsetAt(m, d); if (!s) return;
+    sunHour = Math.max(6, s.hour - 0.2); hourEl.value = sunHour; store.set('sunHour', sunHour); applySun();
+    faceAz(s.az, 0.02); const [dx, dz] = azDir(s.az); sunTag.p = toUnit(eyeB[0] + dx * 1200, 70, eyeB[2] + dz * 1200); sunTag.off = false;
+    sunTag.el.textContent = `השקיעה · ${hm(s.hour)} · ${seaAt(scen === 'fu' ? SA.fu : SA.ex, s.az) ? 'לתוך הים' : 'מאחורי מבנים'}`; drawBalc();
+  };
+  dateSeg.addEventListener('click', () => { if (currentView === 'balcony') drawBalc(); });
 
   // ===================== saving (image + model) =====================
   const toast = document.getElementById('toast');

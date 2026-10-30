@@ -137,7 +137,7 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
     paving: std('site_paving', 0xd9d4ca, 0.9),
     highlight: std('unit_highlight', 0xe2703a, 0.6, 0, null, { transparent: true, opacity: 0.42, depthWrite: false, depthTest: false, emissive: 0xe2703a, emissiveIntensity: 0.35 }),
     ctxEx: std('context_existing', 0xe9e7e2, 0.95),
-    ctxDemo: std('context_to_demolish', 0xe6b8ae, 0.95),
+    ctxDemo: std('context_to_demolish', 0xe7dcd6, 0.95),
     ctxPlan: std('context_planned', 0x7fa6bd, 0.6, 0, null, { transparent: true, opacity: 0.38, depthWrite: false, side: THREE.DoubleSide }),
     ctxGround: std('context_ground', 0xdedbd3, 1),
     ctxSea: std('context_sea', 0x8fb3c8, 0.25, 0.05),
@@ -566,7 +566,7 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   rbox('balcony_dining_table', M.teak, 255, 330, 345, 382, 0.72, 0.75, 0.02, bal);
   pbox('balcony_dining_leg_a', M.teak, 262, 340, 266, 372, 0, 0.72, bal); pbox('balcony_dining_leg_b', M.teak, 334, 340, 338, 372, 0, 0.72, bal);
   [272, 300, 328].forEach((x, i) => { chair('balcony_chair_n' + i, x, 318, [0, 1], bal, M.outdoor); chair('balcony_chair_s' + i, x, 394, [0, -1], bal, M.outdoor); });
-  plant('balcony_olive', 205, 300, 0.3, 0.55, 1.4, bal);
+  plant('balcony_olive', 480, 430, 0.3, 0.55, 1.4, bal);
   pbox('planter_box_north', M.planter, 330, 252, 520, 268, 0, 0.5, bal);
   for (let x = 338; x < 515; x += 12) { const s = new THREE.Mesh(new THREE.IcosahedronGeometry(0.15 + rnd() * 0.07, 1), rnd() > 0.5 ? M.foliage : M.foliageDark); s.name = 'planter_shrub'; s.position.set(ux(x), 0.58 + rnd() * 0.1, uz(260)); bal.add(s); }
 
