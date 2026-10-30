@@ -310,12 +310,12 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
     // four panels, two fixed outer + two sliding (one pushed open)
     const q = (L - 2 * F) / 4, A = o.a0 + F;
     panel(o, name + '_panel_fixed_a', A, A + q + 1, tm + 0.4, tm + 3.4, 0.02, head - 0.06, g);
-    panel(o, name + '_panel_sliding_a', A + q * 1.0 + 2, A + q * 2 + 2, tm - 3.4, tm - 0.4, 0.02, head - 0.06, g);
-    panel(o, name + '_panel_sliding_b', A + q * 2.2, A + q * 3.2, tm - 3.4, tm - 0.4, 0.02, head - 0.06, g);
+    panel(o, name + '_sliding_panel_a', A + 1, A + q + 2, tm - 3.4, tm - 0.4, 0.02, head - 0.06, g);
+    panel(o, name + '_sliding_panel_b', A + q * 3 - 2, o.a1 - F - 1, tm - 3.4, tm - 0.4, 0.02, head - 0.06, g);
     panel(o, name + '_panel_fixed_b', A + q * 3 - 1, o.a1 - F, tm + 0.4, tm + 3.4, 0.02, head - 0.06, g);
     rollerShutter(o, 0, head, name + '_shutter');
   }
-  function door(o, head, name, { hinge = 'a0', side = 1, mat = M.door, leafT = 2.3, closed = false } = {}) {
+  function door(o, head, name, { hinge = 'a0', side = 1, mat = M.door, leafT = 2.3, closed = false, fold = false } = {}) {
     const g = grp(name, open); const tm = (o.c0 + o.c1) / 2, J = 1.2;
     gb(o, name + '_lintel', M.plaster, o.a0, o.a1, o.c0, o.c1, head, CEIL, g);
     gb(o, name + '_jamb_a', mat, o.a0, o.a0 + J, o.c0 - 0.4, o.c1 + 0.4, 0, head, g);
@@ -324,6 +324,10 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
     const L = o.a1 - o.a0 - 2 * J;
     if (closed) { gb(o, name + '_leaf', mat, o.a0 + J, o.a1 - J, tm - leafT / 2, tm + leafT / 2, 0.005, head - 0.04, g); return g; }
     const hx = hinge === 'a0' ? o.a0 + J : o.a1 - J;
+    if (fold) { // opened ~180°, lying along the wall beside the opening
+      const F0 = hinge === 'a0' ? hx - L : hx, F1 = F0 + L, T0f = side > 0 ? o.c1 + 0.3 : o.c0 - 0.3 - leafT;
+      gb(o, name + '_leaf', mat, F0, F1, T0f, T0f + leafT, 0.005, head - 0.04, g); return g;
+    }
     const A0 = hinge === 'a0' ? hx : hx - leafT, A1 = A0 + leafT;
     const T0 = side > 0 ? o.c1 : o.c0 - L, T1 = side > 0 ? o.c1 + L : o.c0;
     gb(o, name + '_leaf', mat, A0, A1, T0, T1, 0.005, head - 0.04, g);
@@ -343,8 +347,9 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   // mistor: aluminium louvre screen on the facade line
   { const g = grp('mistor_louvre_screen', open); for (let h = 0.1; h < 2.6; h += 0.12) pbox('louvre', M.alu, 157, 1013, 162, 1100, h, h + 0.02, g); pbox('louvre_frame_a', M.alu, 156, 1013, 163, 1016, 0, CEIL, g); pbox('louvre_frame_b', M.alu, 156, 1097, 163, 1100, 0, CEIL, g); }
   door(X(599, 647, 807, 827), 2.2, 'door_entrance_security', { mat: M.entry, leafT: 4, closed: true });
-  pbox('door_entrance_handle', M.chrome, 638, 805.4, 641, 806.6, 0.95, 1.1, open);
-  door(X(663, 706, 453, 472), 2.0, 'door_mamad_blast_steel', { hinge: 'a1', side: 1, mat: M.steel, leafT: 3.6 });
+  pbox('door_entrance_handle', M.chrome, 603, 805.4, 606, 806.6, 0.95, 1.1, open);
+  door(X(663, 706, 453, 472), 2.0, 'door_mamad_blast_steel', { hinge: 'a0', side: 1, mat: M.steel, leafT: 3.6, fold: true });
+  pbox('door_mamad_inner_wood_leaf', M.door, 702, 412, 704.3, 452, 0.005, 2.0, open);
   door(Y(480, 525, 726, 733), 2.1, 'door_bedroom_4_suite', { hinge: 'a0', side: 1 });
   door(Y(549, 588, 795, 801), 2.1, 'door_bath_4', { hinge: 'a0', side: 1 });
   door(Y(943, 988, 391, 397), 2.1, 'door_bedroom_2', { hinge: 'a1', side: -1 });
@@ -407,13 +412,14 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
     pbox('bathtub_end_w', M.ceramic, 459.5, 781, 463, 814, 0.12, 0.56, t); pbox('bathtub_end_e', M.ceramic, 547.5, 781, 551, 814, 0.12, 0.56, t); }
   pbox('bath_mixer_multiway', M.chrome, 495, 777.6, 505, 779, 0.7, 0.78, bth);
   pbox('bath_hand_shower_bar', M.chrome, 520, 777.6, 521, 779, 0.9, 1.9, bth);
-  pbox('bath_concealed_cistern', M.clad, 524, 868, 532, 906, 0, 1.12, bth);
-  pbox('bath_flush_plate', M.chrome, 523.6, 882, 524, 892, 0.95, 1.05, bth);
-  rbox('bath_wc_wallhung', M.ceramic, 503, 878, 524, 896, 0.2, 0.42, 0.08, bth);
-  pbox('bath_vanity', M.oak, 459.5, 917, 505, 944, 0.48, 0.82, bth);
-  pbox('bath_vanity_integral_basin', M.ceramic, 459.5, 916, 505, 944, 0.82, 0.86, bth);
-  pbox('bath_basin_mixer', M.chrome, 481, 941, 483, 944, 0.86, 1.02, bth);
-  pbox('bath_mirror', M.mirror, 462, 943.4, 503, 944, 1.05, 1.85, bth);
+  tbox('bath_installation_wall', M.clad, 532, 822, 544, 905.8, 0, 1.12, bth);
+  pbox('bath_shaft_behind_wc', M.plaster, 544, 822, 557.6, 905.8, 0, CEIL, shell);
+  pbox('bath_flush_plate', M.chrome, 531.6, 871, 532, 881, 0.95, 1.05, bth);
+  rbox('bath_wc_wallhung', M.ceramic, 512, 867, 532, 885, 0.2, 0.42, 0.08, bth);
+  pbox('bath_vanity', M.oak, 459.5, 906, 505.5, 931.7, 0.48, 0.82, bth);
+  pbox('bath_vanity_integral_basin', M.ceramic, 459.5, 905.5, 505.5, 931.7, 0.82, 0.86, bth);
+  pbox('bath_basin_mixer', M.chrome, 481, 929, 483, 931.7, 0.86, 1.02, bth);
+  pbox('bath_mirror', M.mirror, 462, 931.1, 503, 931.7, 1.05, 1.85, bth);
   const mb = grp('master_bath', wet);
   pbox('master_shower_drain_linear', M.blackMetal, 461, 990, 503, 992, 0, 0.003, mb);
   pbox('master_shower_mixer', M.chrome, 459.5, 960, 461, 970, 1.0, 1.1, mb);
@@ -423,8 +429,9 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   pbox('master_vanity_integral_basin', M.ceramic, 529, 998, 557, 1042, 0.82, 0.86, mb);
   pbox('master_basin_mixer', M.chrome, 554, 1019, 557, 1021, 0.86, 1.02, mb);
   pbox('master_mirror', M.mirror, 556.4, 1000, 557, 1040, 1.05, 1.85, mb);
-  pbox('master_concealed_cistern', M.clad, 549, 1050, 557, 1086, 0, 1.12, mb);
-  rbox('master_wc_wallhung', M.ceramic, 528, 1059, 549, 1077, 0.2, 0.42, 0.08, mb);
+  tbox('master_installation_wall', M.clad, 545, 1042, 557, 1088, 0, 1.12, mb);
+  pbox('master_flush_plate', M.chrome, 544.6, 1058, 545, 1068, 0.95, 1.05, mb);
+  rbox('master_wc_wallhung', M.ceramic, 524, 1054, 545, 1072, 0.2, 0.42, 0.08, mb);
   const b4 = grp('bath_4', wet);
   pbox('bath4_shower_drain_linear', M.blackMetal, 803, 541, 900, 543, 0, 0.003, b4);
   pbox('bath4_shower_mixer', M.chrome, 845, 492.4, 855, 494, 1.0, 1.1, b4);
@@ -502,7 +509,7 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   rbox('armchair_base', M.chairFab, 560, 492, 600, 530, 0.05, 0.42, 0.04, liv); rbox('armchair_back', M.chairFab, 560, 488, 600, 497, 0.42, 0.8, 0.04, liv);
   pbox('media_console_floating', M.oak, 638, 552, 656.5, 648, 0.22, 0.5, liv);
   pbox('tv_panel', M.screen, 654.5, 565, 656.5, 635, 1.0, 1.72, liv);
-  plant('plant_living', 640, 500, 0.22, 0.5, 1.2, liv);
+  plant('plant_living', 192, 492, 0.2, 0.5, 1.2, liv);
   pbox('curtain_track_slider', M.blackMetal, 189, 473, 514, 475, 2.62, 2.65, liv);
   pbox('sheer_curtain_slider_a', M.sheer, 190, 474, 222, 475, 0.02, 2.62, liv); pbox('sheer_curtain_slider_b', M.sheer, 482, 474, 513, 475, 0.02, 2.62, liv);
   // dining: table for six by the west window, near the kitchen
@@ -520,7 +527,6 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   rbox('master_throw', M.clay, 279, 1182, 373, 1196, 0.66, 0.7, 0.03, ms);
   [[262, 276], [376, 390]].forEach(([a, b], i) => { pbox('master_nightstand_' + i, M.oak, a, 1100, b, 1124, 0, 0.5, ms); pcyl('master_lamp_' + i, M.ceramic, (a + b) / 2, 1112, 0.07, 0.5, 0.78, ms, 24, 0.09); });
   rbox('master_rug', M.rug, 250, 1150, 405, 1260, 0, 0.012, 0.01, ms);
-  rbox('master_bench', M.chairFab, 292, 1220, 360, 1240, 0.05, 0.45, 0.03, ms);
   rbox('master_armchair', M.sage, 192, 1240, 230, 1270, 0.05, 0.42, 0.04, ms); rbox('master_armchair_back', M.sage, 192, 1264, 230, 1271, 0.42, 0.8, 0.04, ms);
   plant('plant_master', 200, 1130, 0.16, 0.42, 0.7, ms);
   const wardrobe = (name, x0, y0, x1, y1, parent, door = 's') => {
@@ -535,19 +541,18 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
   // master closet room (empty per spec — wardrobes are staging)
   wardrobe('master_closet_wardrobe_east', 522, 1131, 557, 1270, staging, 'w');
   wardrobe('master_closet_wardrobe_south', 461, 1238, 521, 1273, staging, 'n');
-  rbox('master_closet_ottoman', M.clay, 480, 1190, 500, 1210, 0.05, 0.45, 0.04, staging);
   // bedroom 2
   const b2 = grp('bedroom_2', staging);
-  bedSet('bed2_bed', 238, 824, 318, 939, 'n', b2, M.sage);
-  [[223, 236], [320, 333]].forEach(([a, b], i) => pbox('bed2_nightstand_' + i, M.oak, a, 826, b, 848, 0, 0.48, b2));
-  wardrobe('bed2_wardrobe', 178, 960, 332, 994, b2, 'n');
+  // bed head on the east wall (beside the door), wardrobe on the north wall, clear strip from the door to the window
+  bedSet('bed2_bed', 276, 864, 391, 940, 'e', b2, M.sage);
+  wardrobe('bed2_wardrobe', 214, 824, 391, 858, b2, 's');
   // mamad / bedroom 3
   const m3 = grp('mamad_bedroom', staging);
   bedSet('mamad_bed', 556, 292, 671, 361, 'w', m3, M.clay);
   pbox('mamad_desk_top', M.oak, 690, 300, 716, 400, 0.72, 0.75, m3);
   pbox('mamad_desk_leg', M.oak, 690, 397, 716, 400, 0, 0.72, m3);
   pbox('mamad_desk_drawer', M.oak, 693, 302, 716, 325, 0.55, 0.72, m3);
-  chair('mamad_desk_chair', 676, 350, [1, 0], m3);
+  chair('mamad_desk_chair', 678, 385, [1, 0], m3);
   pbox('mamad_air_filter_unit', M.steel, 713, 410, 716, 435, 1.9, 2.3, joinery);
   // bedroom 4 suite
   const b4s = grp('bedroom_4', staging);

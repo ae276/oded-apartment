@@ -31,6 +31,8 @@ export function createWalk(THREE, stage, M, unitPt, mapCanvas, opts = {}) {
     const val = n === 'staging' ? 3 : 2;
     if (!o.isMesh) return;
     if (o.material === undefined || /sheer|led_/.test(o.material.name)) return;
+    // door frames, open leaves and parked slider panels never block: the wall polygons already define the openings
+    if (/(_jamb_[ab]|_leaf|_head$|_handle|_lintel|_sliding_panel_|_frame_jamb_|shutter)/.test(o.name)) return;
     box.setFromObject(o);
     if (box.max.y < 0.18 || box.min.y > 1.7) return;
     if ((box.max.x - box.min.x) * (box.max.z - box.min.z) > 8) return;
@@ -174,6 +176,7 @@ export function createWalk(THREE, stage, M, unitPt, mapCanvas, opts = {}) {
       stage.setWalk(step); drawMap();
     },
     goto(room) { const R = ROOMS[room]; place(...R); },
+    __tp(px, py, lx, ly) { place(px, py, lx, ly); },
     stop() { if (active) { cam.near = 0.1; cam.far = 3000; cam.updateProjectionMatrix(); } active = false; st.keys.clear(); st.stick = [0, 0]; stage.setWalk(null); },
     get pos() { return { x: st.x, z: st.z, yaw: st.yaw }; },
     isFree(wx, wz) { return free(wx, wz); },
