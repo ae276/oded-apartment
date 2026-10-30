@@ -28,8 +28,8 @@
   })();
   // Module map + resource lookup: every runtime file is published next to this page.
   (function () {
-    var PATHS = {"three-core":"vendor/three.core.js","three":"vendor/three.module.js","orbit":"vendor/OrbitControls.js","objexp":"vendor/OBJExporter.js","gltfexp":"vendor/GLTFExporter.js","add-postprocessing-EffectComposer-js":"vendor/addons/postprocessing/EffectComposer.js","add-postprocessing-RenderPass-js":"vendor/addons/postprocessing/RenderPass.js","add-postprocessing-OutputPass-js":"vendor/addons/postprocessing/OutputPass.js","add-postprocessing-GTAOPass-js":"vendor/addons/postprocessing/GTAOPass.js","add-postprocessing-Pass-js":"vendor/addons/postprocessing/Pass.js","add-loaders-HDRLoader-js":"vendor/addons/loaders/HDRLoader.js","add-shaders-CopyShader-js":"vendor/addons/shaders/CopyShader.js","add-postprocessing-ShaderPass-js":"vendor/addons/postprocessing/ShaderPass.js","add-postprocessing-MaskPass-js":"vendor/addons/postprocessing/MaskPass.js","add-shaders-OutputShader-js":"vendor/addons/shaders/OutputShader.js","add-shaders-GTAOShader-js":"vendor/addons/shaders/GTAOShader.js","add-shaders-PoissonDenoiseShader-js":"vendor/addons/shaders/PoissonDenoiseShader.js","add-math-SimplexNoise-js":"vendor/addons/math/SimplexNoise.js","bvh":"vendor/three-mesh-bvh.js","pathtracer":"vendor/three-gpu-pathtracer.js","app-model":"g-model.js","app-walk":"g-walk.js","app-render":"g-render.js","app-solar":"g-solar.js","app-device":"g-device.js","app-parking":"g-parking.js","data-parking":"data/parking_pt.json","data-unit":"data/unit_pt.json","data-building":"data/building_pt.json","data-rooms":"data/rooms.json","data-spec":"data/spec.json","data-context":"data/context.json","sky":"textures/s/sky_1k_hdr.json","tx-oak_veneer_01_diffuse":"textures/s/oak_veneer_01_diffuse.jpg","tx-oak_veneer_01_nor_gl":"textures/s/oak_veneer_01_nor_gl.jpg","tx-oak_veneer_01_rough":"textures/s/oak_veneer_01_rough.jpg","tx-curly_teddy_natural_diffuse":"textures/s/curly_teddy_natural_diffuse.jpg","tx-curly_teddy_natural_nor_gl":"textures/s/curly_teddy_natural_nor_gl.jpg","tx-curly_teddy_natural_rough":"textures/s/curly_teddy_natural_rough.jpg","tx-rough_linen_nor_gl":"textures/s/rough_linen_nor_gl.jpg","tx-rough_linen_rough":"textures/s/rough_linen_rough.jpg","tx-beige_wall_001_nor_gl":"textures/s/beige_wall_001_nor_gl.jpg"};
-    var SPECS = {"three-core":"three-core","three":"three","three/addons/controls/OrbitControls.js":"orbit","three/addons/exporters/OBJExporter.js":"objexp","three/addons/exporters/GLTFExporter.js":"gltfexp","three/addons/postprocessing/EffectComposer.js":"add-postprocessing-EffectComposer-js","three/addons/postprocessing/RenderPass.js":"add-postprocessing-RenderPass-js","three/addons/postprocessing/OutputPass.js":"add-postprocessing-OutputPass-js","three/addons/postprocessing/GTAOPass.js":"add-postprocessing-GTAOPass-js","three/addons/postprocessing/Pass.js":"add-postprocessing-Pass-js","three/addons/loaders/HDRLoader.js":"add-loaders-HDRLoader-js","three/addons/shaders/CopyShader.js":"add-shaders-CopyShader-js","three/addons/postprocessing/ShaderPass.js":"add-postprocessing-ShaderPass-js","three/addons/postprocessing/MaskPass.js":"add-postprocessing-MaskPass-js","three/addons/shaders/OutputShader.js":"add-shaders-OutputShader-js","three/addons/shaders/GTAOShader.js":"add-shaders-GTAOShader-js","three/addons/shaders/PoissonDenoiseShader.js":"add-shaders-PoissonDenoiseShader-js","three/addons/math/SimplexNoise.js":"add-math-SimplexNoise-js","three-mesh-bvh":"bvh","three-gpu-pathtracer":"pathtracer","app-model":"app-model","app-walk":"app-walk","app-render":"app-render","app-solar":"app-solar","app-device":"app-device","app-parking":"app-parking"};
+    var PATHS = {"three-core":"vendor/three.core.js","three":"vendor/three.module.js","orbit":"vendor/OrbitControls.js","objexp":"vendor/OBJExporter.js","gltfexp":"vendor/GLTFExporter.js","add-postprocessing-EffectComposer-js":"vendor/addons/postprocessing/EffectComposer.js","add-postprocessing-RenderPass-js":"vendor/addons/postprocessing/RenderPass.js","add-postprocessing-OutputPass-js":"vendor/addons/postprocessing/OutputPass.js","add-postprocessing-GTAOPass-js":"vendor/addons/postprocessing/GTAOPass.js","add-postprocessing-Pass-js":"vendor/addons/postprocessing/Pass.js","add-loaders-HDRLoader-js":"vendor/addons/loaders/HDRLoader.js","add-shaders-CopyShader-js":"vendor/addons/shaders/CopyShader.js","add-postprocessing-ShaderPass-js":"vendor/addons/postprocessing/ShaderPass.js","add-postprocessing-MaskPass-js":"vendor/addons/postprocessing/MaskPass.js","add-shaders-OutputShader-js":"vendor/addons/shaders/OutputShader.js","add-shaders-GTAOShader-js":"vendor/addons/shaders/GTAOShader.js","add-shaders-PoissonDenoiseShader-js":"vendor/addons/shaders/PoissonDenoiseShader.js","add-math-SimplexNoise-js":"vendor/addons/math/SimplexNoise.js","bvh":"vendor/three-mesh-bvh.js","pathtracer":"vendor/three-gpu-pathtracer.js","app-model":"g-model.js","app-walk":"g-walk.js","app-render":"g-render.js","app-solar":"g-solar.js","app-device":"g-device.js","app-parking":"g-parking.js","add-objects-Sky-js":"vendor/addons/objects/Sky.js","add-objects-Water-js":"vendor/addons/objects/Water.js","data-parking":"data/parking_pt.json","data-unit":"data/unit_pt.json","data-building":"data/building_pt.json","data-rooms":"data/rooms.json","data-spec":"data/spec.json","data-context":"data/context.json","sky":"textures/s/sky_1k_hdr.json","tx-oak_veneer_01_diffuse":"textures/s/oak_veneer_01_diffuse.jpg","tx-oak_veneer_01_nor_gl":"textures/s/oak_veneer_01_nor_gl.jpg","tx-oak_veneer_01_rough":"textures/s/oak_veneer_01_rough.jpg","tx-curly_teddy_natural_diffuse":"textures/s/curly_teddy_natural_diffuse.jpg","tx-curly_teddy_natural_nor_gl":"textures/s/curly_teddy_natural_nor_gl.jpg","tx-curly_teddy_natural_rough":"textures/s/curly_teddy_natural_rough.jpg","tx-rough_linen_nor_gl":"textures/s/rough_linen_nor_gl.jpg","tx-rough_linen_rough":"textures/s/rough_linen_rough.jpg","tx-beige_wall_001_nor_gl":"textures/s/beige_wall_001_nor_gl.jpg"};
+    var SPECS = {"three-core":"three-core","three":"three","three/addons/controls/OrbitControls.js":"orbit","three/addons/exporters/OBJExporter.js":"objexp","three/addons/exporters/GLTFExporter.js":"gltfexp","three/addons/postprocessing/EffectComposer.js":"add-postprocessing-EffectComposer-js","three/addons/postprocessing/RenderPass.js":"add-postprocessing-RenderPass-js","three/addons/postprocessing/OutputPass.js":"add-postprocessing-OutputPass-js","three/addons/postprocessing/GTAOPass.js":"add-postprocessing-GTAOPass-js","three/addons/postprocessing/Pass.js":"add-postprocessing-Pass-js","three/addons/loaders/HDRLoader.js":"add-loaders-HDRLoader-js","three/addons/shaders/CopyShader.js":"add-shaders-CopyShader-js","three/addons/postprocessing/ShaderPass.js":"add-postprocessing-ShaderPass-js","three/addons/postprocessing/MaskPass.js":"add-postprocessing-MaskPass-js","three/addons/shaders/OutputShader.js":"add-shaders-OutputShader-js","three/addons/shaders/GTAOShader.js":"add-shaders-GTAOShader-js","three/addons/shaders/PoissonDenoiseShader.js":"add-shaders-PoissonDenoiseShader-js","three/addons/math/SimplexNoise.js":"add-math-SimplexNoise-js","three-mesh-bvh":"bvh","three-gpu-pathtracer":"pathtracer","app-model":"app-model","app-walk":"app-walk","app-render":"app-render","app-solar":"app-solar","app-device":"app-device","app-parking":"app-parking","three/addons/objects/Sky.js":"add-objects-Sky-js","three/addons/objects/Water.js":"add-objects-Water-js"};
     var R = window.__resources || {};
     var u = function (id) { return R[id] || new URL(PATHS[id], document.baseURI).href; };
     window.__res = u;
@@ -259,6 +259,7 @@
   <div class="box" id="balcbox" hidden>
     <div class="label">הנוף ממרפסת דירה 120 · קומה 27</div>
     <div class="seg" id="scenSeg"><button type="button" data-v="ex">המצב היום</button><button type="button" data-v="fu">אחרי התוכניות</button></div>
+    <label class="tog"><input type="checkbox" id="skyDyn"> שמיים לפי השעה (צבעי זריחה ושקיעה, עננים)</label>
     <div class="seastat" id="seastat"></div>
     <div class="strip" id="strip" aria-label="קשת הנוף מהמרפסת"></div>
     <div class="legend"><span><i class="k-vis"></i>ים נראה</span><span><i class="k-lost"></i>ייחסם בעתיד</span><span><i class="k-blk"></i>חסום היום</span><span><i class="k-own"></i>הבניין עצמו</span></div>
@@ -358,6 +359,7 @@
   import { sunDir, sunIntensity } from 'app-solar';
   import { deviceProfile, applyQuality } from 'app-device';
   import { buildParking } from 'app-parking';
+  import { Sky } from 'three/addons/objects/Sky.js';
 
   // ===================== sale spec (מפרט מכר דירה 120, 05.05.2026) =====================
   const PORC = 'פורצלן סוג א׳, כ-80/80 או כ-100/100 ס״מ, לבחירה מספק החברה (בדגם: 100×100)';
@@ -483,6 +485,7 @@
     document.getElementById('sunTime').textContent = String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
     document.getElementById('sunAlt').textContent = s.alt <= 0 ? 'השמש מתחת לאופק' : `גובה ${Math.round(s.alt)}° · אזימוט ${Math.round(s.az)}°`;
     pipe.stopPhoto();
+    if (typeof updateBalcSky === 'function' && currentView === 'balcony') updateBalcSky();
   }
   const dateSeg = document.getElementById('dateSeg'), hourEl = document.getElementById('hour');
   const pickSeg = (seg, v) => seg.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === String(v))));
@@ -516,7 +519,7 @@
     document.getElementById('outlookBtn').setAttribute('aria-pressed', String(outlookOn));
     const inWalk = currentView === 'walk' || currentView === 'balcony';
     outlook.userData.setPlanned?.(currentView === 'balcony' ? scen === 'fu' : planOn.checked && prof.tier !== 'low');
-    if ((currentView === 'walk' && outlookOn) || (currentView === 'balcony' && ctxData)) { stage._scene.add(outlook); stage._scene.fog = fog; stage._ground.visible = false; }
+    if ((currentView === 'walk' && outlookOn) || (currentView === 'balcony' && ctxData)) { stage._scene.add(outlook); stage._scene.fog = currentView === 'balcony' ? haze : fog; stage._ground.visible = false; }
     else { stage._scene.remove(outlook); stage._scene.fog = null; stage._ground.visible = true; }
     pipe.stopPhoto();
   }
@@ -544,7 +547,7 @@
       stage.setFx(M.fx); M.fx.visible = v.ceiling;
       stage._scene.environmentIntensity = v.ceiling ? 0.32 : 0.5;
       stage._hemi.intensity = v.ceiling ? 0.3 : 0.4;
-      pipe.setScene(v.look ? 'unit-balc-' + scen : v.ceiling ? 'unit-walk' + (outlookOn ? '-ctx' : '') : 'unit-cut', { photo: prof.photo, skyBackground: !!v.ceiling, exposure: v.ceiling ? 1.08 : 1.0, skyTilt: -0.12, skyIntensity: 0.9 });
+      pipe.setScene(v.look ? 'unit-balc-' + scen : v.ceiling ? 'unit-walk' + (outlookOn ? '-ctx' : '') : 'unit-cut', { photo: prof.photo && !v.look, skyBackground: v.look ? !skyDyn : !!v.ceiling, exposure: v.ceiling ? 1.08 : 1.0, skyTilt: -0.12, skyIntensity: 0.9 });
       if (v.walk) { walker.start('entrance'); markRoom('entrance'); walker.setEmpty(empty); showHint(); }
       else if (v.look) { startLook(); }
       else {
@@ -862,15 +865,54 @@
     document.getElementById('sunsets').innerHTML = `<table class="ss"><thead><tr><th>21 ב…</th><th>שקיעה</th><th>כיוון</th><th>לים היום</th><th>בעתיד</th></tr></thead><tbody>${SUNSETS.map((s) => `<tr aria-current="${s.m === cm}"><td>${s.n}</td><td class="n">${s.hour ? hm(s.hour) : '—'}</td><td class="n">${s.az ? Math.round(s.az) + '°' : ''}</td><td class="${seaAt(SA.ex, s.az) ? 'yes">כן' : 'no">לא'}</td><td class="${seaAt(SA.fu, s.az) ? 'yes">כן' : 'no">לא'}</td></tr>`).join('')}</tbody></table>`;
     placeSeaTag(); outlook.userData.setPlanned?.(scen === 'fu'); pipe.stopPhoto();
   }
-  scenSeg.querySelectorAll('button').forEach((b) => (b.onclick = () => { scen = b.dataset.v; store.set('scen', scen); drawBalc(); if (currentView === 'balcony') pipe.setScene('unit-balc-' + scen, { photo: prof.photo, skyBackground: true, exposure: 1.05, skyTilt: -0.12, skyIntensity: 0.9 }); }));
+  scenSeg.querySelectorAll('button').forEach((b) => (b.onclick = () => { scen = b.dataset.v; store.set('scen', scen); drawBalc(); }));
+  // ---- balcony visuals: physical sky with clouds (optional), reflective sea, haze ----
+  let skyDyn = store.get('skyDyn', '1') === '1';
+  const skyEl = document.getElementById('skyDyn'); skyEl.checked = skyDyn;
+  const sky = new Sky(); sky.name = 'physical_sky'; sky.scale.setScalar(7500);
+  const envSky = new Sky(); envSky.scale.setScalar(90); const envScene = new THREE.Scene(); envScene.add(envSky);
+  [sky, envSky].forEach((s) => { const u = s.material.uniforms; u.turbidity.value = 2.6; u.rayleigh.value = 1.25; u.mieCoefficient.value = 0.0045; u.mieDirectionalG.value = 0.86; u.cloudCoverage.value = 0.32; u.cloudDensity.value = 0.42; u.cloudScale.value = 0.00028; });
+  envSky.material.uniforms.showSunDisc.value = 0;
+  const pmrem = new THREE.PMREMGenerator(stage._renderer); let envRT = null, envT = 0;
+  const studioEnv = stage._scene.environment;
+  const haze = new THREE.FogExp2(0xd7e2e8, 0.00022);
+  let balcOn = false;
+  const curSun = () => { const [month, day] = md(); return sunDir({ lat: LAT, lon: LON, month, day, hour: sunHour, northDeg: NORTH }); };
+  function updateBalcSky() {
+    if (!balcOn) return;
+    const s = curSun(), dir = new THREE.Vector3(...s.dir); // toward the sun, scene frame (true altitude, also below the horizon)
+    const a = Math.asin(Math.max(-1, Math.min(1, s.dir[1])));
+    const sp = new THREE.Vector3(s.dir[0], Math.sin(a), s.dir[2]).normalize();
+    sky.material.uniforms.sunPosition.value.copy(sp); envSky.material.uniforms.sunPosition.value.copy(sp);
+    outlook.userData.setWater?.(prof.tier !== 'low', [sp.x, Math.max(0.05, sp.y), sp.z]);
+    const alt = s.alt, c = new THREE.Color(alt > 12 ? 0xd3dee6 : alt > 3 ? 0xe6d3bb : alt > -3 ? 0xd9a888 : 0x5d6278);
+    haze.color.copy(c); haze.density = alt > 3 ? 0.0002 : 0.00028;
+    stage._key.color.set(alt > 15 ? 0xfff3e2 : alt > 5 ? 0xffd9b0 : 0xffb47a);
+    stage._hemi.intensity = alt > 5 ? 0.45 : 0.3; stage._hemi.color.set(alt > 5 ? 0xf3f6ff : 0xffd9c0);
+    if (skyDyn) {
+      stage._renderer.toneMappingExposure = alt > 8 ? 0.8 : alt > 0 ? 0.85 : 1.0;
+      const now = performance.now(); if (now - envT > 120) { envT = now; const rt = pmrem.fromScene(envScene, 0.02); if (envRT) envRT.dispose(); envRT = rt; stage._scene.environment = rt.texture; stage._scene.environmentIntensity = 0.6; }
+    } else { stage._renderer.toneMappingExposure = 1.05; stage._scene.environment = pipe.sky; stage._scene.environmentIntensity = 0.45; }
+  }
+  function balcVisuals(on) {
+    balcOn = on; const sc = stage._scene;
+    if (on) {
+      if (skyDyn) { sc.add(sky); sc.background = null; } else { sc.remove(sky); sc.background = pipe.sky; }
+      sc.fog = haze; stage._ground.visible = false; updateBalcSky();
+    } else {
+      sc.remove(sky); sc.environment = studioEnv; outlook.userData.setWater?.(false); stage._key.color.set(0xffffff); stage._hemi.color.set(0xf3f6ff);
+    }
+  }
+  skyEl.onchange = () => { skyDyn = skyEl.checked; store.set('skyDyn', skyDyn ? '1' : '0'); if (currentView === 'balcony') { balcVisuals(true); pipe.setScene('unit-balc-' + scen + (skyDyn ? '-sky' : ''), { photo: false, skyBackground: !skyDyn, exposure: stage._renderer.toneMappingExposure, skyTilt: -0.12, skyIntensity: 0.9 }); balcVisuals(true); } };
+
   // ---- look-around camera (drag, wheel / pinch to zoom, arrows) ----
   const look = { yaw: 0, pitch: -0.04, fov: 62, on: false, drag: null, pts: new Map() };
   const faceAz = (az, pitch = -0.04) => { const [dx, dz] = azDir(az); look.yaw = Math.atan2(-dx, -dz); look.pitch = pitch; };
   const lookStep = () => { const cam = stage.camera; cam.position.copy(eyeW); cam.rotation.order = 'YXZ'; cam.rotation.set(look.pitch, look.yaw, 0); if (cam.fov !== look.fov) { cam.fov = look.fov; cam.updateProjectionMatrix(); }
     const hm2 = document.getElementById('headMark'); if (hm2) { const f = new THREE.Vector3(); cam.getWorldDirection(f); const a = Math.atan2(f.x, -f.z) * 180 / Math.PI - NORTH; const az = ((a % 360) + 360) % 360; hm2.setAttribute('transform', `translate(${(((az - 180) % 360) + 360) % 360} 0)`); } };
   const keysL = new Set();
-  function startLook() { look.on = true; const cam = stage.camera; cam.near = 0.05; cam.far = 4000; look.fov = innerHeight > innerWidth ? 80 : 62; cam.updateProjectionMatrix(); stage.setFx(M.fx); M.fx.visible = true; if (!look.init) { faceAz(bestDir(SA.ex)); look.init = true; } stage.setWalk((dt) => { if (keysL.has('arrowleft')) look.yaw += dt * 0.9; if (keysL.has('arrowright')) look.yaw -= dt * 0.9; lookStep(); }); drawBalc(); }
-  function stopLook() { if (!look.on) return; look.on = false; keysL.clear(); stage.setWalk(null); }
+  function startLook() { look.on = true; const cam = stage.camera; cam.near = 0.1; cam.far = 9000; look.fov = innerHeight > innerWidth ? 80 : 62; cam.updateProjectionMatrix(); stage.setFx(M.fx); M.fx.visible = true; if (!look.init) { faceAz(bestDir(SA.ex)); look.init = true; } stage.setWalk((dt) => { if (keysL.has('arrowleft')) look.yaw += dt * 0.9; if (keysL.has('arrowright')) look.yaw -= dt * 0.9; outlook.userData.tick?.(dt); sky.material.uniforms.time.value += dt; lookStep(); }); balcVisuals(true); drawBalc(); }
+  function stopLook() { if (!look.on) return; look.on = false; keysL.clear(); stage.setWalk(null); balcVisuals(false); }
   const cv = stage.canvas;
   cv.addEventListener('pointerdown', (e) => { if (!look.on) return; look.pts.set(e.pointerId, [e.clientX, e.clientY]); look.drag = [e.clientX, e.clientY]; cv.setPointerCapture?.(e.pointerId); });
   addEventListener('pointermove', (e) => { if (!look.on || !look.pts.has(e.pointerId)) return;

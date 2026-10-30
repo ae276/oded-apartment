@@ -2,6 +2,7 @@
 // Plan coordinates are PDF points off the sale drawings (unit sheet 1:50, page 23; floor plate 1:100, page 15),
 // traced from the raster walls (the sheets carry no wall vectors) and converted to metres here.
 // Finishes and fittings follow the מפרט מכר of 05.05.2026; loose furniture lives in group 'staging'.
+import { Water } from 'three/addons/objects/Water.js';
 export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctxData = null) {
   const PI = Math.PI;
   let seed = 11;
@@ -658,26 +659,94 @@ export async function build(THREE, unitPt, bldPt, TX = {}, roomsData = null, ctx
     const out = new THREE.BufferGeometry(); out.setAttribute('position', new THREE.BufferAttribute(pos, 3)); out.setAttribute('normal', new THREE.BufferAttribute(nor, 3)); return out;
   };
   const ctxShape = (pts) => { const s = new THREE.Shape(); pts.forEach((p, i) => (i ? s.lineTo(p[0], -p[1]) : s.moveTo(p[0], -p[1]))); s.closePath(); return s; };
+  // ---- context materials: facades with windows, roofs, land, trees ----
+  const facadeTex = canvasTex(256, 256, (g, w, h) => {   // one 3.0 m bay x 3.2 m storey; vertex colour tints the wall
+    g.fillStyle = '#ffffff'; g.fillRect(0, 0, w, h);
+    mottle(g, w, h, 60, ['#f2efe9', '#fbfaf7'], 0.5);
+    g.fillStyle = '#ebe8e2'; g.fillRect(0, h * 0.92, w, h * 0.08);                       // slab band
+    const gr = g.createLinearGradient(0, h * 0.3, 0, h * 0.78); gr.addColorStop(0, '#9aa6ad'); gr.addColorStop(1, '#6e7a82');
+    g.fillStyle = gr; g.fillRect(w * 0.27, h * 0.3, w * 0.46, h * 0.48);                // window
+    g.fillStyle = 'rgba(0,0,0,0.12)'; g.fillRect(w * 0.27, h * 0.3, w * 0.46, h * 0.04);  // reveal shadow
+    g.fillStyle = '#e2ded7'; g.fillRect(w * 0.24, h * 0.78, w * 0.52, h * 0.03);         // sill
+  }, 1 / 3.0, 1 / 3.2);
+  const roofTex = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#d3cfc6'; g.fillRect(0, 0, w, h); mottle(g, w, h, 200, ['#c8c3b9', '#dcd8d0'], 0.35); }, 1 / 12, 1 / 12);
+  const landTex = canvasTex(512, 512, (g, w, h) => { g.fillStyle = '#d8d3c7'; g.fillRect(0, 0, w, h); mottle(g, w, h, 900, ['#cfc9bb', '#e0dbd0', '#c7cdb8'], 0.3); }, 1 / 60, 1 / 60);
+  const cityFacade = std('context_facade_windows', 0xffffff, 0.82, 0, facadeTex, { vertexColors: true });
+  const cityRoof = std('context_roof', 0xffffff, 0.92, 0, roofTex, { vertexColors: true });
+  M.ctxGround.map = landTex; M.ctxGround.color.set(0xffffff); M.ctxGround.needsUpdate = true;
+  const seaSimple = std('context_sea_surface', 0x1f5f80, 0.12, 0.05);
+  const PALETTE = [0xf1e9da, 0xe8dcc6, 0xdccfb8, 0xf4efe5, 0xe6dccd, 0xd6c8b0, 0xebe1d1, 0xe0d6c6, 0xf2ece2].map((c) => new THREE.Color(c));
+  // merge extrusions keeping caps (roofs) and sides (facades) apart, with UVs and a per-building tint
+  const mergeSplit = (items) => {
+    const acc = [{ p: [], n: [], u: [], c: [] }, { p: [], n: [], u: [], c: [] }];
+    items.forEach(({ g, col }) => {
+      const P = g.attributes.position.array, N = g.attributes.normal.array, U = g.attributes.uv.array;
+      (g.groups.length ? g.groups : [{ start: 0, count: g.attributes.position.count, materialIndex: 1 }]).forEach((gr) => {
+        const A = acc[gr.materialIndex ? 1 : 0];
+        for (let i = gr.start; i < gr.start + gr.count; i++) { A.p.push(P[i * 3], P[i * 3 + 1], P[i * 3 + 2]); A.n.push(N[i * 3], N[i * 3 + 1], N[i * 3 + 2]); A.u.push(U[i * 2], U[i * 2 + 1]); A.c.push(col.r, col.g, col.b); }
+      });
+      g.dispose();
+    });
+    return acc.map((A) => { if (!A.p.length) return null; const o = new THREE.BufferGeometry(); o.setAttribute('position', new THREE.Float32BufferAttribute(A.p, 3)); o.setAttribute('normal', new THREE.Float32BufferAttribute(A.n, 3)); o.setAttribute('uv', new THREE.Float32BufferAttribute(A.u, 2)); o.setAttribute('color', new THREE.Float32BufferAttribute(A.c, 3)); return o; });
+  };
   const ctxGeo = {};
   if (ctxData) {
-    const mk = (items, filt) => mergeGeos(items.filter(filt).map((b) => { const g = new THREE.ExtrudeGeometry(ctxShape(decode(b.r)), { depth: b.h, bevelEnabled: false }); g.rotateX(-PI / 2); if (b.z0) g.translate(0, b.z0, 0); return g; }));
-    ctxGeo.keep = mk(ctxData.existing, (b) => !b.d);
-    ctxGeo.demo = mk(ctxData.existing, (b) => b.d);
-    ctxGeo.plan = mk(ctxData.planned, () => true);
+    const ext = (b) => { const g = new THREE.ExtrudeGeometry(ctxShape(decode(b.r)), { depth: b.h, bevelEnabled: false }); g.rotateX(-PI / 2); if (b.z0) g.translate(0, b.z0, 0); return g; };
+    let k = 0; const tint = () => PALETTE[(k++ * 7 + 3) % PALETTE.length];
+    [ctxGeo.keepRoof, ctxGeo.keepSide] = mergeSplit(ctxData.existing.filter((b) => !b.d).map((b) => ({ g: ext(b), col: tint() })));
+    [ctxGeo.demoRoof, ctxGeo.demoSide] = mergeSplit(ctxData.existing.filter((b) => b.d).map((b) => ({ g: ext(b), col: tint() })));
+    ctxGeo.plan = mergeGeos(ctxData.planned.map(ext));
+    ctxGeo.planEdges = new THREE.EdgesGeometry(ctxGeo.plan, 25);
+    const holed = (q) => { const s = ctxShape(decode(q.o)); (q.h || []).forEach((h) => { const p = new THREE.Path(); decode(h).forEach((v, i) => (i ? p.lineTo(v[0], -v[1]) : p.moveTo(v[0], -v[1]))); s.holes.push(p); }); return s; };
+    if (ctxData.land) ctxGeo.land = new THREE.ShapeGeometry(ctxData.land.map(holed), 24);
+    if (ctxData.ocean) ctxGeo.ocean = new THREE.ShapeGeometry(ctxData.ocean.map(holed), 24);
     const flatG = (rings, y) => mergeGeos(rings.map((r) => { const g = new THREE.ShapeGeometry(ctxShape(decode(r))); g.rotateX(-PI / 2); g.translate(0, y, 0); return g; }));
-    ctxGeo.sea = flatG(ctxData.sea, -0.4); ctxGeo.beach = flatG(ctxData.beach, -0.3); ctxGeo.park = flatG(ctxData.parks, -0.25); ctxGeo.road = flatG(ctxData.roads, -0.2);
+    ctxGeo.beach = flatG(ctxData.beach, -0.3); ctxGeo.park = flatG(ctxData.parks, -0.25); ctxGeo.road = flatG(ctxData.roads, -0.2);
+    // trees scattered in the parks (illustrative)
+    const pts = []; let sd = 99; const r2 = () => ((sd = (sd * 16807) % 2147483647) / 2147483647);
+    for (const r of ctxData.parks) { const P = decode(r); let x0 = 1e9, z0 = 1e9, x1 = -1e9, z1 = -1e9; P.forEach(([x, z]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); });
+      const area = (x1 - x0) * (z1 - z0), n = Math.min(260, Math.floor(area / 140));
+      for (let i = 0; i < n; i++) { const x = x0 + r2() * (x1 - x0), z = z0 + r2() * (z1 - z0); let c = false; for (let a = 0, b = P.length - 1; a < P.length; b = a++) { if (((P[a][1] > z) != (P[b][1] > z)) && (x < (P[b][0] - P[a][0]) * (z - P[a][1]) / (P[b][1] - P[a][1]) + P[a][0])) c = !c; } if (c) pts.push([x, z, 2.2 + r2() * 2.2]); } }
+    ctxGeo.trees = pts;
   }
-  // returns a fresh group sharing the merged geometry; flags let the page switch layers
   const makeContext = (name) => {
     const g = new THREE.Group(); g.name = name; if (!ctxData) return g;
     const add = (geo, mat, n, shadow = true) => { if (!geo) return null; const m = new THREE.Mesh(geo, mat); m.name = n; m.castShadow = shadow; m.receiveShadow = true; g.add(m); return m; };
-    const ground = new THREE.Mesh(new THREE.CircleGeometry(1400, 64), M.ctxGround); ground.rotation.x = -PI / 2; ground.position.y = -0.5; ground.name = 'context_ground'; ground.receiveShadow = true; g.add(ground);
-    add(ctxGeo.sea, M.ctxSea, 'context_sea', false); add(ctxGeo.beach, M.ctxBeach, 'context_beach', false); add(ctxGeo.park, M.ctxPark, 'context_parks', false); add(ctxGeo.road, M.ctxRoad, 'context_roads', false);
-    const keep = add(ctxGeo.keep, M.ctxEx, 'context_existing_buildings');
-    const demo = add(ctxGeo.demo, M.ctxDemo, 'context_existing_to_demolish');
+    if (ctxGeo.land) { const l = add(ctxGeo.land, M.ctxGround, 'context_land', false); l.rotation.x = -PI / 2; l.position.y = -0.5; }
+    else { const ground = new THREE.Mesh(new THREE.CircleGeometry(1400, 64), M.ctxGround); ground.rotation.x = -PI / 2; ground.position.y = -0.5; ground.name = 'context_ground'; g.add(ground); }
+    let sea = null, water = null;
+    if (ctxGeo.ocean) { sea = add(ctxGeo.ocean, seaSimple, 'context_sea', false); sea.rotation.x = -PI / 2; sea.position.y = -0.7; }
+    add(ctxGeo.beach, M.ctxBeach, 'context_beach', false); add(ctxGeo.park, M.ctxPark, 'context_parks', false); add(ctxGeo.road, M.ctxRoad, 'context_roads', false);
+    const keep = new THREE.Group(); keep.name = 'context_existing_buildings'; g.add(keep);
+    if (ctxGeo.keepSide) { keep.add(Object.assign(new THREE.Mesh(ctxGeo.keepSide, cityFacade), { name: 'facades' })); keep.add(Object.assign(new THREE.Mesh(ctxGeo.keepRoof, cityRoof), { name: 'roofs' })); }
+    const demo = new THREE.Group(); demo.name = 'context_existing_to_demolish'; g.add(demo);
+    if (ctxGeo.demoSide) { demo.add(Object.assign(new THREE.Mesh(ctxGeo.demoSide, cityFacade), { name: 'facades' })); demo.add(Object.assign(new THREE.Mesh(ctxGeo.demoRoof, cityRoof), { name: 'roofs' })); }
     const plan = add(ctxGeo.plan, M.ctxPlan, 'context_planned_massing', false);
-    if (plan) plan.renderOrder = 4;
-    g.userData = { keep, demo, plan, setPlanned(on) { if (plan) plan.visible = on; if (demo) demo.visible = !on; } };
+    if (plan) { plan.renderOrder = 4; const e = new THREE.LineSegments(ctxGeo.planEdges, new THREE.LineBasicMaterial({ color: 0x4d7c99, transparent: true, opacity: 0.55 })); e.name = 'planned_edges'; plan.add(e); }
+    if (ctxGeo.trees.length) {
+      const geo = new THREE.IcosahedronGeometry(1, 1), mats = [M.foliage, M.foliageDark];
+      mats.forEach((mt, j) => { const list = ctxGeo.trees.filter((_, i) => i % 2 === j); const im = new THREE.InstancedMesh(geo, mt, list.length); im.name = 'park_trees_' + j; const o = new THREE.Object3D();
+        list.forEach(([x, z, r], i) => { o.position.set(x, r * 0.9, z); o.scale.set(r, r * 1.1, r); o.updateMatrix(); im.setMatrixAt(i, o.matrix); }); im.castShadow = false; g.add(im); });
+    }
+    g.userData = {
+      keep, demo, plan,
+      setPlanned(on) { if (plan) plan.visible = on; demo.visible = !on; },
+      // reflective animated water for the balcony view; the plain surface stays for the walk-through and photoreal
+      setWater(on, sunDir) {
+        if (!sea) return null;
+        if (on && !water) {
+          const c = document.createElement('canvas'); c.width = c.height = 256; const x = c.getContext('2d'), img = x.createImageData(256, 256);
+          const hgt = (u, v) => { let s2 = 0; [[3, 2, 0.5], [5, -4, 0.3], [9, 7, 0.18], [-13, 11, 0.12], [21, -17, 0.07]].forEach(([a, b, amp], i) => (s2 += amp * Math.sin(2 * PI * (a * u + b * v) + i * 1.7))); return s2; };
+          for (let j = 0; j < 256; j++) for (let i = 0; i < 256; i++) { const u = i / 256, v = j / 256, e = 1 / 256, dx = (hgt(u + e, v) - hgt(u - e, v)) * 6, dy = (hgt(u, v + e) - hgt(u, v - e)) * 6; const l = Math.hypot(dx, dy, 1), k2 = (j * 256 + i) * 4; img.data[k2] = (-dx / l * 0.5 + 0.5) * 255; img.data[k2 + 1] = (-dy / l * 0.5 + 0.5) * 255; img.data[k2 + 2] = (1 / l * 0.5 + 0.5) * 255; img.data[k2 + 3] = 255; }
+          x.putImageData(img, 0, 0); const nt = new THREE.CanvasTexture(c); nt.wrapS = nt.wrapT = THREE.RepeatWrapping;
+          water = new Water(ctxGeo.ocean, { textureWidth: 512, textureHeight: 512, waterNormals: nt, sunDirection: new THREE.Vector3(0, 1, 0), sunColor: 0xfff4e0, waterColor: 0x0e4a66, distortionScale: 2.6, fog: true });
+          water.name = 'context_sea_water'; water.rotation.x = -PI / 2; water.position.y = -0.7; water.material.uniforms.size.value = 0.6; g.add(water);
+        }
+        if (water) { water.visible = !!on; if (sunDir) water.material.uniforms.sunDirection.value.set(...sunDir).normalize(); }
+        sea.visible = !on || !water; return water;
+      },
+      tick(dt) { if (water && water.visible) water.material.uniforms.time.value += dt * 0.6; },
+    };
     return g;
   };
   const bldContext = makeContext('neighbourhood_context'); bldContext.visible = false; bld.add(bldContext);
