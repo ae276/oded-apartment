@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>דירה 120 · בת גלים</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&display=swap">
+<script>
+  // Device class on <html>: mobile → bottom sheet + joystick, tablet → large touch layout, desktop → full layout.
+  (function () {
+    function detect() {
+      var o = null; try { o = localStorage.getItem('g120_device'); } catch (e) {}
+      var touch = matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 1;
+      var uaMobile = (navigator.userAgentData && navigator.userAgentData.mobile) || /Android.+Mobile|iPhone|iPod|Windows Phone|Mobile Safari/i.test(navigator.userAgent);
+      var short = Math.min(innerWidth, innerHeight);
+      var auto = (uaMobile || short < 600 || innerWidth < 700) ? 'mobile' : (touch ? 'tablet' : 'desktop');
+      var r = document.documentElement;
+      r.dataset.deviceAuto = auto; r.dataset.device = (o === 'desktop' || o === 'mobile') ? o : auto; r.dataset.touch = touch ? '1' : '0';
+      r.lang = 'he';
+    }
+    window.__detectDevice = detect; detect();
+  })();
+  // Module map + resource lookup: every runtime file is published next to this page.
+  (function () {
+    var PATHS = {"three-core":"vendor/three.core.js","three":"vendor/three.module.js","orbit":"vendor/OrbitControls.js","objexp":"vendor/OBJExporter.js","gltfexp":"vendor/GLTFExporter.js","add-postprocessing-EffectComposer-js":"vendor/addons/postprocessing/EffectComposer.js","add-postprocessing-RenderPass-js":"vendor/addons/postprocessing/RenderPass.js","add-postprocessing-OutputPass-js":"vendor/addons/postprocessing/OutputPass.js","add-postprocessing-GTAOPass-js":"vendor/addons/postprocessing/GTAOPass.js","add-postprocessing-Pass-js":"vendor/addons/postprocessing/Pass.js","add-loaders-HDRLoader-js":"vendor/addons/loaders/HDRLoader.js","add-shaders-CopyShader-js":"vendor/addons/shaders/CopyShader.js","add-postprocessing-ShaderPass-js":"vendor/addons/postprocessing/ShaderPass.js","add-postprocessing-MaskPass-js":"vendor/addons/postprocessing/MaskPass.js","add-shaders-OutputShader-js":"vendor/addons/shaders/OutputShader.js","add-shaders-GTAOShader-js":"vendor/addons/shaders/GTAOShader.js","add-shaders-PoissonDenoiseShader-js":"vendor/addons/shaders/PoissonDenoiseShader.js","add-math-SimplexNoise-js":"vendor/addons/math/SimplexNoise.js","bvh":"vendor/three-mesh-bvh.js","pathtracer":"vendor/three-gpu-pathtracer.js","app-model":"g-model.js","app-walk":"g-walk.js","app-render":"g-render.js","app-solar":"g-solar.js","app-device":"g-device.js","app-parking":"g-parking.js","data-parking":"data/parking_pt.json","data-unit":"data/unit_pt.json","data-building":"data/building_pt.json","data-rooms":"data/rooms.json","data-spec":"data/spec.json","data-context":"data/context.json","sky":"textures/s/sky_1k_hdr.json","tx-oak_veneer_01_diffuse":"textures/s/oak_veneer_01_diffuse.jpg","tx-oak_veneer_01_nor_gl":"textures/s/oak_veneer_01_nor_gl.jpg","tx-oak_veneer_01_rough":"textures/s/oak_veneer_01_rough.jpg","tx-curly_teddy_natural_diffuse":"textures/s/curly_teddy_natural_diffuse.jpg","tx-curly_teddy_natural_nor_gl":"textures/s/curly_teddy_natural_nor_gl.jpg","tx-curly_teddy_natural_rough":"textures/s/curly_teddy_natural_rough.jpg","tx-rough_linen_nor_gl":"textures/s/rough_linen_nor_gl.jpg","tx-rough_linen_rough":"textures/s/rough_linen_rough.jpg","tx-beige_wall_001_nor_gl":"textures/s/beige_wall_001_nor_gl.jpg"};
+    var SPECS = {"three-core":"three-core","three":"three","three/addons/controls/OrbitControls.js":"orbit","three/addons/exporters/OBJExporter.js":"objexp","three/addons/exporters/GLTFExporter.js":"gltfexp","three/addons/postprocessing/EffectComposer.js":"add-postprocessing-EffectComposer-js","three/addons/postprocessing/RenderPass.js":"add-postprocessing-RenderPass-js","three/addons/postprocessing/OutputPass.js":"add-postprocessing-OutputPass-js","three/addons/postprocessing/GTAOPass.js":"add-postprocessing-GTAOPass-js","three/addons/postprocessing/Pass.js":"add-postprocessing-Pass-js","three/addons/loaders/HDRLoader.js":"add-loaders-HDRLoader-js","three/addons/shaders/CopyShader.js":"add-shaders-CopyShader-js","three/addons/postprocessing/ShaderPass.js":"add-postprocessing-ShaderPass-js","three/addons/postprocessing/MaskPass.js":"add-postprocessing-MaskPass-js","three/addons/shaders/OutputShader.js":"add-shaders-OutputShader-js","three/addons/shaders/GTAOShader.js":"add-shaders-GTAOShader-js","three/addons/shaders/PoissonDenoiseShader.js":"add-shaders-PoissonDenoiseShader-js","three/addons/math/SimplexNoise.js":"add-math-SimplexNoise-js","three-mesh-bvh":"bvh","three-gpu-pathtracer":"pathtracer","app-model":"app-model","app-walk":"app-walk","app-render":"app-render","app-solar":"app-solar","app-device":"app-device","app-parking":"app-parking"};
+    var R = window.__resources || {};
+    var u = function (id) { return R[id] || new URL(PATHS[id], document.baseURI).href; };
+    window.__res = u;
+    var map = { imports: {} };
+    for (var sp in SPECS) map.imports[sp] = u(SPECS[sp]);
+    var s = document.createElement('script'); s.type = 'importmap'; s.textContent = JSON.stringify(map);
+    document.currentScript.after(s);
+  })();
+</script>
+<style>
+  /* Layout: full-bleed 3D stage; control rail on the reading side (right, RTL), spec ledger opposite; on phones the rail is a bottom sheet. */
+  :root {
+    --bg: #eceae5; --panel: rgba(250, 249, 246, 0.95); --ink: #1d1c19; --ink-2: #4b4943; --ink-3: #7c786f;
+    --line: rgba(29, 28, 25, 0.12); --chip: rgba(29, 28, 25, 0.06); --chip-hover: rgba(29, 28, 25, 0.11);
+    --accent: oklch(0.64 0.15 45); --accent-ink: #ffffff; --accent-soft: oklch(0.64 0.15 45 / 0.14);
+    --stage-cut: #ebe9e3; --stage-walk: #e7ecef; --stage-bld: #e5e8e9; --scrim: rgba(29, 28, 25, 0.84); --scrim-ink: #f4f2ec;
+    --font-ui: "IBM Plex Sans Hebrew", "Assistant", "Arial Hebrew", Arial, sans-serif;
+    --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #1b1c1d; --panel: rgba(32, 33, 34, 0.94); --ink: #ecebe7; --ink-2: #c3c0b8; --ink-3: #8f8c84;
+    --line: rgba(236, 235, 231, 0.12); --chip: rgba(236, 235, 231, 0.07); --chip-hover: rgba(236, 235, 231, 0.13);
+    --accent: oklch(0.7 0.15 48); --accent-ink: #1b1c1d; --accent-soft: oklch(0.7 0.15 48 / 0.18);
+    --stage-cut: #262728; --stage-walk: #2a2f33; --stage-bld: #24282a; --scrim: rgba(236, 235, 231, 0.9); --scrim-ink: #1b1c1d; color-scheme: dark; } }
+  :root[data-theme="dark"] {
+    --bg: #1b1c1d; --panel: rgba(32, 33, 34, 0.94); --ink: #ecebe7; --ink-2: #c3c0b8; --ink-3: #8f8c84;
+    --line: rgba(236, 235, 231, 0.12); --chip: rgba(236, 235, 231, 0.07); --chip-hover: rgba(236, 235, 231, 0.13);
+    --accent: oklch(0.7 0.15 48); --accent-ink: #1b1c1d; --accent-soft: oklch(0.7 0.15 48 / 0.18);
+    --stage-cut: #262728; --stage-walk: #2a2f33; --stage-bld: #24282a; --scrim: rgba(236, 235, 231, 0.9); --scrim-ink: #1b1c1d; color-scheme: dark; }
+  html, body { height: 100%; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 14px; overflow: hidden; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  button { font: inherit; color: inherit; }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  three-d-stage { position: fixed; inset: 0; width: 100vw; height: 100dvh; touch-action: none; }
+  .num { font-family: var(--font-data); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+
+  .rail { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); width: 304px; max-width: calc(100vw - 28px); max-height: calc(100% - 28px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); overflow: auto; box-sizing: border-box; padding: 16px 16px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 14px; z-index: 3; direction: rtl; }
+  .handle { display: none; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.06em; color: var(--ink-3); }
+  h1 { margin: 3px 0 0; font-size: 21px; line-height: 1.2; font-weight: 700; text-wrap: balance; }
+  h1 .num { font-weight: 500; font-size: 0.78em; color: var(--ink-2); margin-inline-start: 4px; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+  .fact { background: var(--chip); border-radius: 8px; padding: 7px 8px 6px; min-width: 0; }
+  .fact b { display: block; font-family: var(--font-data); font-weight: 500; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .fact span { display: block; font-size: 10.5px; color: var(--ink-3); margin-top: 1px; }
+  .sub { font-size: 12px; color: var(--ink-2); line-height: 1.5; margin-top: 8px; text-wrap: pretty; }
+  .label { font-size: 11px; color: var(--ink-3); letter-spacing: 0.04em; margin-bottom: 6px; }
+  .views { display: flex; flex-direction: column; gap: 3px; }
+  .views button { appearance: none; border: 0; background: transparent; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 8px; font-size: 13.5px; text-align: right; }
+  .views button span { font-size: 11px; color: var(--ink-3); }
+  .views button:hover { background: var(--chip); }
+  .views button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .views button[aria-pressed="true"] span { color: var(--bg); opacity: 0.7; }
+  .seg { display: flex; flex-wrap: wrap; gap: 4px; }
+  .seg button { appearance: none; border: 0; cursor: pointer; padding: 6px 9px; border-radius: 6px; font-size: 12px; background: var(--chip); }
+  .seg button:hover { background: var(--chip-hover); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .box { display: flex; flex-direction: column; gap: 9px; }
+  .box[hidden] { display: none; }
+  .row { display: flex; flex-direction: column; gap: 5px; }
+  .row > .rl { font-size: 12px; color: var(--ink-2); }
+  .chips { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; direction: ltr; }
+  .chips button { appearance: none; border: 0; cursor: pointer; text-align: center; padding: 7px 0; border-radius: 6px; font-size: 12px; background: var(--chip); font-family: var(--font-data); }
+  .chips button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .chips button.own { box-shadow: inset 0 0 0 1.5px var(--accent); }
+  .unitline { font-size: 12.5px; }
+  .tog { display: flex; gap: 8px; align-items: center; font-size: 12.5px; cursor: pointer; }
+  .tog input { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+  .sunrow { display: flex; align-items: center; gap: 10px; }
+  .sunrow input[type=range] { flex: 1; accent-color: var(--accent); min-width: 0; }
+  .sunread { font-size: 11.5px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; }
+  .compass { width: 34px; height: 34px; flex: none; border-radius: 50%; background: var(--chip); display: grid; place-items: center; }
+  .compass svg { width: 28px; height: 28px; }
+  .note { font-size: 11px; line-height: 1.55; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 11px; text-wrap: pretty; }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  .btn { appearance: none; border: 1px solid var(--line); cursor: pointer; background: transparent; border-radius: 8px; padding: 7px 10px; font-size: 12px; }
+  .btn:hover { background: var(--chip); }
+  .btn.primary { background: var(--accent); border-color: transparent; color: var(--accent-ink); font-weight: 600; }
+  .btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+  .btn[hidden] { display: none; }
+  .toast { font-size: 11.5px; color: var(--ink-2); min-height: 1em; }
+  body.walking .rail .sub, body.walking .rail .note, body.walking .rail .facts { display: none; }
+
+  .tags { position: fixed; inset: 0; pointer-events: none; z-index: 2; }
+  .tag { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; appearance: none; cursor: pointer; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 3px 9px; font-size: 11.5px; white-space: nowrap; direction: rtl; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+  .tag:hover, .tag[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+  .ptag { pointer-events: none; font-weight: 600; }
+  .ptag.own { background: var(--accent); color: var(--accent-ink); border-color: transparent; font-size: 12.5px; padding: 4px 10px; }
+  .ptag.lobby { background: var(--ink); color: var(--bg); border-color: transparent; }
+  .tag .num { font-size: 10.5px; opacity: 0.75; unicode-bidi: isolate; }
+  .mlabel { position: absolute; transform: translate(-50%, -140%); background: var(--accent); color: var(--accent-ink); font-family: var(--font-data); font-size: 12.5px; font-weight: 500; padding: 3px 8px; border-radius: 6px; white-space: nowrap; pointer-events: none; }
+  .mbar { position: fixed; left: 50%; transform: translateX(-50%); top: calc(14px + env(safe-area-inset-top, 0px)); z-index: 4; display: flex; align-items: center; gap: 10px; background: var(--scrim); color: var(--scrim-ink); border-radius: 999px; padding: 6px 8px 6px 14px; font-size: 12.5px; direction: rtl; max-width: calc(100vw - 32px); }
+  .mbar[hidden] { display: none; }
+  .mbar button { appearance: none; border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 999px; width: 26px; height: 26px; cursor: pointer; font-size: 15px; line-height: 1; }
+
+  .ledger { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); width: 392px; max-width: calc(100vw - 28px); max-height: calc(100% - 28px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); box-sizing: border-box; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); z-index: 4; direction: rtl; display: flex; flex-direction: column; overflow: hidden; }
+  .ledger[hidden] { display: none !important; }
+  .lhead { padding: 14px 16px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .lhead h2 { margin: 0; font-size: 16px; font-weight: 700; }
+  .lhead p { margin: 2px 0 0; font-size: 11.5px; color: var(--ink-3); }
+  .x { appearance: none; border: 0; background: var(--chip); border-radius: 7px; width: 28px; height: 28px; cursor: pointer; font-size: 16px; line-height: 1; flex: none; }
+  .tabs { display: flex; gap: 2px; padding: 10px 12px 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; padding: 8px 10px 9px; font-size: 12.5px; color: var(--ink-2); border-bottom: 2px solid transparent; white-space: nowrap; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .lbody { overflow: auto; padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+  .roompick { display: flex; flex-wrap: wrap; gap: 4px; }
+  .roompick button { appearance: none; border: 0; cursor: pointer; padding: 5px 8px; border-radius: 6px; font-size: 11.5px; background: var(--chip); }
+  .roompick button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .rtitle { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .rtitle h3 { margin: 0; font-size: 15px; }
+  dl.spec { margin: 0; display: grid; grid-template-columns: 92px minmax(0, 1fr); border-top: 1px solid var(--line); }
+  dl.spec dt, dl.spec dd { padding: 7px 0; border-bottom: 1px solid var(--line); margin: 0; font-size: 12.5px; line-height: 1.5; }
+  dl.spec dt { color: var(--ink-3); padding-inline-end: 8px; }
+  dl.spec dd { text-wrap: pretty; min-width: 0; }
+  .elec { display: flex; flex-wrap: wrap; gap: 4px; }
+  .elec span { background: var(--chip); border-radius: 5px; padding: 2px 7px; font-size: 11.5px; }
+  .elec b { font-family: var(--font-data); font-weight: 500; margin-inline-start: 3px; }
+  .ref { font-size: 10.5px; color: var(--ink-3); }
+  .sec h4 { margin: 0 0 4px; font-size: 13px; }
+  .sec p, .sec li { font-size: 12.5px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+  .sec ul { margin: 0; padding-inline-start: 18px; display: grid; gap: 3px; }
+  .wrapx { overflow-x: auto; }
+  table.ft { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  table.ft th, table.ft td { text-align: right; padding: 5px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.ft th { font-weight: 500; color: var(--ink-3); font-size: 11px; }
+  .openspec { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); z-index: 3; }
+  body.ledger-open .openspec { display: none; }
+
+  .walkcard { position: fixed; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); width: 300px; max-width: calc(100vw - 28px); box-sizing: border-box; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); display: none; z-index: 3; direction: rtl; }
+  body.walking .walkcard { display: flex; flex-direction: column; gap: 8px; }
+  .here { font-size: 12px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .here b { color: var(--ink); }
+  .linkbtn { appearance: none; border: 0; background: none; color: var(--accent); cursor: pointer; padding: 0; font-size: 12px; text-decoration: underline; text-underline-offset: 2px; }
+  .rooms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; }
+  .rooms button { appearance: none; border: 0; cursor: pointer; padding: 6px 0; border-radius: 6px; font-size: 11px; background: var(--chip); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rooms button:hover { background: var(--chip-hover); }
+  .rooms button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  #minimap { width: 100%; display: block; cursor: crosshair; border-radius: 6px; background: var(--chip); direction: ltr; }
+  .keys { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%); max-width: min(520px, calc(100vw - 680px)); padding: 9px 13px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line); font-size: 12px; line-height: 1.55; color: var(--ink-2); display: none; z-index: 2; direction: rtl; }
+  body.walking .keys { display: block; }
+  :root[data-touch="1"] .keys, body.ledger-open .keys { display: none !important; }
+  @media (max-width: 1100px) { .keys { display: none !important; } }
+  .keys b { color: var(--ink); font-weight: 600; }
+  .joy { position: fixed; left: max(18px, env(safe-area-inset-left, 0px)); bottom: calc(24px + env(safe-area-inset-bottom, 0px)); width: 96px; height: 96px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); z-index: 4; display: none; touch-action: none; }
+  .joy i { position: absolute; left: 50%; top: 50%; width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 50%; background: var(--accent); opacity: 0.9; }
+  :root[data-touch="1"] body.walking .joy { display: block; }
+  .rstatus { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); appearance: none; border: 0; padding: 9px 15px; border-radius: 999px; background: var(--scrim); color: var(--scrim-ink); font-size: 12px; z-index: 3; cursor: default; direction: rtl; }
+  body.measuring .keys { display: none !important; }
+  .rstatus[data-mode="ready"] { background: var(--accent); color: var(--accent-ink); cursor: pointer; font-weight: 600; }
+  .rstatus[data-mode="off"], .rstatus[hidden] { display: none; }
+  .hint { position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%); background: var(--scrim); color: var(--scrim-ink); padding: 10px 14px; border-radius: 10px; font-size: 13px; z-index: 6; direction: rtl; max-width: calc(100vw - 48px); text-align: center; transition: opacity 0.6s; pointer-events: none; }
+  .hint[hidden] { display: none; }
+  .loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--ink-3); pointer-events: none; direction: rtl; }
+
+  /* phone: bottom sheet */
+  :root[data-device="mobile"] .rail { top: auto; bottom: 0; left: 0; right: 0; width: auto; max-width: none; max-height: 60dvh; border-radius: 14px 14px 0 0; padding: 6px max(14px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); gap: 10px; border-bottom: 0; }
+  :root[data-device="mobile"] .handle { display: block; appearance: none; border: 0; background: transparent; cursor: pointer; padding: 6px 0 2px; align-self: center; width: 100%; }
+  :root[data-device="mobile"] .handle i { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--ink-3); opacity: 0.5; margin: 0 auto; }
+  :root[data-device="mobile"] .rail:not(.expanded) > :not(.handle):not(.head):not(.views) { display: none !important; }
+  :root[data-device="mobile"] .rail:not(.expanded) .facts, :root[data-device="mobile"] .rail:not(.expanded) .sub, :root[data-device="mobile"] .rail:not(.expanded) .eyebrow { display: none; }
+  :root[data-device="mobile"] h1 { font-size: 17px; }
+  :root[data-device="mobile"] .views { flex-direction: row; overflow-x: auto; gap: 4px; scrollbar-width: none; }
+  :root[data-device="mobile"] .views button { flex: none; padding: 9px 12px; font-size: 13px; background: var(--chip); min-height: 40px; }
+  :root[data-device="mobile"] .views button span { display: none; }
+  :root[data-device="mobile"] .views button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  :root[data-device="mobile"] .openspec { top: calc(10px + env(safe-area-inset-top, 0px)); left: max(10px, env(safe-area-inset-left, 0px)); }
+  :root[data-device="mobile"] .ledger { top: auto; bottom: 0; left: 0; right: 0; width: 100%; max-width: 100%; max-height: 70dvh; border-radius: 14px 14px 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); z-index: 5; }
+  :root[data-device="mobile"] .walkcard { top: calc(10px + env(safe-area-inset-top, 0px)); bottom: auto; left: max(10px, env(safe-area-inset-left, 0px)); right: max(10px, env(safe-area-inset-right, 0px)); width: auto; padding: 8px; gap: 6px; }
+  :root[data-device="mobile"] .rooms { display: flex; overflow-x: auto; scrollbar-width: none; }
+  :root[data-device="mobile"] .rooms button { flex: none; padding: 8px 10px; }
+  :root[data-device="mobile"] #minimap { display: none; }
+  :root[data-device="mobile"] body.walking .openspec { display: none; }
+  :root[data-device="mobile"] .rstatus { bottom: calc(118px + env(safe-area-inset-bottom, 0px)); }
+  :root[data-device="mobile"] body.walking .joy { bottom: calc(118px + env(safe-area-inset-bottom, 0px)); }
+  :root[data-device="mobile"] .tag { font-size: 10.5px; padding: 2px 7px; }
+  :root[data-device="mobile"] .mbar { top: auto; bottom: calc(126px + env(safe-area-inset-bottom, 0px)); }
+  :root[data-device="tablet"] .rail button, :root[data-device="tablet"] .walkcard button { min-height: 36px; }
+  @media (max-height: 500px) { :root[data-device="mobile"] .rail:not(.expanded) .head { display: none; } :root[data-device="mobile"] .rstatus, :root[data-device="mobile"] body.walking .joy { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<three-d-stage name="G-120_apartment"></three-d-stage>
+<div class="loading" id="loading">בונה את המודל…</div>
+<div class="tags" id="tags" aria-label="חדרים"></div>
+<div class="mbar" id="mbar" hidden><span id="mtext">הקישו על שתי נקודות כדי למדוד</span><button type="button" id="mclose" aria-label="סיום מדידה">×</button></div>
+
+<aside class="rail" id="rail" aria-label="שליטה בהדמיה">
+  <button type="button" class="handle" id="handle" aria-expanded="false" aria-label="הרחבת הלוח"><i></i></button>
+  <div class="head">
+    <div class="eyebrow">בת גלים, חיפה · מתחם חיל הים · מגדל 1</div>
+    <h1>דירה 120 <span class="num">G · מיני פנטהאוז</span></h1>
+    <div class="facts">
+      <div class="fact"><b>156.9</b><span>מ״ר שטח דירה</span></div>
+      <div class="fact"><b>22.6</b><span>מ״ר מרפסת שמש</span></div>
+      <div class="fact"><b>27</b><span>קומה מתוך 28</span></div>
+    </div>
+    <div class="sub">5 חדרים, פינה צפון-מערבית עם מרפסת מעוגלת. משורטט 1:1 מתוכנית המכר 1:50 ומתוכנית הקומה 1:100, עם הגמרים והאביזרים של מפרט המכר.</div>
+  </div>
+  <div class="views" id="views">
+    <button type="button" data-view="cutaway" aria-pressed="true">חתך אקסונומטרי <span>תוכנית</span></button>
+    <button type="button" data-view="walk" aria-pressed="false">סיור בתוך הדירה <span>גוף ראשון</span></button>
+    <button type="button" data-view="building" aria-pressed="false">הדירה במגדל <span>מגדל 1 וסביבה</span></button>
+    <button type="button" data-view="parking" aria-pressed="false">חניה ומחסן <span>349 + 349B · מחסן</span></button>
+  </div>
+  <div class="box" id="plevels" hidden>
+    <div class="label">מפלס חניון</div>
+    <div class="seg" id="levelSeg"></div>
+    <div class="unitline" id="parkline"></div>
+    <div class="sub" style="margin-top:0">החניון משותף לכל המתחם. בכתום: החניות והמחסן ששוריינו לדירה, והמסלול ללובי בניין 1. הקו הכתום הדק הוא קו המגדל שמעל. המכוניות להמחשה.</div>
+  </div>
+  <div class="box" id="floors" hidden>
+    <div class="label">דגם G בקומות 23–27 · המסגרת = דירה 120</div>
+    <div class="chips" id="chips"></div>
+    <div class="unitline" id="unitline"></div>
+    <label class="tog"><input type="checkbox" id="ctxOn" checked> סביבה (מבנים קיימים)</label>
+    <label class="tog"><input type="checkbox" id="planOn" checked> תוכניות עתידיות (חצי שקוף)</label>
+  </div>
+  <div class="box" id="tools">
+    <div class="label">כלים</div>
+    <div class="actions">
+      <button type="button" class="btn" id="emptyBtn" aria-pressed="false">דירה ריקה</button>
+      <button type="button" class="btn" id="measureBtn" aria-pressed="false">מדידה</button>
+      <button type="button" class="btn" id="areasBtn" aria-pressed="false">שטחי חדרים</button>
+      <button type="button" class="btn" id="outlookBtn" aria-pressed="true" hidden>נוף מהחלונות</button>
+    </div>
+  </div>
+  <div class="box" id="sunbox">
+    <div class="label">מסלול השמש</div>
+    <div class="seg" id="dateSeg">
+      <button type="button" data-v="3-21">21 במרץ</button><button type="button" data-v="6-21">21 ביוני</button><button type="button" data-v="9-21">21 בספט׳</button><button type="button" data-v="12-21">21 בדצמ׳</button><button type="button" data-v="today">היום</button>
+    </div>
+    <div class="sunrow">
+      <input type="range" dir="ltr" id="hour" min="6" max="19" step="0.25" value="10" aria-label="שעה">
+      <div class="compass" title="צפון"><svg viewBox="0 0 28 28" aria-hidden="true"><g id="needle"><path d="M14 3 L18 14 L14 12 L10 14 Z" fill="var(--accent)"/><path d="M14 25 L10 14 L14 16 L18 14 Z" fill="var(--ink-3)"/></g><text x="14" y="8.5" text-anchor="middle" font-size="0">N</text></svg></div>
+    </div>
+    <div class="sunread"><span id="sunTime" class="num">10:00</span><span id="sunAlt"></span></div>
+  </div>
+  <div class="box" id="opts">
+    <div class="label">בחירות מתוך המפרט</div>
+    <div class="row"><div class="rl">ריצוף פורצלן בחדרי המגורים</div><div class="seg" id="tileSeg"><button type="button" data-v="0.8"><span class="num">80×80</span></button><button type="button" data-v="1"><span class="num">100×100</span></button></div></div>
+    <div class="row"><div class="rl">תריסי גלילה חשמליים</div><div class="seg" id="shutSeg"><button type="button" data-v="0">פתוחים</button><button type="button" data-v="0.5">חצי</button><button type="button" data-v="1">סגורים</button></div></div>
+  </div>
+  <div class="box" id="savebox">
+    <div class="label">שמירה</div>
+    <div class="actions">
+      <button type="button" class="btn" id="savePng">תמונה PNG</button>
+      <button type="button" class="btn" id="saveObj">מודל OBJ (zip)</button>
+      <button type="button" class="btn" id="saveGlb">מודל GLB (zip)</button>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <div class="box" id="devbox">
+    <div class="label">תצוגה מותאמת ל<span id="devAuto"></span></div>
+    <div class="seg" id="devSeg"><button type="button" data-v="auto">זיהוי אוטומטי</button><button type="button" data-v="desktop">מחשב</button><button type="button" data-v="mobile">נייד</button></div>
+  </div>
+  <div class="note" id="note">תקרות 2.75 מ׳ לפי המפרט; תקרות משנה 2.45 בפרוזדור, בחדרי הרחצה ובכביסה הן הנחה (מפרט: לפחות 2.05). גובה קומה 3.20 לפי מפלסי התוכניות. הריהוט להמחשה בלבד. חניות 349 + 349B ומחסן ליד חניה 335 שוריינו במשא ומתן; במפרט הם עדיין לא מופיעים.</div>
+</aside>
+
+<button type="button" class="btn primary openspec" id="openSpec">מפרט המכר</button>
+<aside class="ledger" id="ledger" hidden aria-label="מפרט מכר">
+  <div class="lhead">
+    <div><h2>מפרט מכר · דירה 120</h2><p>דגם G, 5 חדרים · קומה 27 · מהדורה 05.05.2026 · מותנה בהיתר</p></div>
+    <button type="button" class="x" id="closeSpec" aria-label="סגירת המפרט">×</button>
+  </div>
+  <div class="tabs" role="tablist" id="tabs">
+    <button type="button" role="tab" data-tab="rooms" aria-selected="true">חדר־חדר</button>
+    <button type="button" role="tab" data-tab="systems" aria-selected="false">מערכות</button>
+    <button type="button" role="tab" data-tab="building" aria-selected="false">הבניין</button>
+    <button type="button" role="tab" data-tab="sources" aria-selected="false">מקורות והנחות</button>
+  </div>
+  <div class="lbody" id="lbody"></div>
+</aside>
+
+<button class="rstatus" id="rstatus" data-mode="off" type="button"></button>
+<div class="keys" id="keyhint"><b>גרירה</b> להסתכל סביב · <b>W A S D</b> או החצים להליכה · <b>Shift</b> מהר יותר · <b>קליק על הרצפה</b> כדי ללכת לשם · קליק במפה כדי לקפוץ</div>
+<div class="joy" id="joy" aria-label="ג׳ויסטיק הליכה"><i id="knob"></i></div>
+<div class="hint" id="hint" hidden>גרור כדי להסתכל · הקש על הרצפה כדי ללכת לשם · ג'ויסטיק לתנועה רציפה</div>
+<aside class="walkcard" id="walkcard" aria-label="ניווט בסיור">
+  <div class="here"><span>אתם ב<b id="hereName">כניסה</b></span><span><button type="button" class="linkbtn" id="hereSpec">מפרט החדר</button></span></div>
+  <div class="rooms" id="rooms"></div>
+  <canvas id="minimap" aria-label="מפת הדירה, קליק כדי לעבור לשם"></canvas>
+</aside>
+
+<template id="__bundler_thumbnail" data-bg-color="#ebe9e3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#ebe9e3"/><path d="M40 70 H160 V160 H40 Z" fill="none" stroke="#1d1c19" stroke-width="8"/><path d="M40 70 Q40 40 70 40 H110 V70 Z" fill="#e2703a"/></svg></template>
+
+
+<script type="application/json" id="source-data">{"project":"בת גלים / מתחם חיל הים, חיפה","building":"מגדל 1","unit":"120 · דגם G · קומה 27","K":0.01739,"UCX":533.75,"UCY":764.9,"northDeg":-20,"lat":32.832,"lon":34.981,"unit_pt":{"walls":[[[459.84,779.04],[461.76,778.56],[462.24,777.6],[475.68,777.6],[476.16,778.56],[479.04,778.56],[479.52,777.6],[538.56,777.6],[539.04,778.56],[542.88,778.56],[543.36,777.6],[559.2,777.6],[560.16,779.52],[560.16,820.32],[559.2,821.28],[543.84,821.28],[544.32,847.2],[557.76,847.68],[557.28,905.76],[506.88,905.76],[505.92,931.68],[459.84,931.68],[459.36,869.76],[453.6,869.28],[453.12,1056.0],[447.84,1056.48],[447.84,1062.24],[453.12,1062.72],[453.6,1076.64],[458.88,1076.64],[459.36,978.24],[460.8,977.76],[460.8,975.36],[459.36,974.88],[459.36,938.4],[460.32,937.44],[505.92,937.44],[506.4,990.72],[533.76,990.72],[535.2,992.16],[557.76,992.64],[558.24,1087.68],[509.28,1088.16],[509.28,1113.12],[508.32,1121.76],[459.84,1121.76],[459.36,1116.0],[453.6,1116.0],[453.12,1161.12],[459.36,1161.12],[459.84,1127.52],[557.76,1128.0],[557.76,1272.48],[459.84,1272.96],[459.36,1239.84],[458.88,1238.88],[453.6,1238.88],[452.64,1272.96],[181.44,1272.96],[180.96,1233.6],[156.96,1233.12],[156.96,1282.56],[156.0,1283.04],[156.0,1292.64],[576.96,1292.64],[576.96,827.04],[598.56,826.56],[598.08,806.88],[566.4,806.88],[565.92,779.52],[566.88,778.08],[574.56,778.08],[574.56,773.76],[453.12,774.24],[453.6,829.44],[459.36,829.44]],[[902.4,486.24],[794.88,486.72],[794.88,549.12],[800.64,549.12],[800.64,540.96],[802.08,530.4],[800.64,529.92],[800.64,493.44],[801.6,492.48],[870.72,492.48],[871.2,493.92],[894.72,492.48],[902.4,492.96],[902.4,646.08],[825.6,646.56],[825.12,631.2],[800.64,630.72],[800.64,588.48],[794.88,588.48],[794.88,630.72],[773.28,631.2],[772.8,677.28],[663.36,677.28],[662.88,546.72],[732.48,546.24],[732.48,524.64],[726.72,524.64],[726.24,540.48],[657.12,540.48],[657.12,697.44],[691.2,697.92],[691.2,807.36],[647.04,806.88],[647.04,809.28],[648.48,809.76],[648.48,826.56],[708.0,826.56],[708.0,697.92],[708.96,696.96],[921.6,697.44],[921.6,388.8],[920.64,386.4],[920.16,247.2],[859.68,246.72],[859.68,265.44],[902.4,265.92]],[[715.68,453.12],[709.92,453.6],[709.44,452.16],[706.08,452.16],[706.08,455.04],[707.04,455.52],[707.04,471.84],[709.44,471.84],[709.92,470.88],[726.24,470.88],[726.72,479.52],[732.48,479.52],[732.96,265.92],[775.2,265.44],[775.2,246.72],[672.96,246.72],[672.96,272.16],[689.28,271.68],[715.68,272.64]],[[529.92,262.08],[531.36,262.56],[531.36,269.28],[529.92,269.76],[529.92,272.16],[531.36,272.64],[531.36,297.6],[529.92,298.08],[529.92,300.48],[531.36,300.96],[531.36,383.04],[529.92,383.52],[529.92,385.92],[531.36,386.4],[531.36,411.36],[529.92,411.84],[529.92,419.04],[531.36,419.52],[531.36,450.72],[529.44,452.16],[516.0,452.16],[516.0,455.04],[517.44,456.48],[517.44,458.88],[516.0,460.32],[516.48,470.88],[616.32,470.88],[616.8,472.32],[624.48,471.84],[625.44,470.88],[640.8,470.88],[641.28,472.32],[661.44,470.88],[661.92,455.52],[662.88,455.04],[662.88,452.64],[659.52,452.64],[659.04,453.6],[553.92,453.12],[553.92,273.12],[554.88,272.16],[616.8,272.16],[616.8,255.36],[582.72,255.36],[582.24,256.32],[560.64,256.32],[560.16,250.56],[616.8,251.04],[616.8,246.72],[531.36,246.72],[531.36,258.72],[529.92,259.2]],[[390.72,1092.0],[261.12,1092.0],[260.64,1089.12],[242.88,1088.64],[243.36,1098.72],[240.96,1100.64],[156.96,1100.16],[156.96,1157.28],[180.96,1156.8],[181.44,1117.44],[260.16,1117.44],[261.12,1097.76],[390.72,1097.76],[391.2,1105.92],[396.96,1106.4],[396.96,1062.72],[402.72,1062.24],[402.72,1056.48],[396.96,1056.0],[396.96,1045.44],[391.2,1045.44]],[[242.88,1015.2],[260.64,1015.2],[260.64,999.84],[262.08,998.88],[389.76,998.88],[391.2,1000.32],[391.2,1005.6],[396.96,1004.64],[396.96,988.32],[391.2,988.32],[390.72,994.08],[260.64,994.08],[260.16,995.04],[174.72,994.56],[174.24,954.72],[156.96,954.24],[156.96,1012.8],[240.96,1012.32],[242.4,1013.28]],[[174.72,824.16],[390.72,824.16],[391.2,942.72],[396.96,942.72],[396.96,773.76],[391.2,773.28],[391.2,817.44],[390.24,818.4],[174.72,818.4],[174.24,680.64],[156.96,680.64],[156.96,869.76],[174.24,869.28]],[[187.2,470.88],[187.2,452.16],[156.96,452.16],[156.96,604.8],[174.24,604.8],[174.24,471.36]]]},"rooms":{"K":0.01739,"northDeg":-20,"entrance":"entrance","UCX":533.75,"UCY":764.9,"footprint":[[156,452],[531,452],[531,247],[911.5,247],[911.5,697],[708,697],[708,827],[577,827],[577,1282.8],[156,1282.8]],"balconies":[{"name":"balcony","poly":[[156,452],[531,452],[531,247],[274,247],[253.5,248.8],[233.6,254.1],[215.0,262.8],[198.2,274.6],[183.6,289.2],[171.8,306.0],[163.1,324.6],[157.8,344.5],[156,365]],"spawn":[420,330,250,300]}],"rooms":{"living":{"poly":[[174,471],[726,471],[726,540],[657,540],[657,697],[552,697],[552,777],[397,777],[397,818],[391,818],[391,700],[174,700]],"spawn":[600,610,300,540]},"kitchen":{"poly":[[174,700],[391,700],[391,818],[174,818]],"spawn":[300,735,190,770]},"entrance":{"poly":[[552,697],[691,697],[691,807],[552,807]],"spawn":[622,770,470,560]},"corridor":{"poly":[[397,777],[453,777],[453,1055],[397,1055]],"spawn":[425,830,425,1040]},"bed2":{"poly":[[175,824],[391,824],[391,994],[175,994]],"spawn":[345,955,175,900]},"laundry":{"poly":[[261,999],[391,999],[391,1092],[261,1092]],"spawn":[300,1030,250,1050]},"mistor":{"poly":[[160,1013],[243,1013],[243,1100],[160,1100]]},"master":{"poly":[[181,1117],[261,1117],[261,1098],[391,1098],[391,1106],[397,1106],[397,1062],[453,1062],[453,1273],[181,1273]],"spawn":[420,1240,200,1150]},"masterCloset":{"poly":[[459,1128],[557,1128],[557,1273],[459,1273]],"spawn":[495,1190,520,1270]},"masterBath":{"poly":[[459,937],[505,937],[505,993],[557,993],[557,1088],[505,1088],[505,1113],[459,1113]],"spawn":[482,1080,540,1020]},"bath":{"poly":[[459,777],[548,777],[548,822],[532,822],[532,905],[520,905],[520,944],[459,944]],"spawn":[478,875,520,800]},"mamad":{"poly":[[554,272],[716,272],[716,453],[554,453]],"spawn":[690,430,640,272]},"bed4":{"poly":[[733,266],[902,266],[902,486],[733,486]],"spawn":[760,455,820,266]},"closet4":{"poly":[[733,486],[795,486],[795,677],[663,677],[663,547],[733,547]],"spawn":[760,600,690,640]},"bath4":{"poly":[[801,492],[902,492],[902,646],[801,646]],"spawn":[822,600,890,520]},"balcony":{"poly":[[156,452],[531,452],[531,247],[274,247],[253.5,248.8],[233.6,254.1],[215.0,262.8],[198.2,274.6],[183.6,289.2],[171.8,306.0],[163.1,324.6],[157.8,344.5],[156,365]],"spawn":[420,330,250,300]}}},"spec":{"source":"מפרט מכר בת גלים, חיפה – דירה 120, דגם G, קומה 27, בניין 1 · צ.מ.ח המרמן & אפריקה התחדשות עירונית · 05.05.2026 (מותנה בהיתר)","areas":{"unit_m2":156.9,"balconies_m2":[22.6],"page":"תוכנית מכר 1:50 (טבלת טיפוס G)"},"heights":{"ceiling":2.75,"drop_min":2.05,"drop_model":2.45,"floor_to_floor":3.2,"page":15,"note":"גובה קומה 3.20 לפי מפלסי הקומות בתוכניות (81.20…94.00…97.20)"},"building":{"floors":"קרקע, גלריה, 2–28, גג; קומה 27 במפלס +94.00","unit":120,"floor":27,"page":4},"rooms":{"entrance":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳","door":{"type":"door","material":"פלדה לביטחון (רב-בריח)","page":18},"page":15},"living":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","opening":{"type":"slider","material":"אלומיניום מזוגג, הזזה כנף על כנף","shutter":"electric","page":18},"page":15},"kitchen":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"ceramic","size_cm":[10,30],"height_m":0.55,"note":"חיפוי כ-50–60 ס״מ מעל משטח ארון תחתון; שאר הקירות טיח וצבע","page":15},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","page":15},"corridor":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳","page":15},"bed2":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","opening":{"type":"window","material":"אלומיניום מזוגג, הזזה","shutter":"electric","page":18},"page":15},"laundry":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳","opening":{"type":"window","material":"אלומיניום מזוגג, הזזה (אל המסתור)","shutter":"none","page":19},"page":15},"mistor":{"floor":{"material":"none","note":"ללא ריצוף (טבלה 2)","page":15},"walls":{"material":"plaster","note":"טיח או אחר; מסתור מאלומיניום בחזית","page":18},"ceiling":"—","note":"דוד 150 ל׳ ומעבי מיזוג (עמ׳ 23, 26)","page":15},"master":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","opening":{"type":"window","material":"אלומיניום מזוגג, הזזה","shutter":"electric","page":18},"page":15},"masterCloset":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","page":15},"masterBath":{"floor":{"material":"porcelain","size_cm":[60,60],"options":["33×33","45×45","30×60","60×60","20×60/20×70"],"choice":"buyer","note":"ריצוף פורצלן בחדרי רחצה; במקלחת ריצוף משופע","page":16},"walls":{"material":"ceramic/porcelain","size_cm":[30,60],"options":["30×60","30×90","45×90","60×120"],"height_m":2.45,"choice":"buyer","note":"חיפוי קירות לגובה תקרה/תקרת משנה או עד סיום אריח שלם","page":15},"ceiling":"תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳","page":15},"bath":{"floor":{"material":"porcelain","size_cm":[60,60],"options":["33×33","45×45","30×60","60×60","20×60/20×70"],"choice":"buyer","note":"ריצוף פורצלן בחדרי רחצה; במקלחת ריצוף משופע","page":16},"walls":{"material":"ceramic/porcelain","size_cm":[30,60],"options":["30×60","30×90","45×90","60×120"],"height_m":2.45,"choice":"buyer","note":"חיפוי קירות לגובה תקרה/תקרת משנה או עד סיום אריח שלם","page":15},"ceiling":"תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳","page":15},"mamad":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"בטון מזוין לפי הג״א","page":15},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","opening":{"type":"mamad","material":"דלת פלדה לפי הג״א נפתחת החוצה; חלון אלומיניום מזוגג + כנף פלדה","shutter":"steel","page":18},"page":15},"bed4":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","opening":{"type":"window","material":"אלומיניום מזוגג, הזזה","shutter":"electric","page":19},"page":15},"closet4":{"floor":{"material":"porcelain","size_cm":[100,100],"options":["80×80","100×100"],"choice":"buyer","note":"פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה","page":16},"walls":{"material":"plaster + acrylic paint","note":"טיח + צבע אקרילי (סופרקריל או ש״ע), לבן","page":16},"ceiling":"טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)","page":15},"bath4":{"floor":{"material":"porcelain","size_cm":[60,60],"options":["33×33","45×45","30×60","60×60","20×60/20×70"],"choice":"buyer","note":"ריצוף פורצלן בחדרי רחצה; במקלחת ריצוף משופע","page":16},"walls":{"material":"ceramic/porcelain","size_cm":[30,60],"options":["30×60","30×90","45×90","60×120"],"height_m":2.45,"choice":"buyer","note":"חיפוי קירות לגובה תקרה/תקרת משנה או עד סיום אריח שלם","page":15},"ceiling":"תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳","page":15},"balcony":{"floor":{"material":"porcelain","size_cm":[33,33],"options":["33×33","20×60"],"choice":"buyer","note":"פורצלן נגד החלקה, בשיפוע לניקוז","page":16},"walls":{"material":"חיפוי/ציפוי חיצוני לפי סעיף 2.6","page":15},"ceiling":"מקורה","page":15}},"kitchen":{"lower_cabinets_m":"כ-9 מ׳ כולל (תחתון + עליון + בילד-אין)","countertop":"אבן קיסר (קוורץ) כ-2 ס״מ, 5 דגמים","sink":"כיור אגן יחיד (סיליקוורץ/נירוסטה), סוללה פרח/מערבל נשלף","doors":"MDF פורמייקה, 6 גוונים, טריקה שקטה","page":17},"sanitary":[{"room":"kitchen","item":"sink","type":"אגן יחיד, התקנה שטוחה/תחתונה","page":20},{"room":"bath","item":"bathtub","type":"אמבטיה אקרילית","size_cm":[160,70],"page":21},{"room":"bath","item":"wc","type":"אסלה תלויה, ארגז שטיפה סמוי","page":21},{"room":"bath","item":"basin","type":"כיור אינטגרלי בארון (60–120 ס״מ)","page":17},{"room":"masterBath","item":"shower","type":"ריצוף משופע, סוללה רב-דרך + מוט","page":21},{"room":"masterBath","item":"wc","type":"אסלה תלויה, ארגז שטיפה סמוי","page":21},{"room":"masterBath","item":"basin","type":"כיור אינטגרלי בארון","page":17},{"room":"bath4","item":"shower","type":"ריצוף משופע, סוללה רב-דרך + מוט","page":21},{"room":"bath4","item":"wc","type":"אסלה תלויה, ארגז שטיפה סמוי","page":21},{"room":"bath4","item":"basin","type":"כיור אינטגרלי בארון","page":17},{"room":"laundry","item":"washer connection","type":"חיבור מים וניקוז למכונת כביסה + פתח 4״ למייבש","page":21}],"openings":[{"room":"entrance","type":"door","material":"פלדה לביטחון","page":18},{"room":"living","type":"slider","material":"אלומיניום מזוגג נגרר כ.ע.כ","shutter":"electric","page":18},{"room":"living","type":"window","material":"אלומיניום מזוגג נגרר","shutter":"electric","page":18},{"room":"master","type":"window","material":"אלומיניום מזוגג נגרר","shutter":"electric","page":18},{"room":"bed2","type":"window","material":"אלומיניום מזוגג נגרר","shutter":"electric","page":18},{"room":"mamad","type":"mamad","material":"דלת ופלדה לפי הג״א + חלון","shutter":"steel","page":18},{"room":"bed4","type":"window","material":"אלומיניום מזוגג נגרר","shutter":"electric","page":19},{"room":"laundry","type":"window","material":"אלומיניום מזוגג נגרר","shutter":"none","page":19},{"room":"bath","type":"vent","material":"אוורור מכני, ללא חלון","page":19},{"room":"masterBath","type":"vent","material":"אוורור מכני, ללא חלון","page":19},{"room":"bath4","type":"vent","material":"אוורור מכני, ללא חלון","page":19}],"electrical":[{"room":"entrance","lights":1,"sockets":0,"page":24},{"room":"living","lights":1,"sockets":6,"page":24},{"room":"kitchen","lights":1,"sockets":4,"page":24},{"room":"living","lights":1,"sockets":1,"note":"פינת אוכל","page":24},{"room":"corridor","lights":2,"sockets":0,"page":24},{"room":"master","lights":1,"sockets":3,"note":"+ הכנה למאוורר תקרה","page":24},{"room":"bed2","lights":1,"sockets":3,"page":24},{"room":"bed4","lights":1,"sockets":3,"page":24},{"room":"masterCloset","lights":1,"sockets":0,"page":24},{"room":"closet4","lights":1,"sockets":0,"page":24},{"room":"mamad","lights":1,"sockets":3,"page":24},{"room":"bath","lights":1,"sockets":1,"page":24},{"room":"masterBath","lights":1,"sockets":1,"page":24},{"room":"bath4","lights":1,"sockets":1,"page":24},{"room":"laundry","lights":1,"sockets":2,"page":24},{"room":"balcony","lights":1,"sockets":1,"page":24}],"hvac":{"type":"מיני-מרכזי אינוורטר (למעט חדרי רחצה ושרות), תעלות ותריסי פיזור, תריס אוויר חוזר","page":26},"water_heater":{"type":"דוד 150 ל׳ במסתור הכביסה, מערכת משותפת (סולארית/משאבת חום)","page":23},"other":["מעקה מרפסת לפי האדריכל","גוש 10919, חלקות 37,39,40,41,43; תוכנית חפ/מק/2400 (עמ׳ 4)"],"parking":{"stalls":["349","349B"],"tandem":true,"storage":"המחסן הצמוד לחניה 335","level":"גלריה","source":"user","note":"שוריין במשא ומתן; במפרט 05.05.2026 רשום חניה ---- ומחסן ----"}},"building_pt":{"K5":0.03478,"BCX":553.0,"BCY":673.5,"slab":[[268.3,166.7],[262.0,168.0],[255.8,169.9],[246.9,173.8],[238.7,179.0],[233.7,183.1],[229.1,187.7],[223.1,195.3],[219.8,200.9],[217.0,206.7],[214.8,212.8],[213.3,219.1],[212.1,228.8],[212.0,1115.0],[212.3,1121.5],[214.0,1131.0],[217.0,1140.3],[221.4,1148.9],[225.0,1154.3],[231.3,1161.7],[236.1,1166.0],[244.1,1171.6],[249.8,1174.7],[258.8,1178.2],[265.1,1179.7],[274.8,1180.9],[828.0,1181.0],[837.7,1180.3],[844.0,1179.0],[853.3,1176.0],[861.9,1171.6],[869.9,1166.0],[876.9,1159.3],[881.0,1154.3],[886.2,1146.1],[889.0,1140.3],[892.0,1131.0],[893.3,1124.7],[894.0,1115.0],[894.0,232.0],[893.3,222.3],[891.2,212.8],[887.7,203.8],[884.6,198.1],[881.0,192.7],[874.7,185.3],[867.3,179.0],[861.9,175.4],[856.2,172.3],[847.2,168.8],[840.9,167.3],[831.2,166.1],[278.0,166.0]],"env":[[212.0,1031.0],[363.0,1031.0],[363.0,1180.9],[783.0,1181.0],[783.0,1029.0],[894.0,1029.0],[894.0,321.0],[783.0,321.0],[783.0,166.1],[405.4,166.0],[405.4,273.5],[212.1,273.5]],"p23":{"walls":[[[316.8,280.8],[357.1,280.8],[357.1,278.9],[316.8,278.9]],[[285.6,283.7],[288.5,283.7],[289.0,282.2],[292.3,282.2],[292.8,283.7],[297.1,283.7],[297.1,281.3],[296.2,281.3],[295.7,279.8],[294.2,279.8],[293.8,280.8],[276.0,280.8],[276.0,282.2],[277.4,282.2],[277.9,283.7],[280.8,283.7],[281.3,282.2],[285.1,282.2]],[[300.0,283.7],[303.4,283.7],[303.8,282.2],[306.7,282.2],[307.2,283.7],[310.6,283.7],[311.0,282.2],[315.8,282.2],[315.8,280.8],[301.9,280.8],[301.4,279.8],[300.0,279.8]],[[523.2,287.5],[521.8,287.5],[521.3,289.0],[506.9,289.0],[506.9,290.4],[520.8,290.4],[521.3,291.8],[524.6,291.8],[524.6,290.4],[523.2,289.9]],[[338.9,519.8],[338.9,434.4],[336.5,434.4],[336.0,457.0],[227.5,456.5],[227.5,433.9],[228.0,430.1],[229.0,429.6],[229.0,427.7],[228.0,427.2],[228.0,422.9],[229.4,422.4],[229.4,420.0],[228.0,419.5],[227.5,416.2],[227.5,283.7],[237.6,283.7],[237.6,282.2],[235.2,281.8],[235.2,278.9],[233.8,278.4],[233.8,274.1],[218.4,274.1],[218.4,350.4],[224.6,350.9],[224.6,387.8],[218.4,388.3],[218.4,482.4],[224.6,482.9],[224.6,523.2],[228.0,523.2],[228.0,459.8],[335.0,459.8],[336.5,461.3],[336.5,519.8]],[[241.4,429.6],[242.4,430.1],[242.4,433.4],[244.3,433.4],[244.3,424.3],[242.4,424.3]],[[474.7,503.0],[477.1,503.0],[477.1,501.1],[472.8,501.1],[471.8,499.7],[470.4,499.7],[470.4,500.6],[469.0,501.1],[469.0,505.0],[471.8,505.0]],[[336.5,544.3],[334.6,545.3],[228.0,545.3],[227.5,526.1],[226.1,526.1],[225.6,525.1],[218.4,525.1],[218.9,554.4],[261.1,554.4],[262.1,555.8],[270.7,555.8],[270.7,548.6],[272.6,547.7],[335.0,547.7],[336.5,548.6],[336.5,551.0],[338.9,550.6],[338.9,542.9],[336.5,542.9]],[[496.3,654.2],[521.8,653.8],[521.8,651.4],[496.3,651.4]],[[361.1,1030.5],[363.3,1030.6],[363.5,1032.3],[365.3,1032.5],[365.8,1033.9],[370.6,1033.9],[370.6,1032.5],[369.6,1032.0],[369.6,1006.1],[332.6,1005.6],[332.6,964.8],[331.7,964.3],[331.7,961.0],[332.6,960.5],[333.1,954.7],[330.7,954.7],[329.8,955.7],[324.5,955.2],[325.0,994.6],[324.5,1005.1],[323.5,1006.1],[230.9,1005.6],[230.9,973.9],[229.4,973.4],[229.4,961.9],[230.9,961.4],[230.9,947.5],[229.4,947.5],[229.4,960.0],[226.6,960.5],[226.6,974.4],[225.6,975.4],[222.7,974.9],[222.7,963.8],[221.3,963.8],[221.3,971.5],[218.9,972.0],[218.4,970.1],[217.0,969.6],[217.0,966.7],[218.4,966.2],[218.4,962.9],[217.0,962.4],[217.0,959.0],[218.4,958.6],[218.4,955.2],[217.0,954.7],[217.0,951.8],[218.4,951.4],[218.9,946.6],[230.4,946.6],[231.4,927.8],[323.5,927.8],[324.5,928.8],[323.5,932.6],[331.2,932.6],[333.1,932.2],[333.1,921.6],[331.7,918.7],[331.7,914.9],[330.2,914.9],[330.2,918.2],[329.3,919.2],[326.9,919.7],[228.0,919.2],[227.5,841.9],[329.3,841.4],[330.2,844.3],[332.6,844.3],[332.6,835.7],[330.2,835.7],[329.3,838.6],[228.0,838.6],[227.5,781.4],[329.3,781.0],[330.7,783.4],[330.2,813.6],[332.6,813.6],[332.6,811.2],[335.5,810.7],[335.5,807.8],[333.1,807.8],[331.7,805.4],[331.7,802.6],[332.6,802.1],[332.6,790.6],[331.7,790.1],[331.7,787.2],[332.6,786.7],[332.6,778.1],[228.0,778.1],[228.0,737.3],[227.5,736.3],[224.6,736.3],[224.6,756.5],[218.4,757.0],[218.4,792.0],[224.6,792.5],[224.6,829.4],[218.4,829.9],[218.4,855.4],[224.6,855.8],[224.6,897.6],[218.4,898.1],[218.4,944.6],[216.0,945.1],[216.0,667.2],[218.4,667.7],[218.4,714.2],[224.6,714.7],[224.6,733.9],[227.5,733.9],[228.0,733.0],[228.0,694.1],[364.8,694.1],[365.3,711.4],[368.2,711.4],[368.2,695.0],[369.1,694.1],[419.5,694.6],[419.0,757.0],[369.1,757.4],[368.2,756.5],[368.2,740.6],[365.3,740.6],[365.3,783.8],[368.2,783.8],[368.6,782.4],[368.6,775.7],[369.6,775.2],[369.6,773.8],[368.2,773.3],[368.2,762.2],[369.1,759.8],[407.5,759.8],[408.0,775.7],[419.5,776.2],[419.5,831.8],[368.6,832.3],[368.2,804.0],[365.3,804.0],[364.8,807.8],[358.6,807.8],[358.6,810.7],[365.3,811.2],[365.3,851.0],[368.2,851.0],[368.2,837.6],[369.1,834.7],[412.3,834.7],[412.8,849.6],[419.5,850.6],[419.5,874.6],[418.6,875.0],[418.1,894.7],[369.1,894.7],[368.2,893.3],[368.2,870.7],[365.3,870.7],[365.3,921.6],[368.2,921.6],[368.2,920.2],[371.0,918.2],[419.0,918.7],[419.5,947.0],[415.7,947.5],[415.2,940.8],[412.8,940.8],[412.8,949.0],[419.5,949.9],[419.5,957.1],[407.0,958.1],[392.2,957.6],[391.7,956.6],[369.1,956.6],[368.2,941.8],[365.8,941.8],[365.3,960.0],[429.1,960.0],[429.1,925.0],[430.6,923.5],[438.2,923.5],[439.7,925.0],[442.1,925.0],[441.6,922.6],[439.2,922.1],[439.2,917.3],[441.6,916.8],[441.6,915.4],[430.6,915.4],[429.1,914.4],[429.1,461.8],[439.2,461.3],[437.8,455.0],[438.7,453.1],[440.2,453.1],[440.2,451.7],[423.4,450.7],[423.4,445.9],[425.3,445.4],[425.3,444.0],[423.4,443.5],[423.4,437.8],[427.7,437.3],[427.7,434.4],[367.2,434.4],[367.2,462.7],[370.1,462.7],[371.0,437.3],[419.0,437.8],[419.0,450.2],[421.0,450.7],[421.0,453.1],[419.0,453.6],[418.6,458.4],[415.2,458.4],[414.7,457.0],[412.3,457.0],[412.3,471.4],[418.6,471.8],[418.1,501.1],[393.1,501.1],[392.6,513.6],[370.6,513.6],[370.1,482.9],[367.2,482.9],[367.7,570.2],[367.2,576.0],[364.8,576.5],[364.8,579.4],[367.2,579.8],[367.2,586.1],[370.1,586.6],[370.6,517.4],[393.1,517.0],[393.6,543.8],[418.6,543.8],[419.5,544.8],[419.5,591.8],[395.0,592.3],[394.6,609.1],[371.0,609.1],[370.1,606.2],[367.7,606.2],[367.2,627.8],[367.7,628.8],[370.1,628.3],[370.6,612.0],[419.5,612.5],[419.5,684.0],[371.0,684.5],[370.1,683.0],[370.1,667.2],[367.7,667.2],[366.7,684.5],[231.4,684.5],[231.4,606.7],[270.2,606.7],[271.2,597.1],[336.0,597.1],[336.5,601.4],[338.9,601.4],[338.9,579.8],[341.8,579.4],[341.8,576.5],[339.8,576.5],[338.9,575.5],[338.9,570.7],[336.5,570.7],[336.5,575.0],[334.6,576.0],[334.6,577.4],[336.5,577.9],[336.5,593.3],[334.6,594.2],[271.2,594.2],[270.7,591.4],[266.9,591.4],[265.9,592.8],[262.1,592.8],[262.1,597.1],[261.1,598.1],[218.9,598.1],[218.4,626.4],[228.0,626.9],[228.0,663.8],[218.4,663.8],[218.4,636.0],[215.5,635.5],[215.5,274.0],[214.1,274.0],[214.1,1030.5],[215.5,1030.5],[215.5,976.8],[217.4,975.4],[221.3,975.8],[221.3,999.8],[222.7,1000.3],[222.2,1003.2],[218.4,1003.2],[218.4,1018.6],[360.5,1018.1],[361.4,1023.8]],[[400.3,858.2],[398.9,858.7],[398.4,862.1],[399.8,862.1],[400.3,860.6],[403.2,860.2],[403.2,858.2],[404.2,857.3],[406.6,857.3],[406.6,855.8],[404.2,855.8],[400.3,857.3]],[[330.2,902.9],[331.7,902.9],[331.7,899.5],[332.6,899.0],[332.6,887.5],[331.7,887.0],[332.6,872.2],[331.7,871.7],[331.7,866.9],[330.2,866.9]],[[506.4,1110.2],[507.4,1109.8],[507.4,1106.4],[506.4,1105.9],[506.4,1072.3],[508.8,1071.8],[508.8,1069.0],[503.5,1069.0],[503.5,1166.9],[502.6,1167.8],[493.4,1167.8],[492.5,1170.7],[494.9,1171.2],[494.9,1177.0],[512.6,1176.5],[512.6,1123.7],[515.5,1123.2],[515.0,1114.6],[506.4,1114.1]],[[458.4,1167.4],[370.1,1167.8],[369.6,1156.8],[363.5,1157.2],[363.5,1177.0],[456.5,1177.0],[456.5,1171.2],[458.4,1169.3]],[[630.7,217.9],[621.6,217.9],[621.6,220.8],[628.3,220.8],[630.7,219.4]],[[605.8,310.1],[619.2,310.1],[619.2,308.6],[605.8,308.6]],[[538.6,322.6],[541.0,322.6],[541.0,301.4],[538.6,301.0]],[[639.4,372.5],[642.2,372.5],[642.7,371.5],[646.6,371.5],[647.0,372.5],[653.3,371.5],[653.3,369.6],[636.5,369.6],[636.5,371.5],[638.9,371.5]],[[397.4,278.9],[397.4,283.7],[448.3,283.2],[448.3,287.5],[452.6,287.5],[454.1,285.6],[457.0,285.6],[457.4,283.2],[458.9,283.7],[458.9,285.1],[470.4,284.6],[472.3,284.2],[472.8,283.2],[475.7,283.2],[476.2,284.2],[477.6,284.2],[478.1,283.2],[481.0,283.2],[481.4,284.2],[483.4,284.2],[483.8,283.2],[503.5,283.2],[504.5,287.5],[506.4,287.5],[505.9,182.4],[507.4,181.0],[592.3,181.4],[592.3,290.4],[538.6,290.9],[539.0,299.5],[541.0,299.5],[541.0,295.7],[541.9,294.2],[560.2,294.2],[560.6,295.7],[584.2,294.2],[591.4,294.7],[591.8,332.6],[589.0,333.1],[589.0,334.6],[591.8,335.0],[592.3,365.8],[591.4,366.2],[591.4,370.6],[553.4,371.0],[553.0,363.4],[541.0,362.9],[541.0,353.3],[539.0,353.3],[538.6,362.9],[527.0,363.8],[526.6,386.9],[472.3,386.9],[471.8,321.6],[506.4,321.1],[506.4,310.1],[504.0,310.6],[503.5,318.2],[469.0,318.2],[469.0,396.5],[486.2,397.4],[486.2,450.7],[462.7,451.2],[463.2,453.1],[465.6,453.6],[465.6,458.9],[463.2,459.4],[463.2,461.3],[468.5,461.3],[469.0,465.1],[471.8,464.2],[471.8,462.2],[472.8,461.3],[485.3,461.3],[486.2,462.2],[486.2,486.2],[485.3,487.2],[472.3,486.7],[470.4,482.4],[469.0,482.4],[469.0,491.0],[471.8,491.0],[472.8,489.6],[485.3,489.6],[486.2,490.6],[486.2,500.2],[481.9,502.1],[481.9,503.5],[485.3,504.5],[486.2,505.9],[486.2,537.1],[485.3,538.1],[469.0,537.6],[469.0,688.3],[477.6,688.3],[479.5,687.4],[479.5,685.9],[477.6,685.4],[477.6,671.5],[479.0,671.0],[479.0,669.1],[477.6,668.6],[477.6,660.5],[491.0,660.0],[491.0,654.7],[493.9,654.2],[493.9,651.4],[490.6,651.4],[490.1,653.8],[477.6,653.3],[478.1,577.9],[543.8,577.9],[544.8,578.9],[544.8,652.3],[543.8,653.8],[528.5,653.8],[528.0,651.4],[523.7,651.4],[523.7,653.8],[528.0,654.7],[528.0,660.0],[628.8,660.0],[629.3,665.8],[624.5,666.7],[624.5,668.6],[626.9,669.1],[626.4,671.0],[624.5,671.0],[625.0,674.4],[627.4,674.9],[626.9,676.3],[625.0,676.3],[625.4,679.7],[627.8,680.2],[627.4,682.1],[625.4,682.1],[625.9,687.4],[627.8,687.4],[628.3,689.8],[630.7,690.2],[631.2,688.3],[637.9,688.3],[637.9,569.8],[632.2,569.8],[631.7,576.0],[624.0,576.0],[624.0,578.9],[630.2,578.4],[632.2,579.4],[631.7,601.4],[573.6,601.4],[573.1,598.1],[574.1,596.2],[575.5,585.6],[573.1,585.1],[573.1,579.4],[577.4,578.9],[577.9,580.3],[579.8,580.3],[580.3,581.3],[585.1,580.8],[585.1,578.4],[584.2,577.9],[584.2,576.0],[573.6,576.0],[572.6,575.0],[572.6,535.2],[573.6,533.3],[631.7,533.3],[632.2,539.0],[637.9,539.5],[637.9,517.9],[631.2,517.9],[630.7,516.0],[629.3,516.0],[628.8,524.2],[494.9,524.2],[494.4,493.0],[496.8,491.5],[496.8,489.6],[495.4,489.1],[494.4,487.2],[494.4,398.9],[611.0,398.9],[611.5,471.4],[613.4,471.8],[613.4,483.8],[628.8,484.3],[629.3,488.2],[637.9,488.2],[638.4,484.3],[648.0,484.3],[648.5,451.2],[647.0,451.2],[646.6,474.2],[626.9,474.7],[622.6,473.8],[622.6,466.6],[624.0,466.1],[624.0,464.6],[622.6,464.2],[622.6,390.2],[697.0,389.8],[697.4,386.9],[653.3,386.9],[652.8,385.4],[650.4,385.4],[649.9,384.5],[646.6,384.5],[646.1,385.4],[639.4,384.5],[638.9,385.4],[637.0,385.4],[636.5,386.9],[603.4,386.4],[603.4,352.8],[605.3,352.3],[605.3,339.4],[603.4,336.5],[603.4,281.3],[628.8,280.3],[628.8,277.4],[626.4,277.0],[626.4,274.1],[623.5,274.1],[623.0,277.4],[603.4,276.5],[603.4,252.0],[617.3,252.0],[617.3,258.7],[615.8,259.2],[615.8,261.6],[617.3,262.1],[617.3,268.8],[618.7,268.8],[619.2,250.6],[630.7,250.6],[631.2,247.7],[640.8,247.7],[641.3,250.6],[650.4,250.6],[650.9,277.0],[646.1,277.4],[646.1,280.3],[653.8,280.3],[654.2,181.0],[776.2,181.0],[776.2,273.1],[776.6,275.5],[779.5,275.5],[779.5,233.3],[782.5,233.1],[782.5,171.8],[697.4,171.8],[697.0,178.1],[660.0,178.1],[659.5,171.8],[644.6,171.8],[644.6,241.0],[642.2,241.9],[641.8,246.2],[618.7,246.2],[617.8,249.1],[607.7,249.1],[607.2,246.2],[606.2,245.8],[606.2,241.9],[601.4,241.4],[601.0,171.8],[571.2,171.8],[570.7,178.1],[550.6,178.1],[550.6,179.0],[549.1,179.5],[548.2,178.1],[529.4,178.6],[528.5,177.6],[528.5,171.8],[478.6,171.8],[478.1,169.9],[782.5,169.5],[782.5,168.0],[405.9,168.4],[405.9,169.5],[446.4,169.4],[447.8,170.9],[447.4,174.7],[423.8,174.7],[423.4,176.2],[421.0,176.2],[421.0,171.8],[405.9,171.8],[405.9,273.5],[398.4,274.6],[398.4,278.4]],[[582.2,456.5],[582.2,454.6],[580.8,452.6],[580.8,438.2],[581.3,435.8],[582.2,435.4],[582.2,432.0],[583.2,431.5],[583.2,427.2],[528.5,427.2],[527.0,428.2],[527.0,474.2],[526.1,474.7],[526.1,476.2],[527.0,476.6],[527.0,491.5],[581.3,491.5],[580.8,466.6],[581.3,463.7],[582.2,463.2],[581.3,461.3],[581.3,457.0]],[[612.0,576.0],[596.2,576.0],[596.2,578.4],[612.0,578.9]],[[708.5,620.6],[707.0,619.7],[706.6,618.2],[704.2,617.8],[703.7,622.1],[704.6,624.0],[708.0,624.0]],[[684.5,906.7],[684.5,973.0],[741.6,973.0],[741.6,970.6],[687.4,970.1],[687.4,906.7],[741.6,906.2],[741.1,883.7],[738.2,883.7],[737.8,901.9],[694.1,901.9],[693.6,891.4],[687.4,890.9],[687.8,861.1],[737.8,861.1],[738.2,863.5],[741.6,863.5],[741.1,833.8],[738.2,833.8],[737.8,838.1],[687.4,837.6],[687.4,797.8],[693.6,797.3],[693.6,787.7],[687.4,787.2],[687.4,768.0],[737.8,767.5],[738.7,813.1],[741.6,813.1],[741.6,796.8],[744.0,796.3],[744.0,793.4],[741.6,793.0],[741.1,760.8],[738.2,760.8],[737.8,765.1],[687.8,764.6],[687.4,719.0],[688.3,718.6],[688.3,716.6],[686.4,716.2],[686.4,711.4],[687.4,710.4],[691.2,710.9],[691.7,717.6],[693.6,717.6],[694.1,710.9],[697.4,709.9],[704.6,710.9],[706.1,693.6],[704.6,693.1],[704.6,684.0],[706.6,683.5],[706.6,682.1],[705.6,681.6],[706.1,680.2],[730.6,680.2],[731.0,735.4],[737.8,736.3],[738.2,740.2],[741.1,740.6],[742.1,736.3],[743.5,735.4],[751.2,735.4],[751.2,733.4],[734.4,733.0],[734.4,680.2],[792.5,679.7],[793.0,733.0],[776.2,733.4],[775.7,735.8],[777.6,736.3],[778.1,735.4],[795.8,736.3],[796.3,679.7],[878.4,679.7],[878.4,706.6],[880.3,708.0],[880.3,710.4],[878.4,711.8],[878.9,714.7],[880.3,715.2],[880.3,717.6],[878.4,719.0],[878.4,728.6],[879.4,730.1],[878.4,736.3],[879.4,739.7],[881.8,739.7],[881.8,703.2],[884.2,702.2],[888.0,702.7],[888.0,645.1],[882.2,645.1],[881.8,642.7],[878.4,642.7],[878.9,669.1],[877.4,670.1],[796.3,669.6],[795.8,613.4],[775.7,613.4],[776.2,616.3],[793.0,616.8],[793.0,669.1],[789.1,670.1],[735.8,670.1],[734.4,669.1],[734.4,616.8],[751.2,615.8],[751.2,613.4],[742.1,613.4],[741.6,608.2],[738.7,607.7],[737.8,613.4],[731.0,613.9],[731.0,639.4],[730.1,639.8],[730.1,641.8],[731.0,642.2],[731.0,668.6],[730.1,669.6],[724.8,668.6],[719.5,669.6],[705.1,669.1],[704.6,657.1],[706.1,656.6],[704.6,639.8],[694.1,639.8],[693.6,632.2],[687.4,631.7],[687.4,584.2],[737.8,583.7],[738.2,587.5],[741.1,588.0],[741.6,561.1],[744.0,560.6],[744.0,558.2],[742.1,558.2],[741.1,555.8],[738.2,556.3],[737.8,580.8],[694.1,580.8],[693.6,573.1],[687.4,572.6],[687.4,510.7],[688.8,509.3],[736.8,509.8],[738.2,510.7],[738.2,532.3],[741.1,532.8],[741.6,486.2],[738.2,486.2],[737.8,489.1],[694.1,489.1],[693.6,481.4],[689.3,481.4],[687.4,480.5],[687.4,446.9],[737.8,446.4],[738.2,466.1],[741.1,466.1],[741.6,442.1],[677.3,442.1],[677.3,474.2],[671.0,474.7],[670.6,475.7],[670.6,484.3],[677.3,484.8],[677.3,897.1],[670.1,898.1],[670.1,905.8],[667.2,906.2],[667.2,907.7],[673.4,907.7],[673.9,906.2]],[[531.4,732.5],[561.1,732.5],[561.1,727.7],[531.4,727.7]],[[601.9,781.9],[603.4,781.9],[603.4,737.3],[601.9,737.3]],[[567.8,899.0],[568.3,900.0],[571.7,900.0],[572.2,899.0],[579.8,899.0],[579.8,892.3],[581.3,891.8],[581.3,890.4],[580.3,889.9],[581.3,884.6],[579.8,882.7],[579.8,867.8],[581.3,866.4],[581.3,864.5],[579.8,864.0],[580.8,862.1],[579.8,855.8],[582.2,855.4],[579.8,849.1],[579.8,845.8],[581.3,845.3],[581.3,843.8],[580.3,843.4],[579.8,837.1],[580.8,834.2],[527.0,834.2],[527.0,867.8],[526.1,868.3],[526.1,873.6],[527.0,876.0],[526.1,894.7],[527.0,895.2],[527.0,899.0],[542.9,899.0],[543.8,900.0],[545.8,900.0],[546.2,899.0]],[[535.2,806.9],[610.1,807.4],[610.1,928.8],[611.5,929.3],[610.6,931.7],[546.2,931.7],[545.8,930.7],[543.4,931.7],[495.4,931.7],[493.4,930.2],[493.9,922.1],[493.0,920.6],[493.4,896.2],[494.4,895.2],[494.4,893.8],[493.4,893.3],[493.4,844.3],[478.1,844.3],[477.6,838.6],[469.0,838.6],[469.0,858.2],[470.4,858.2],[470.4,856.8],[471.8,856.3],[472.3,853.0],[479.0,853.0],[484.8,854.4],[484.8,880.8],[472.3,881.3],[471.8,877.9],[469.0,877.9],[469.0,888.5],[471.8,888.5],[471.8,885.1],[472.8,884.2],[484.8,884.6],[484.8,914.9],[472.3,915.4],[471.8,908.6],[470.4,908.2],[470.4,906.2],[469.0,906.2],[469.0,914.4],[467.5,915.4],[464.6,915.4],[464.6,916.8],[466.6,917.3],[466.6,921.6],[464.6,922.1],[465.1,925.0],[467.0,925.0],[468.0,923.5],[472.8,923.5],[473.3,924.5],[476.6,924.5],[477.1,925.4],[480.5,925.9],[481.4,925.0],[485.3,924.5],[485.8,923.5],[490.1,923.5],[490.1,925.4],[484.8,925.4],[484.8,939.4],[554.4,939.4],[556.3,942.2],[556.3,948.0],[555.4,948.5],[555.4,953.3],[556.3,953.8],[556.3,975.4],[555.4,975.8],[555.4,982.6],[556.3,983.0],[556.3,985.0],[555.4,985.4],[555.4,994.1],[556.3,994.6],[555.4,996.0],[555.4,999.4],[556.3,999.8],[556.3,1021.0],[555.4,1021.4],[555.4,1023.8],[556.3,1024.3],[556.3,1036.8],[555.4,1037.3],[554.9,1041.1],[556.3,1042.6],[556.3,1058.4],[555.4,1058.9],[556.3,1063.7],[555.4,1064.2],[554.4,1068.5],[529.0,1069.0],[529.0,1071.8],[555.4,1072.3],[555.4,1075.7],[556.3,1076.2],[555.4,1078.1],[555.4,1088.6],[556.3,1089.1],[556.3,1090.6],[555.4,1091.0],[554.9,1099.2],[555.4,1113.6],[553.0,1114.6],[552.5,1116.5],[550.6,1117.0],[550.6,1118.4],[552.5,1118.9],[552.5,1123.2],[555.8,1123.2],[556.8,1124.2],[556.8,1173.1],[563.5,1173.1],[563.5,1123.7],[567.8,1123.2],[567.8,1114.6],[565.0,1114.1],[565.0,1072.3],[567.4,1071.8],[567.8,1073.3],[572.6,1073.3],[572.6,1072.3],[574.1,1071.8],[574.6,1073.3],[583.2,1073.3],[583.7,1071.8],[592.3,1071.8],[592.3,1069.0],[565.0,1068.0],[565.0,939.8],[621.1,939.8],[621.1,908.2],[644.6,907.7],[645.1,906.2],[645.1,897.6],[637.9,897.1],[637.9,835.7],[638.9,835.2],[638.9,833.3],[637.9,832.3],[637.9,818.9],[638.9,817.4],[638.9,816.0],[637.9,815.5],[637.9,773.8],[638.9,773.3],[638.9,771.8],[637.9,771.4],[637.9,740.2],[638.9,739.7],[638.9,737.8],[637.9,737.3],[637.9,718.1],[631.2,718.1],[630.7,716.2],[629.3,716.2],[628.8,721.9],[612.5,721.9],[612.0,727.7],[597.6,727.7],[597.6,732.5],[609.1,732.5],[609.6,733.4],[612.5,733.9],[612.0,795.8],[492.5,796.3],[477.6,795.4],[477.6,734.4],[478.6,732.5],[491.0,732.5],[492.0,733.4],[494.4,733.4],[494.4,727.7],[478.1,727.7],[477.6,716.6],[476.2,716.6],[475.7,718.1],[469.0,718.1],[469.0,809.8],[477.6,809.8],[477.6,805.4],[479.0,804.5],[524.6,804.5],[526.6,805.4],[526.6,806.9],[532.8,806.9],[533.3,805.9],[534.7,805.9]],[[780.0,882.2],[773.3,882.7],[773.8,942.7],[775.7,942.7],[776.6,943.7],[776.6,946.1],[779.5,946.1],[779.5,943.7],[781.4,942.2],[877.4,942.2],[878.9,943.7],[878.4,965.3],[880.3,966.7],[880.3,968.6],[878.4,970.1],[878.4,972.5],[880.3,973.9],[880.3,976.3],[878.4,977.8],[878.4,987.8],[879.4,989.3],[878.4,991.7],[878.4,994.6],[879.4,996.0],[878.9,1023.8],[780.0,1024.3],[779.5,969.1],[776.6,969.1],[776.6,1167.4],[663.4,1167.8],[662.4,1170.7],[664.3,1171.2],[664.3,1177.0],[782.5,1177.0],[782.5,1120.5],[779.5,1120.3],[779.5,1036.8],[782.5,1035.8],[782.6,1028.7],[888.0,1028.5],[888.0,1001.8],[881.8,1001.3],[881.8,963.4],[888.0,962.9],[888.0,927.4],[887.0,927.4],[886.6,925.0],[885.1,924.5],[885.1,922.1],[886.6,921.6],[886.6,917.3],[885.1,916.8],[885.1,908.2],[888.0,907.7],[888.0,903.4],[886.1,902.9],[886.1,900.5],[883.7,900.5],[883.7,902.4],[882.7,903.4],[875.5,903.4],[875.0,935.0],[782.9,935.0],[782.4,885.1],[783.4,884.6],[783.4,882.7],[782.4,882.2],[782.4,880.8],[780.5,880.8]],[[628.8,1169.3],[628.8,1167.4],[618.2,1167.4],[618.2,1069.0],[612.5,1069.0],[612.5,1071.8],[614.9,1072.3],[614.9,1114.1],[603.4,1114.6],[603.4,1117.9],[604.8,1118.4],[604.8,1123.2],[608.6,1123.7],[608.6,1176.0],[609.1,1177.0],[626.9,1177.0],[626.9,1171.2]],[[577.9,1143.4],[578.9,1144.3],[585.6,1144.3],[585.1,1141.4],[578.9,1141.0]],[[881.8,350.9],[888.0,350.4],[888.0,321.5],[782.7,321.4],[782.5,317.0],[779.5,316.8],[779.5,277.4],[774.7,277.0],[774.7,278.9],[775.7,278.9],[776.6,280.8],[776.6,383.5],[779.5,383.5],[780.0,329.3],[878.4,329.3],[878.4,352.8],[879.4,354.2],[878.4,359.5],[879.4,361.0],[879.4,364.3],[881.8,364.3]],[[878.9,374.4],[881.8,374.4],[881.8,367.7],[880.8,367.7],[880.3,366.2],[878.9,366.2]],[[780.0,403.2],[780.0,404.6],[793.4,404.6],[793.9,406.1],[797.3,406.1],[797.3,405.1],[798.7,404.6],[798.7,401.8],[794.4,401.8],[793.9,403.2]],[[773.8,409.4],[773.8,469.0],[775.7,469.9],[783.4,469.4],[783.4,467.5],[782.4,466.6],[782.9,417.1],[875.0,417.1],[875.5,450.7],[877.0,451.2],[877.0,462.7],[875.5,463.2],[876.0,485.8],[875.0,495.4],[805.0,495.4],[804.5,493.4],[805.9,493.0],[805.9,491.0],[803.5,491.0],[803.5,492.5],[801.6,493.0],[801.1,495.4],[782.9,495.4],[782.4,493.4],[783.4,493.0],[783.4,490.6],[781.9,490.6],[781.9,492.0],[780.5,493.0],[772.8,493.0],[771.4,510.2],[769.9,510.7],[769.4,514.6],[773.8,516.0],[773.8,529.4],[776.6,529.4],[776.6,504.5],[777.6,503.5],[877.0,503.5],[878.9,504.5],[879.4,522.7],[878.4,526.6],[879.4,528.0],[879.4,530.4],[881.8,530.4],[882.2,524.2],[888.0,524.2],[888.0,478.1],[891.8,477.6],[891.8,475.2],[888.0,475.2],[887.5,477.1],[877.0,476.6],[877.0,463.2],[879.8,462.7],[879.8,460.3],[878.4,459.8],[878.4,452.2],[879.8,451.7],[880.3,448.8],[882.7,448.8],[883.7,451.7],[885.1,451.7],[885.1,450.2],[886.6,448.8],[888.0,448.8],[888.0,446.9],[885.1,446.4],[885.1,436.3],[886.6,435.8],[886.6,430.1],[888.0,429.6],[888.0,427.7],[885.6,427.7],[885.1,424.3],[883.7,423.8],[884.2,420.5],[888.0,420.5],[888.0,388.3],[881.8,387.8],[881.8,376.8],[880.3,376.8],[880.3,378.2],[878.4,379.7],[878.9,382.6],[880.3,383.0],[880.3,384.0],[878.4,385.4],[878.4,409.0],[780.0,409.0],[779.5,406.1],[776.6,406.1],[776.6,408.5]],[[777.1,580.8],[776.6,552.5],[773.8,552.5],[773.3,558.2],[767.0,558.2],[767.0,560.6],[773.8,561.1],[773.8,583.2],[878.4,583.7],[878.9,615.8],[881.8,615.8],[881.8,609.6],[880.3,609.1],[880.3,605.8],[881.8,605.3],[882.2,603.8],[888.0,603.8],[888.0,562.6],[884.2,562.6],[881.8,561.6],[881.8,541.9],[880.3,541.4],[880.3,540.5],[881.8,540.0],[881.8,533.3],[879.4,533.3],[879.4,536.6],[878.4,538.1],[878.4,548.2],[880.3,549.6],[880.3,551.5],[878.4,553.0],[878.4,555.4],[880.3,556.8],[880.3,558.2],[878.4,559.7],[878.4,580.8]],[[880.3,632.2],[878.4,633.6],[878.4,636.5],[880.3,637.9],[880.3,640.8],[881.8,640.8],[881.8,618.2],[879.4,618.2],[878.4,619.7],[878.4,629.3],[880.3,630.7]],[[776.6,802.1],[777.1,770.4],[878.4,770.4],[878.9,793.4],[880.3,793.9],[880.3,797.3],[881.8,797.3],[881.8,791.0],[888.0,790.6],[888.0,745.4],[883.7,745.9],[881.8,745.0],[881.8,742.6],[878.9,742.6],[878.9,767.0],[876.5,768.0],[773.8,768.0],[773.8,793.0],[767.0,793.4],[767.0,796.3],[773.3,796.3],[773.8,802.1]],[[878.4,821.8],[881.8,822.2],[881.8,807.4],[878.9,807.4],[878.4,813.1],[879.4,814.6],[879.4,817.9]],[[777.1,821.8],[777.1,823.2],[791.0,823.2],[791.5,824.6],[794.4,824.6],[794.4,823.7],[795.8,823.2],[795.8,820.8],[791.0,820.3],[790.6,821.8]],[[782.9,856.8],[800.6,856.8],[801.6,861.1],[805.9,861.1],[805.9,859.2],[804.5,858.2],[805.0,856.8],[875.0,856.8],[876.0,865.0],[875.5,890.4],[877.0,890.9],[877.0,901.4],[879.8,901.9],[879.8,899.0],[878.4,898.6],[878.4,889.9],[877.0,889.4],[877.0,877.0],[879.8,876.5],[880.3,875.0],[891.8,875.0],[891.8,871.2],[890.4,871.2],[889.9,873.6],[888.0,873.1],[888.0,828.5],[882.2,828.5],[881.8,824.6],[879.4,824.6],[878.9,825.6],[878.4,848.2],[777.1,848.2],[776.6,824.6],[773.8,824.6],[773.8,836.2],[769.9,835.7],[769.4,839.5],[771.4,841.0],[772.8,858.2],[775.2,858.7],[775.7,859.7],[782.9,860.6]]],"balc":[[[262.0,168.0],[255.8,169.9],[246.9,173.8],[238.7,179.0],[233.7,183.1],[229.1,187.7],[223.1,195.3],[219.8,200.9],[217.0,206.7],[214.8,212.8],[213.3,219.1],[212.1,228.8],[212.1,273.5],[405.4,273.5],[405.4,166.0],[278.0,166.0],[268.3,166.7]],[[894.0,232.0],[893.3,222.3],[891.2,212.8],[887.7,203.8],[884.6,198.1],[881.0,192.7],[874.7,185.3],[867.3,179.0],[861.9,175.4],[856.2,172.3],[847.2,168.8],[840.9,167.3],[831.2,166.1],[783.0,166.1],[783.0,321.0],[894.0,321.0]],[[212.0,1115.0],[212.3,1121.5],[214.0,1131.0],[217.0,1140.3],[221.4,1148.9],[225.0,1154.3],[231.3,1161.7],[236.1,1166.0],[244.1,1171.6],[249.8,1174.7],[258.8,1178.2],[265.1,1179.7],[274.8,1180.9],[363.0,1180.9],[363.0,1031.0],[212.0,1031.0]],[[828.0,1181.0],[837.7,1180.3],[844.0,1179.0],[853.3,1176.0],[861.9,1171.6],[869.9,1166.0],[876.9,1159.3],[881.0,1154.3],[886.2,1146.1],[889.0,1140.3],[892.0,1131.0],[893.3,1124.7],[894.0,1115.0],[894.0,1029.0],[783.0,1029.0],[783.0,1181.0]]]},"roofCore":[[[470,385],[690,385],[690,940],[470,940]]],"unitToBld":{"a":0.5,"ox":139.92,"oy":47.519999999999996},"levels":{"0":0,"gallery":4.5,"2":7.75,"3":11.5,"ftf":3.2,"roof":100.4},"note":"Floor plate 23–27 (1:100) used for all residential floors 2–28 (simplification)."},"parking_pt":{"crop":[120.0,140.0,1810.0,1860.0],"mine":[{"id":"p349","label":"חניה 349","kind":"stall","level":"g","rect":[806,672,877,708]},{"id":"p349b","label":"חניה 349B","kind":"stall","level":"g","rect":[877,672,947,708]},{"id":"s335","label":"מחסן (צמוד לחניה 335)","kind":"storage","level":"g","rect":[598.5,787.5,631.5,820.5]}],"ref":[{"label":"חניה 335","level":"g","rect":[646,781,717,820]}],"path":{"level":"g","pts":[[806,690],[765,690],[765,527],[640,527],[600,522],[552,515]],"label":"לובי בניין 1"},"plate2site":{"a":0.5,"ox":175.2,"oy":238.72000000000003},"stalls":[{"poly":[[806,672],[877,672],[877,708],[806,708]],"nums":["349"],"mine":true},{"poly":[[877,672],[947,672],[947,708],[877,708]],"nums":["349B"],"mine":true},{"poly":[[646,781],[717,781],[717,820],[646,820]],"nums":["335"]}]},"context_ref":"https://claude.ai/artifact/XHp9tuzc8fPfP2E23iiqq3","myUnits":[{"code":"G-120","building":"1","floorFrom":27,"floorTo":27,"anchor":[533.75,764.9]}]}</script>
+<script src="three-d-stage.js"></script>
+<script type="module">
+  import { build } from 'app-model';
+  import { createWalk } from 'app-walk';
+  import { createPipeline } from 'app-render';
+  import { sunDir, sunIntensity } from 'app-solar';
+  import { deviceProfile, applyQuality } from 'app-device';
+  import { buildParking } from 'app-parking';
+
+  // ===================== sale spec (מפרט מכר דירה 120, 05.05.2026) =====================
+  const PORC = 'פורצלן סוג א׳, כ-80/80 או כ-100/100 ס״מ, לבחירה מספק החברה (בדגם: 100×100)';
+  const WALL = 'בטון / בלוקים / גבס, טיח וצבע אקרילי (סופרקריל או ש״ע), לבן';
+  const CEILF = 'טיח + צבע · כ-2.75 מ׳';
+  const CEILD = 'תקרת משנה לתעלות המיזוג · בדגם 2.45 מ׳ (מפרט: לפחות 2.05)';
+  const WETF = 'פורצלן 33/33, 45/45, 30/60, 60/60 או 20/60 (בדגם 60×60). במקלחת ריצוף משופע לניקוז';
+  const CLAD = 'חיפוי קרמיקה/פורצלן עד תקרת המשנה או עד סיום אריח שלם, 30/60 · 30/90 · 45/90 · 60/120 (בדגם 30×60)';
+  const BATHSAN = 'אסלה תלויה עם ארגז שטיפה סמוי · ארון רחצה עם כיור אינטגרלי (60–120 ס״מ) · סוללה פרח/מערבל לכיור';
+  const ROOMS = {
+    entrance: { n: 'כניסה', pos: [622, 742], floor: PORC, walls: WALL, ceil: CEILD, open: 'דלת פלדה לביטחון (רב-בריח), נעילה לפי מפרט', elec: [['נק׳ מאור', 1], ['אינטרקום עם מסך', '✓']] },
+    living: { n: 'דיור ופינת אוכל', tag: 'חדר דיור', pos: [530, 560], showArea: true, floor: PORC, walls: WALL, ceil: CEILF,
+      open: 'דלת הזזה מזוגגת מאלומיניום (כנף על כנף) אל המרפסת · תריס גלילה חשמלי · חלון הזזה בפינת האוכל עם תריס חשמלי', elec: [['נק׳ מאור', 2], ['בית תקע', 7], ['טלוויזיה', '✓'], ['תקשורת', '✓']],
+      more: 'השטח כולל את פינת האוכל ואת המעבר מהכניסה. פינת האוכל ליד החלון המערבי, סמוך למטבח.' },
+    dining: { n: 'פינת אוכל', pos: [276, 528], floor: PORC, walls: WALL, ceil: CEILF, open: 'חלון הזזה מזוגג מאלומיניום · תריס גלילה חשמלי', elec: [['נק׳ מאור', 1], ['בית תקע', 1]] },
+    kitchen: { n: 'מטבח', pos: [290, 752], showArea: true, floor: PORC, walls: WALL + '. חיפוי קרמיקה כ-10/30 ס״מ בגובה כ-50–60 ס״מ מעל משטח העבודה', ceil: CEILF,
+      san: 'כיור אגן יחיד (סיליקוורץ / נירוסטה) · סוללה פרח/מערבל נשלף · הכנה למדיח · נקודת גז לבישול', elec: [['נק׳ מאור', 1], ['בית תקע', '2 + 2 כפול'], ['מעגל נפרד', 2], ['IP44', 2]],
+      more: 'ארונות תחתונים, עליונים וארון "בילד-אין" לתנור ולמיקרו, כ-9 מ׳ אורך כולל. דלתות MDF בציפוי פורמייקה (6 גוונים), טריקה שקטה. משטח אבן קיסר כ-2 ס״מ, 5 דגמים. הסידור הסופי לפי ספק המטבחים.' },
+    corridor: { n: 'פרוזדור', pos: [425, 905], floor: PORC, walls: WALL, ceil: CEILD, elec: [['נק׳ מאור', 2]], more: 'יחידת המיזוג המיני-מרכזית והתעלות מעל תקרת המשנה.' },
+    bed2: { n: 'חדר שינה 2', tag: 'שינה 2', pos: [283, 875], showArea: true, floor: PORC, walls: WALL, ceil: CEILF, open: 'חלון הזזה מזוגג מאלומיניום · תריס גלילה חשמלי · דלת עץ', elec: [['נק׳ מאור', 1], ['בית תקע', '2 + 1 כפול'], ['טלוויזיה', '✓'], ['תקשורת', '✓']] },
+    laundry: { n: 'חדר כביסה', tag: 'כביסה', pos: [326, 1035], showArea: true, floor: PORC, walls: WALL, ceil: CEILD, open: 'חלון הזזה מזוגג אל מסתור הכביסה · דלת עץ', san: 'חיבור מים וניקוז למכונת כביסה · פתח 4״ בדופן חיצונית למייבש', elec: [['נק׳ מאור', 1], ['מעגל נפרד מוגן', 2]] },
+    mistor: { n: 'מסתור כביסה ומערכות', tag: 'מסתור', pos: [200, 1056], floor: 'ללא ריצוף', walls: 'טיח או אחר; מסתור מאלומיניום בחזית', ceil: '—', san: 'דוד מים חמים 150 ל׳ (מערכת משותפת: סולארית או משאבת חום) · מתקן לתליית כביסה עם 2 מוטות, גלגלות וחבלים', more: 'ייתכן שיותקנו כאן גם מעבי המיזוג.' },
+    master: { n: 'יחידת הורים', tag: 'שינה הורים', pos: [300, 1238], showArea: true, floor: PORC, walls: WALL, ceil: CEILF, open: 'חלון הזזה מזוגג מאלומיניום · תריס גלילה חשמלי · דלת עץ', elec: [['נק׳ מאור', '1 + הכנה למאוורר'], ['בית תקע', 3], ['טלוויזיה', '✓'], ['תקשורת', '✓'], ['פומית אינטרקום', '✓']] },
+    masterCloset: { n: 'חדר ארונות הורים', tag: 'ח׳ ארונות', pos: [500, 1170], showArea: true, floor: PORC, walls: WALL, ceil: CEILF, elec: [['נק׳ מאור', 1]], more: 'החדר נמסר ריק; הארונות בדגם להמחשה.' },
+    masterBath: { n: 'חדר רחצה הורים', tag: 'רחצת הורים', pos: [500, 1015], showArea: true, floor: WETF, walls: CLAD, ceil: CEILD, open: 'ללא חלון · אוורור מכני · דלת עץ', san: 'מקלחת בריצוף משופע (ללא מקלחון) · סוללה רב-דרך + ראש נייד על מוט · ' + BATHSAN, elec: [['נק׳ מאור מוגן', 1], ['IP44', '1 + 1 לחימום']] },
+    bath: { n: 'חדר רחצה כללי', tag: 'רחצה כללי', pos: [490, 855], showArea: true, floor: WETF, walls: CLAD, ceil: CEILD, open: 'ללא חלון · אוורור מכני · דלת עץ', san: 'אמבטיה אקרילית כ-160/70 · סוללה רב-דרך + ראש נייד על מוט + פיית מילוי · ' + BATHSAN, elec: [['נק׳ מאור מוגן', 1], ['IP44', '1 + 1 לחימום']] },
+    mamad: { n: 'ממ״ד / חדר שינה 3', tag: 'ממ״ד', pos: [610, 410], showArea: true, floor: PORC, walls: 'בטון מזוין לפי הוראות הג״א, טיח וצבע', ceil: 'בטון מזוין · כ-2.75 מ׳',
+      open: 'דלת פלדה לפי הג״א, נפתחת החוצה · חלון אלומיניום מזוגג + כנף פלדה · תריס אלומיניום נגרר לכיס', elec: [['נק׳ מאור', 1], ['בית תקע', '2 + 1 כפול'], ['למסנן', 1], ['טלוויזיה', '✓'], ['תקשורת', '✓']], more: 'מערכת סינון אוויר לפי פיקוד העורף.' },
+    bed4: { n: 'חדר שינה 4', tag: 'שינה 4', pos: [790, 300], showArea: true, floor: PORC, walls: WALL, ceil: CEILF, open: 'חלון הזזה מזוגג מאלומיניום · תריס גלילה חשמלי · דלת עץ', elec: [['נק׳ מאור', 1], ['בית תקע', '2 + 1 כפול'], ['טלוויזיה', '✓'], ['תקשורת', '✓']], more: 'יחידה עם חדר ארונות וחדר רחצה צמוד.' },
+    closet4: { n: 'חדר ארונות 4', tag: 'ארונות 4', pos: [735, 615], showArea: true, floor: PORC, walls: WALL, ceil: CEILD, elec: [['נק׳ מאור', 1]], more: 'החדר נמסר ריק; הארונות בדגם להמחשה.' },
+    bath4: { n: 'חדר רחצה 4', tag: 'רחצה 4', pos: [850, 590], showArea: true, floor: WETF, walls: CLAD, ceil: CEILD, open: 'ללא חלון · אוורור מכני · דלת עץ', san: 'מקלחת בריצוף משופע (ללא מקלחון) · סוללה רב-דרך + ראש נייד על מוט · ' + BATHSAN, elec: [['נק׳ מאור מוגן', 1], ['IP44', '1 + 1 לחימום']] },
+    balcony: { n: 'מרפסת שמש', tag: 'מרפסת', pos: [330, 300], showArea: true, floor: 'פורצלן נגד החלקה כ-33/33 או כ-20/60, בשיפוע לניקוז', walls: 'חיפוי/ציפוי חיצוני לפי חזיתות הבניין', ceil: 'מקורה (רצפת קומה 28)', open: 'מעקה לפי תכנון האדריכל (בדגם: זכוכית)', san: 'ברז גינה (דלי)', elec: [['נק׳ מאור מוגן', 1], ['IP44', 1]], more: '22.6 מ״ר בתוכנית המכר, פינה מעוגלת לצפון ולמערב.' },
+  };
+  const ROOM_ORDER = ['entrance', 'living', 'dining', 'kitchen', 'balcony', 'master', 'masterCloset', 'masterBath', 'bed2', 'mamad', 'bed4', 'closet4', 'bath4', 'bath', 'laundry', 'mistor', 'corridor'];
+  const SYSTEMS = [
+    ['מיזוג אוויר', 'מיני-מרכזי אינוורטר לכל הדירה (למעט חדרי רחצה ושירות), כולל צנרת חשמל, גז וניקוז, תעלות פיזור עם תריסי אספקה, תריס אוויר חוזר ומפסק בכל חדר שינה (סעיף 4.1). אין מזגן מפוצל, רדיאטורים או חימום רצפתי; הכנה לתנור חימום בחדרי הרחצה.'],
+    ['מים חמים וגז', 'מערכת משותפת לבניין (סולארית / משאבת חום). דוד 150 ל׳ במסתור הכביסה. חיבור מים חמים למטבח, לכיורים, לאמבטיה ולמקלחות. צנרת גז עד נקודת הבישול במטבח והכנה למונה.'],
+    ['חשמל ותקשורת', 'נקודות לפי טבלה 5. אינטרקום עם מסך בכניסה ופומית בחדר ההורים. הכנה לטלוויזיה רב-ערוצית ולתקשורת בחדר הדיור, בחדרי השינה ובממ״ד.'],
+    ['דלתות וחלונות', 'דלת כניסה מפלדה לביטחון. דלתות פנים עם גמר פורמייקה ומשקוף עמיד במים; בחדרי הרחצה נעילת תפוס/פנוי. חלונות ודלתות הזזה מאלומיניום מזוגג; תריסי גלילה חשמליים בחדר הדיור, בפינת האוכל ובחדרי השינה. חדרי הרחצה ללא חלון, באוורור מכני.'],
+    ['בטיחות', 'ספרינקלרים ככל שיידרש, גלאי עשן לפי יועץ הבטיחות, מערכת סינון בממ״ד.'],
+  ];
+  const BUILDING = [
+    ['המגדל', 'מגדל 1: קומת קרקע, גלריה, קומות 2–28 וגג במפלס +100.40. בקומות 23–27 חמש דירות לקומה; דגם G בפינה הצפון-מערבית: דירות 104, 108, 112, 116 ו-120. מפלס קומה 27: +94.00.'],
+    ['הפרויקט', 'מתחם חיל הים, בת גלים, חיפה: פינוי-בינוי לפי תוכנית חפ/מק/2400. צ.מ.ח המרמן ואפריקה התחדשות עירונית. אדריכלים: מילוסלבסקי. מהנדס שלד: אנונו רפי.'],
+    ['כתובת', 'חיל הים 2, 4, 6 והעלייה השנייה 9, 11, 11א׳, 11ב׳, 13, 13א׳ (לפני ההריסה). גוש 10919, חלקות 37, 39, 40, 41, 43.'],
+    ['שטחים', 'שטח דירה 156.9 מ״ר ומרפסת שמש מקורה 22.6 מ״ר לפי תוכנית המכר.'],
+    ['חניה ומחסן', 'שוריינו לדירה במשא ומתן: חניות 349 ו-349B (זוג חניות בטור) והמחסן הצמוד לחניה 335, כולם בקומת הגלריה של החניון, ליד גרעין בניין 1. במפרט מ-05.05.2026 עדיין רשום "מחסן ----, חניה ----", ולכן כדאי לוודא שהשריון נכנס להסכם ולנספח החניות.'],
+  ];
+
+  // ===================== scene =====================
+  const stage = document.querySelector('three-d-stage');
+  const { THREE } = await stage.ready;
+  const dev = () => document.documentElement.dataset.device, isMobile = () => dev() === 'mobile';
+  const prof = deviceProfile(stage._renderer);
+  applyQuality(stage, prof);
+  document.body.dataset.input = prof.touch ? 'touch' : 'mouse';
+  const stageNote = () => { const n = stage.shadowRoot.querySelector('.note'); if (!n) return; n.textContent = document.documentElement.dataset.touch === '1' ? 'גררו באצבע לסיבוב · צביטה לזום · שתי אצבעות להזזה' : 'גררו לסיבוב · גלגלת לזום · גרירה ימנית להזזה'; n.style.left = '16px'; n.style.right = 'auto'; n.style.direction = 'rtl'; n.toggleAttribute('data-hide', isMobile()); };
+  { const st = document.createElement('style'); st.textContent = '.note[data-hide]{display:none!important}'; stage.shadowRoot.appendChild(st); const tb = stage.shadowRoot.querySelector('.toolbar'); if (tb) tb.style.display = 'none'; stageNote(); }
+  const J = (id) => fetch(window.__res(id)).then((r) => r.json());
+  const [unitPt, bldPt, roomsData, ctxData, parkPt] = await Promise.all([J('data-unit'), J('data-building'), J('data-rooms'), J('data-context').catch(() => null), J('data-parking')]);
+  const tl = new THREE.TextureLoader();
+  const T = (n) => tl.loadAsync(window.__res('tx-' + n)).catch(() => null);
+  const [od, on, or, bd, bn, br, ln, lr, wn] = await Promise.all(['oak_veneer_01_diffuse', 'oak_veneer_01_nor_gl', 'oak_veneer_01_rough', 'curly_teddy_natural_diffuse', 'curly_teddy_natural_nor_gl', 'curly_teddy_natural_rough', 'rough_linen_nor_gl', 'rough_linen_rough', 'beige_wall_001_nor_gl'].map(T));
+  const TX = { oak: { d: od, n: on, r: or }, boucle: { d: bd, n: bn, r: br }, linen: { n: ln, r: lr }, wall: { n: wn } };
+  const M = await build(THREE, unitPt, bldPt, TX, roomsData, ctxData);
+  const chip = document.getElementById('rstatus');
+  const { HDRLoader } = await import('three/addons/loaders/HDRLoader.js');
+  const skyTex = await fetch(window.__res('sky')).then((r) => r.json()).then(({ b64 }) => {
+    const bin = atob(b64), u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    const d = new HDRLoader().parse(u8.buffer), t = new THREE.DataTexture(d.data, d.width, d.height, d.format ?? THREE.RGBAFormat, d.type);
+    t.colorSpace = THREE.LinearSRGBColorSpace; t.flipY = true; t.minFilter = t.magFilter = THREE.LinearFilter; t.generateMipmaps = false; t.needsUpdate = true; return t;
+  });
+  const pipe = await createPipeline(THREE, stage, skyTex, (s) => {
+    chip.dataset.mode = s.mode;
+    chip.textContent = s.mode === 'ready' ? 'רנדר פוטוריאליסטי' : s.mode === 'prep' ? 'מכין סימולציית אור, כמה שניות…' : s.mode === 'pt' ? (s.samples < 200 ? 'עוקב אחרי האור · ' + s.samples + ' דגימות · הזזה מבטלת' : 'פוטוריאליסטי · ' + s.samples + ' דגימות · הזזה מבטלת') : s.mode === 'error' ? 'הרנדר הפוטוריאליסטי לא נתמך במכשיר הזה' : '';
+  });
+  pipe.setMaxSamples(prof.maxSamples);
+  if (!prof.photo) chip.hidden = true;
+  chip.onclick = () => { if (chip.dataset.mode === 'ready') pipe.startPhoto(); };
+  pipe.setAO(!isMobile());
+  const PK = buildParking(THREE, parkPt, bldPt, tl, (p) => new URL(p, document.baseURI).href);
+  document.getElementById('loading').remove();
+
+  const store = { get(k, d) { try { const v = localStorage.getItem('g120_' + k); return v == null ? d : v; } catch { return d; } }, set(k, v) { try { localStorage.setItem('g120_' + k, v); } catch {} } };
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const { K, UCX, UCY } = M;
+  const RP = roomsData.rooms;
+  const polyArea = (poly) => { let a = 0; for (let i = 0; i < poly.length; i++) { const p = poly[i], q = poly[(i + 1) % poly.length]; a += p[0] * q[1] - q[0] * p[1]; } return Math.abs(a / 2) * K * K; };
+  const inPoly = (x, y, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i], [xj, yj] = poly[j]; if (((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) c = !c; } return c; };
+
+  // ===================== walk =====================
+  const balc = roomsData.balconies[0].poly, fp = roomsData.footprint;
+  // walkable outline = footprint ∪ balcony (they share the living-room façade line y = 452)
+  const walkFp = [[156, 1282.8], [156, 365], ...balc.slice(4, -1).reverse(), [274, 247], [911.5, 247], [911.5, 697], [708, 697], [708, 827], [577, 827], [577, 1282.8]];
+  let measuring = false;
+  const spawns = {}; ['entrance', 'living', 'kitchen', 'balcony', 'master', 'masterBath', 'bed2', 'mamad', 'bed4', 'bath4', 'bath', 'laundry'].forEach((k) => { if (RP[k]?.spawn) spawns[k] = RP[k].spawn; });
+  const walker = createWalk(THREE, stage, M, unitPt, document.getElementById('minimap'), { rooms: spawns, fp: walkFp, onTap: (e) => (measuring ? (measureTap(e), true) : false) });
+  const ROOM_LABELS = { entrance: 'כניסה', living: 'דיור', kitchen: 'מטבח', balcony: 'מרפסת', master: 'הורים', masterBath: 'רחצת הורים', bed2: 'שינה 2', mamad: 'ממ״ד', bed4: 'שינה 4', bath4: 'רחצה 4', bath: 'רחצה', laundry: 'כביסה' };
+  const roomsEl = document.getElementById('rooms');
+  const markRoom = (r) => roomsEl.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.room === r)));
+  walker.rooms.forEach((r) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = ROOM_LABELS[r]; b.dataset.room = r; b.onclick = () => { walker.goto(r); markRoom(r); }; roomsEl.appendChild(b); });
+
+  // outlook from the windows: the neighbourhood placed relative to floor 27
+  const outlook = M.makeContext('outlook_context');
+  outlook.position.set(M.unitOffset[0], -M.base(27), M.unitOffset[1]);
+  outlook.traverse((o) => { if (o.isMesh) { o.castShadow = false; } });
+  if (outlook.userData.setPlanned) outlook.userData.setPlanned(prof.tier !== 'low');
+  let outlookOn = store.get('outlook', '1') === '1' && !!ctxData;
+  const fog = new THREE.Fog(0xdfe7ec, 350, 2800);
+
+  // ===================== sun =====================
+  const LAT = 32.832, LON = 34.981, NORTH = roomsData.northDeg; // north arrow on the sale plan: 20° anticlockwise from page-up
+  const now = new Date();
+  let sunDate = store.get('sunDate', 'today'), sunHour = Number(store.get('sunHour', 10)) || 10;
+  const md = () => (sunDate === 'today' ? [now.getMonth() + 1, now.getDate()] : sunDate.split('-').map(Number));
+  const BASE = { walk: 3.4, cutaway: 2.8, building: 3.0, parking: 2.6 };
+  function applySun() {
+    const [month, day] = md(); const s = sunDir({ lat: LAT, lon: LON, month, day, hour: sunHour, northDeg: NORTH });
+    const v = VIEWS[currentView]; if (!v) return;
+    const span = v.obj === 'bld' ? (bldCtxVisible() ? 160 : 70) : v.obj === 'park' ? 45 : 11, center = v.obj === 'bld' ? [0, 40, 0] : v.obj === 'park' ? [PK.focus[0], 0, PK.focus[1]] : [0, 0, 0];
+    stage.setSun({ dir: s.alt > 0 ? s.dir : [s.dir[0], 0.05, s.dir[2]], center, span, intensity: sunIntensity(s.alt, BASE[currentView] || 3) });
+    const hh = Math.floor(sunHour), mm = Math.round((sunHour - hh) * 60);
+    document.getElementById('sunTime').textContent = String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
+    document.getElementById('sunAlt').textContent = s.alt <= 0 ? 'השמש מתחת לאופק' : `גובה ${Math.round(s.alt)}° · אזימוט ${Math.round(s.az)}°`;
+    pipe.stopPhoto();
+  }
+  const dateSeg = document.getElementById('dateSeg'), hourEl = document.getElementById('hour');
+  const pickSeg = (seg, v) => seg.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === String(v))));
+  dateSeg.querySelectorAll('button').forEach((b) => (b.onclick = () => { sunDate = b.dataset.v; store.set('sunDate', sunDate); pickSeg(dateSeg, sunDate); applySun(); }));
+  pickSeg(dateSeg, sunDate); hourEl.value = sunHour;
+  hourEl.addEventListener('input', () => { sunHour = Number(hourEl.value); store.set('sunHour', sunHour); applySun(); });
+  const needle = document.getElementById('needle');
+  const northV = new THREE.Vector3(Math.sin(NORTH * Math.PI / 180), 0, -Math.cos(NORTH * Math.PI / 180));
+  const fwd = new THREE.Vector3();
+  function spinCompass() {
+    stage.camera.getWorldDirection(fwd); fwd.y = 0; if (fwd.lengthSq() < 1e-6) fwd.set(0, 0, -1); fwd.normalize();
+    const right = new THREE.Vector3(-fwd.z, 0, fwd.x);
+    const a = Math.atan2(northV.dot(right), northV.dot(fwd)) * 180 / Math.PI;
+    needle.setAttribute('transform', `rotate(${a.toFixed(1)} 14 14)`);
+  }
+
+  // ===================== views =====================
+  let floor = Number(store.get('floor', 27)); if (!(floor >= 23 && floor <= 27)) floor = 27;
+  const VIEWS = {
+    cutaway: { obj: 'unit', ceiling: false, fov: 30, dirFrame: [-0.55, 1.35, 0.85], mult: 0.92, bg: '--stage-cut' },
+    walk: { obj: 'unit', ceiling: true, walk: true, bg: '--stage-walk' },
+    building: { obj: 'bld', fov: 30, bg: '--stage-bld' },
+    parking: { obj: 'park', fov: 32, bg: '--stage-bld' },
+  };
+  let current = null, currentView = 'cutaway', empty = false;
+  const ctxOn = document.getElementById('ctxOn'), planOn = document.getElementById('planOn');
+  const bldCtxVisible = () => !!ctxData && ctxOn.checked;
+  function setOutlook(on) {
+    outlookOn = on && !!ctxData; store.set('outlook', outlookOn ? '1' : '0');
+    document.getElementById('outlookBtn').setAttribute('aria-pressed', String(outlookOn));
+    const inWalk = currentView === 'walk';
+    if (inWalk && outlookOn) { stage._scene.add(outlook); stage._scene.fog = fog; stage._ground.visible = false; }
+    else { stage._scene.remove(outlook); stage._scene.fog = null; stage._ground.visible = true; }
+    pipe.stopPhoto();
+  }
+  function show(name) {
+    const v = VIEWS[name];
+    currentView = name; if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+    walker.stop(); stopMeasure();
+    document.body.classList.toggle('walking', name === 'walk');
+    document.querySelectorAll('#views button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === name)));
+    document.getElementById('floors').hidden = name !== 'building';
+    document.getElementById('plevels').hidden = name !== 'parking';
+    document.getElementById('sunbox').hidden = name === 'parking';
+    document.getElementById('tools').hidden = name === 'building' || name === 'parking';
+    document.getElementById('opts').hidden = name === 'building' || name === 'parking';
+    document.getElementById('areasBtn').hidden = name !== 'cutaway';
+    document.getElementById('outlookBtn').hidden = name !== 'walk' || !ctxData;
+    tagsEl.hidden = name !== 'cutaway' && name !== 'parking';
+    tagsEl.dataset.set = name;
+    stage.setBackground(css(v.bg));
+    if (v.obj === 'unit') {
+      M.ceil.visible = v.ceiling;
+      stage.setAttribute('name', 'G-120_apartment');
+      if (current !== 'unit') stage.setObject(M.unit, { frame: false });
+      stage.setFx(M.fx); M.fx.visible = v.ceiling;
+      stage._scene.environmentIntensity = v.ceiling ? 0.32 : 0.5;
+      stage._hemi.intensity = v.ceiling ? 0.3 : 0.4;
+      pipe.setScene(v.ceiling ? 'unit-walk' + (outlookOn ? '-ctx' : '') : 'unit-cut', { photo: prof.photo, skyBackground: !!v.ceiling, exposure: v.ceiling ? 1.08 : 1.0, skyTilt: -0.12, skyIntensity: 0.9 });
+      if (v.walk) { walker.start('entrance'); markRoom('entrance'); walker.setEmpty(empty); showHint(); }
+      else {
+        const box = new THREE.Box3().setFromObject(M.unit), c = box.getCenter(new THREE.Vector3()), r = box.getBoundingSphere(new THREE.Sphere()).radius;
+        const d = (r / Math.tan((v.fov * Math.PI) / 360)) * v.mult, dir = new THREE.Vector3(...v.dirFrame).normalize();
+        c.y = 0.6;
+        const pos = c.clone().add(dir.clone().multiplyScalar(d)), f = c.clone().sub(pos).normalize(), right = new THREE.Vector3().crossVectors(f, new THREE.Vector3(0, 1, 0)).normalize();
+        const asp = innerWidth / Math.max(1, innerHeight);
+        if (isMobile()) {
+          pos.copy(c).add(dir.clone().multiplyScalar(d * Math.max(0.95, 0.6 / asp)));
+          const up = new THREE.Vector3().crossVectors(right, f).normalize().multiplyScalar(-r * 0.12);
+          stage.setView({ pos: pos.add(up).toArray(), target: c.add(up).toArray(), fov: v.fov });
+        } else {
+          pos.copy(c).add(dir.clone().multiplyScalar(d * Math.max(1, 1.35 / asp)));   // portrait tablets: back off to fit the width
+          const shift = r * 0.3 * Math.min(1, asp);
+          stage.setView({ pos: pos.add(right.clone().multiplyScalar(shift)).toArray(), target: c.add(right.multiplyScalar(shift)).toArray(), fov: v.fov });
+        }
+      }
+      current = 'unit';
+    } else if (v.obj === 'park') {
+      stage.setAttribute('name', 'Parking_storage_' + PK.level);
+      if (current !== 'park') stage.setObject(PK.park, { frame: false });
+      stage.setFx(null);
+      stage._scene.environmentIntensity = 0.55; stage._hemi.intensity = 0.5; stage._renderer.toneMappingExposure = 1.0;
+      const [fx0, fz0, ext] = PK.focus, tgt = new THREE.Vector3(fx0, 0, fz0), asp = innerWidth / Math.max(1, innerHeight);
+      const dist = (ext * 1.15 + 14) / Math.tan(16 * Math.PI / 180) * (isMobile() ? Math.max(1, 0.9 / asp) : 1) * 0.5;
+      const pos = tgt.clone().add(new THREE.Vector3(-0.22, 1.5, 0.5).normalize().multiplyScalar(dist));
+      const f = tgt.clone().sub(pos).normalize(), right = new THREE.Vector3().crossVectors(f, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(isMobile() ? 0 : 9);
+      stage.setView({ pos: pos.add(right).toArray(), target: tgt.add(right).toArray(), fov: v.fov });
+      pipe.setScene('park', { photo: false, skyBackground: false });
+      current = 'park';
+    } else {
+      stage.setAttribute('name', 'Tower1_massing');
+      if (current !== 'bld') stage.setObject(M.bld, { frame: false });
+      stage.setFx(null);
+      stage._scene.environmentIntensity = 0.5; stage._hemi.intensity = 0.45; stage._renderer.toneMappingExposure = 1.0;
+      M.bldContext.visible = bldCtxVisible();
+      const t = M.unitInBld(533, 765, floor, 1.4), H = M.roofTop, far = bldCtxVisible() ? 3.1 : 2.3;
+      const tgt = new THREE.Vector3(t[0] * 0.35, H * 0.52, t[2] * 0.35), pos = tgt.clone().add(new THREE.Vector3(-0.78, 0.34, -0.52).normalize().multiplyScalar(H * far * (isMobile() ? 1.25 : 1)));
+      const f = tgt.clone().sub(pos).normalize(), right = new THREE.Vector3().crossVectors(f, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(isMobile() ? 0 : H * 0.25);
+      stage.setView({ pos: pos.add(right).toArray(), target: tgt.add(right).toArray(), fov: v.fov });
+      pipe.setScene('bld', { photo: false, skyBackground: false });
+      current = 'bld';
+    }
+    setOutlook(outlookOn);
+    applySun();
+  }
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => stage.setBackground(css(VIEWS[currentView].bg)));
+  new MutationObserver(() => stage.setBackground(css(VIEWS[currentView].bg))).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // floor chips (G stack: apartment no. = 104 + 4 × (floor − 23))
+  const chips = document.getElementById('chips');
+  function setFloor(L) {
+    floor = L; store.set('floor', L); M.setFloor(L);
+    chips.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.f) === L)));
+    document.getElementById('unitline').innerHTML = `<b>דירה <span class="num">${104 + 4 * (L - 23)}</span></b> · קומה <span class="num">${L}</span> מתוך 28 · מפלס <span class="num">+${M.base(L).toFixed(2)}</span>` + (L === 27 ? ' · <b>הדירה שלך</b>' : '');
+    if (currentView === 'building') show('building');
+  }
+  for (let L = 23; L <= 27; L++) { const b = document.createElement('button'); b.type = 'button'; b.textContent = L; b.dataset.f = L; if (L === 27) b.classList.add('own'); b.onclick = () => setFloor(L); chips.appendChild(b); }
+  if (!ctxData) { ctxOn.closest('label').hidden = true; planOn.closest('label').hidden = true; }
+  ctxOn.onchange = () => { planOn.disabled = !ctxOn.checked; show('building'); };
+  planOn.onchange = () => { M.bldContext.userData.setPlanned?.(planOn.checked); outlook.userData.setPlanned?.(planOn.checked); };
+  M.bldContext.userData.setPlanned?.(true);
+
+  // ===================== options =====================
+  const seg = (id, key, fn, def) => { const el = document.getElementById(id); el.querySelectorAll('button').forEach((b) => (b.onclick = () => { fn(Number(b.dataset.v)); pickSeg(el, b.dataset.v); store.set(key, b.dataset.v); })); const v = store.get(key, def); fn(Number(v)); pickSeg(el, v); };
+  seg('tileSeg', 'tile', (v) => M.setTile(v), '1');
+  seg('shutSeg', 'shut', (v) => { M.setShutters(v); pipe.stopPhoto(); }, '0');
+  const emptyBtn = document.getElementById('emptyBtn');
+  emptyBtn.onclick = () => { empty = !empty; emptyBtn.setAttribute('aria-pressed', String(empty)); M.unit.getObjectByName('staging').visible = !empty; walker.setEmpty(empty); pipe.stopPhoto(); };
+  document.getElementById('outlookBtn').onclick = () => { setOutlook(!outlookOn); pipe.setScene('unit-walk' + (outlookOn ? '-ctx' : ''), { photo: prof.photo, skyBackground: true, exposure: 1.08, skyTilt: -0.12, skyIntensity: 0.9 }); };
+  let showAreas = store.get('areas', '0') === '1';
+  const areasBtn = document.getElementById('areasBtn');
+
+  // ===================== room tags (cutaway) =====================
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const tagsEl = document.getElementById('tags');
+  const tagBtns = {};
+  const roomArea = (k) => (RP[k] ? polyArea(RP[k].poly) : null);
+  function drawTags() {
+    for (const k of ROOM_ORDER) {
+      const R = ROOMS[k]; const b = tagBtns[k]; const a = roomArea(k);
+      b.innerHTML = `<bdi>${esc(R.tag || R.n)}</bdi>` + (showAreas && R.showArea && a ? ` · <span class="num"><bdi>${a.toFixed(1)}</bdi> מ״ר</span>` : '');
+    }
+    areasBtn.setAttribute('aria-pressed', String(showAreas));
+  }
+  ROOM_ORDER.forEach((k) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'tag'; b.dataset.room = k; b.onclick = () => openSpec('rooms', k); tagsEl.appendChild(b); tagBtns[k] = b; });
+  areasBtn.onclick = () => { showAreas = !showAreas; store.set('areas', showAreas ? '1' : '0'); drawTags(); };
+  drawTags();
+  const v3 = new THREE.Vector3();
+  const put = (el, wx, wy, wz, cam, w, h) => { v3.set(wx, wy, wz).project(cam); el.style.left = ((v3.x + 1) / 2 * w).toFixed(1) + 'px'; el.style.top = ((1 - v3.y) / 2 * h).toFixed(1) + 'px'; el.hidden = v3.z > 1; };
+
+  // parking levels
+  const levelSeg = document.getElementById('levelSeg');
+  PK.levelInfo.forEach((L) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.v = L.key; b.textContent = L.name; b.onclick = () => setLevel(L.key); levelSeg.appendChild(b); });
+  function setLevel(k) {
+    PK.setLevel(k); pickSeg(levelSeg, k); const L = PK.levelInfo.find((l) => l.key === k);
+    document.getElementById('parkline').innerHTML = k === 'g' ? `<b>חניות 349 + 349B</b> (בטור) ו<b>מחסן</b> ליד חניה 335 · כ-<span class="num">${Math.round(PK.park.userData.routeLen / 5) * 5}</span> מ׳ הליכה ללובי בניין 1` : `${L.name} · מפלס <span class="num">${L.elev >= 0 ? '+' : ''}${L.elev.toFixed(2)}</span> · החניות והמחסן של הדירה בקומת הגלריה`;
+    if (currentView === 'parking') stage.setAttribute('name', 'Parking_storage_' + k);
+  }
+  setLevel('g');
+  const parkTags = PK.labels.map((l) => { const b = document.createElement('div'); b.className = 'tag ptag' + (l.own ? ' own' : '') + (l.lobby ? ' lobby' : ''); b.textContent = l.t; tagsEl.appendChild(b); return [b, l]; });
+
+  // ===================== measuring =====================
+  const mbar = document.getElementById('mbar'), mtext = document.getElementById('mtext'), measureBtn = document.getElementById('measureBtn');
+  const mLabel = document.createElement('div'); mLabel.className = 'mlabel'; mLabel.hidden = true; tagsEl.parentNode.appendChild(mLabel);
+  mLabel.style.position = 'fixed'; mLabel.style.zIndex = 3;
+  const mMat = new THREE.LineBasicMaterial({ color: 0xe2703a, depthTest: false, transparent: true });
+  const mDotMat = new THREE.MeshBasicMaterial({ color: 0xe2703a, depthTest: false, transparent: true });
+  const mGroup = new THREE.Group(); mGroup.renderOrder = 20; stage._scene.add(mGroup);
+  let mPts = [];
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const visibleChain = (o) => { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; };
+  const snap = (p) => {
+    const x = p.x / K + UCX, y = p.z / K + UCY, tol = 0.08 / K; let best = null;
+    for (const poly of unitPt.walls) for (let i = 0; i < poly.length; i++) {
+      const a = poly[i], b = poly[(i + 1) % poly.length];
+      for (const v of [a]) { const d = Math.hypot(x - v[0], y - v[1]); if (d < tol * 0.75 && (!best || d < best.d)) best = { d, x: v[0], y: v[1], v: 1 }; }
+      const dx = b[0] - a[0], dy = b[1] - a[1], t = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy) / (dx * dx + dy * dy || 1)));
+      const qx = a[0] + t * dx, qy = a[1] + t * dy, d = Math.hypot(x - qx, y - qy);
+      if (d < tol && (!best || (!best.v && d < best.d))) best = { d, x: qx, y: qy };
+    }
+    if (best) { p.x = (best.x - UCX) * K; p.z = (best.y - UCY) * K; p.y = 0.03; } // wall-snapped points measure along the floor, like the plan's dimensions
+    return p;
+  };
+  function measureTap(e) {
+    const rc = stage.canvas.getBoundingClientRect();
+    ndc.set(((e.clientX - rc.left) / rc.width) * 2 - 1, -((e.clientY - rc.top) / rc.height) * 2 + 1);
+    ray.setFromCamera(ndc, stage.camera);
+    const hit = ray.intersectObject(M.unit, true).find((h) => h.object.isMesh && visibleChain(h.object) && !h.object.material.transparent && !/^(light_point|led)/.test(h.object.name));
+    if (!hit) return;
+    if (mPts.length >= 2) mPts = [];
+    mPts.push(snap(hit.point.clone()));
+    drawMeasure();
+  }
+  function drawMeasure() {
+    mGroup.clear();
+    mPts.forEach((p) => { const d = new THREE.Mesh(new THREE.SphereGeometry(0.035, 16, 12), mDotMat); d.position.copy(p); d.renderOrder = 21; mGroup.add(d); });
+    if (mPts.length === 2) {
+      const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(mPts), mMat); l.renderOrder = 20; mGroup.add(l);
+      const dist = mPts[0].distanceTo(mPts[1]); mLabel.textContent = dist.toFixed(2) + ' מ׳'; mLabel.hidden = false;
+      mtext.textContent = 'הקשה נוספת מתחילה מדידה חדשה';
+    } else { mLabel.hidden = true; mtext.textContent = mPts.length ? 'עכשיו הנקודה השנייה' : 'הקישו על שתי נקודות כדי למדוד'; }
+  }
+  function startMeasure() { document.body.classList.add('measuring'); measuring = true; mPts = []; drawMeasure(); mbar.hidden = false; measureBtn.setAttribute('aria-pressed', 'true'); }
+  function stopMeasure() { document.body.classList.remove('measuring'); measuring = false; mPts = []; mGroup.clear(); mLabel.hidden = true; mbar.hidden = true; measureBtn.setAttribute('aria-pressed', 'false'); }
+  measureBtn.onclick = () => (measuring ? stopMeasure() : startMeasure());
+  document.getElementById('mclose').onclick = stopMeasure;
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && measuring) stopMeasure(); });
+  // cutaway taps (walk taps arrive through the walker's onTap hook)
+  { let down = null;
+    stage.canvas.addEventListener('pointerdown', (e) => { down = [e.clientX, e.clientY]; });
+    stage.canvas.addEventListener('pointerup', (e) => { if (!down || currentView !== 'cutaway' || !measuring) return; if (Math.hypot(e.clientX - down[0], e.clientY - down[1]) < 6) measureTap(e); down = null; }); }
+
+  function frame() {
+    const cam = stage.camera, w = stage.clientWidth, h = stage.clientHeight;
+    if (!tagsEl.hidden) {
+      const inPark = currentView === 'parking';
+      for (const k of ROOM_ORDER) { if (inPark) { tagBtns[k].hidden = true; continue; } const [x, y] = ROOMS[k].pos; put(tagBtns[k], (x - UCX) * K, 0.25, (y - UCY) * K, cam, w, h); }
+      for (const [el, l] of parkTags) { if (!inPark || l.level !== PK.level) { el.hidden = true; continue; } put(el, l.p[0], l.p[1], l.p[2], cam, w, h); }
+    }
+    if (!mLabel.hidden && mPts.length === 2) { const m = mPts[0].clone().add(mPts[1]).multiplyScalar(0.5); put(mLabel, m.x, m.y, m.z, cam, w, h); }
+    spinCompass();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ===================== spec ledger =====================
+  const ledger = document.getElementById('ledger'), lbody = document.getElementById('lbody');
+  let tab = 'rooms', room = 'living';
+  const computed = polyArea(fp), computedBalc = polyArea(balc);
+  function render() {
+    document.querySelectorAll('#tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
+    Object.values(tagBtns).forEach((b) => b.setAttribute('aria-pressed', String(!ledger.hidden && tab === 'rooms' && b.dataset.room === room)));
+    if (tab === 'rooms') {
+      const R = ROOMS[room], a = roomArea(room);
+      const rows = [['ריצוף', R.floor], ['קירות', R.walls], ['תקרה', R.ceil], R.open && ['פתחים', R.open], R.san && ['כלים ואביזרים', R.san], R.more && ['עוד', R.more]].filter(Boolean);
+      lbody.innerHTML = `<div class="roompick">${ROOM_ORDER.map((k) => `<button type="button" data-room="${k}" aria-pressed="${k === room}">${esc(ROOMS[k].n)}</button>`).join('')}</div>
+        <div class="rtitle"><h3>${esc(R.n)}</h3>${a ? `<span class="ref">כ-<span class="num">${a.toFixed(1)}</span> מ״ר נטו</span>` : ''}</div>
+        <dl class="spec">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}
+        ${R.elec ? `<dt>חשמל</dt><dd><div class="elec">${R.elec.map(([k, n]) => `<span>${esc(k)}<b>${esc(n)}</b></span>`).join('')}</div></dd>` : ''}</dl>
+        <div class="ref">מקור: טבלאות 2–5 במפרט המכר (עמ׳ 15–24). השטח מחושב מפני הקירות בתוכנית, לפני טיח וחיפוי.</div>`;
+      lbody.querySelectorAll('.roompick button').forEach((b) => (b.onclick = () => { room = b.dataset.room; render(); }));
+    } else if (tab === 'systems' || tab === 'building') {
+      const L = tab === 'systems' ? SYSTEMS : BUILDING;
+      lbody.innerHTML = L.map(([h, t]) => `<div class="sec"><h4>${esc(h)}</h4><p>${esc(t)}</p></div>`).join('');
+    } else {
+      const FT = [['מגורים, חדרי שינה וארונות', 'פורצלן 100×100 (או 80×80)', 'טיח וצבע לבן', 'תריסים חשמליים'], ['מטבח', 'פורצלן כמו המגורים', 'קרמיקה 10×30 מעל המשטח', 'כ-9 מ׳ ארונות, אבן קיסר, כיור יחיד'], ['רחצה כללי', 'פורצלן 60×60', 'חיפוי 30×60 עד התקרה', 'אמבטיה 160/70, אסלה תלויה, ארון כיור'], ['רחצת הורים, רחצה 4', 'פורצלן 60×60, משופע', 'חיפוי 30×60 עד התקרה', 'מקלחת מרוצפת, אסלה תלויה, ארון כיור'], ['ממ״ד', 'פורצלן', 'בטון מזוין', 'דלת וכנף פלדה'], ['מרפסת', 'פורצלן 33×33 נגד החלקה', '—', 'מעקה, ברז גינה']];
+      lbody.innerHTML = `
+        <div class="sec"><h4>מקורות</h4><ul>
+          <li>תוכנית מכר דגם G, 1:50 (תוכניות A120, גיליון 23, 27.04.2026)</li>
+          <li>תוכנית קומה טיפוסית 23–27, 1:100 (גיליון 15)</li>
+          <li>מפרט מכר דירה 120, 05.05.2026, 39 עמ׳</li>
+          <li>תוכניות החניון: מרתף 1-, קרקע, גלריה וקומה 2, 1:200 (גיליונות 18–21)</li>
+          <li>סביבה: המודל "מודל בת גלים" (מבנים מ-OpenStreetMap, תוכניות מ-XPLAN)</li></ul></div>
+        <div class="sec"><h4>שטח</h4><p>מחושב מהשרטוט: <span class="num">${computed.toFixed(1)}</span> מ״ר מול <span class="num">156.9</span> בתוכנית (<span class="num">${((computed / 156.9 - 1) * 100).toFixed(1)}%+</span>), לפי קווי החוץ ומרכז הקירות המשותפים. מרפסת: <span class="num">${computedBalc.toFixed(1)}</span> מול <span class="num">22.6</span> מ״ר.</p></div>
+        <div class="sec"><h4>גמרים בקצרה</h4><div class="wrapx"><table class="ft"><thead><tr><th>חדר</th><th>ריצוף</th><th>קירות</th><th>עיקר האביזרים</th></tr></thead><tbody>${FT.map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="ref">ריצוף, חיפוי וגוונים לבחירת הקונה מתוך ספקי החברה; בדגם מוצג גוון ניטרלי. עמ׳ 15–21.</p></div>
+        <div class="sec"><h4>הנחות</h4><ul>
+          <li>הקירות שורטטו מתמונת הגיליון (אין בו קווים וקטוריים), דיוק של כ-2 ס״מ. קנה המידה כויל מ-7 מידות חדרים (0.01739 מ׳ לנקודה).</li>
+          <li>גובה אדן וחלונות (90/230 ס״מ, ממ״ד 100/210) אינם בסט; דלת ההזזה לסלון בגובה 2.45.</li>
+          <li>תקרות משנה 2.45 מ׳; עובי תקרה 0.30 מ׳.</li>
+          <li>מסגרת הזכוכית במקלחות לא מופיעה במפרט ולכן לא שורטטה.</li>
+          <li>כל הקומות 2–28 במגדל מוצגות לפי תוכנית הקומה 23–27; קומות הקרקע והגלריה כבסיס מזוגג. מפלסי הקומות לפי הגיליונות; בין קומה 5 (17.90+) לקומה 6 (26.80+) יש 8.90 מ׳ שהסט אינו מסביר, וקומה 5 מוצגת כקומה גבוהה אחת.</li>
+          <li>חץ הצפון בגיליון נוטה 20° שמאלה; כיוון השמש מחושב לפיו (דיוק כ-1°) ואינו כולל הצללה מבניינים שכנים.</li>
+          <li>מיקום מגדל 1 בתוך מודל השכונה סכמטי (כ-10 מ׳); גובה מבנים קיימים משוער, ומבנים מתוכננים הם מסות אינדיקטיביות.</li>
+          <li>הריהוט, מכונות הכביסה והמקרר להמחשה בלבד.</li>
+          <li>המחסנים אינם ממוספרים בגיליון; סומן המחסן שדלתו פונה לחניה 335 (כ-2.3×2.3 מ׳). מפלסי החניון ביחס למגדל: 4.00- (לפי גיליון 3), 0.00, 4.50+, 7.75+.</li></ul></div>`;
+    }
+  }
+  function openSpec(t, r) { tab = t || tab; if (r) room = r; ledger.hidden = false; document.body.classList.add('ledger-open'); render(); }
+  function closeSpec() { ledger.hidden = true; document.body.classList.remove('ledger-open'); render(); }
+  document.getElementById('openSpec').onclick = () => openSpec();
+  document.getElementById('closeSpec').onclick = closeSpec;
+  document.querySelectorAll('#tabs button').forEach((b) => (b.onclick = () => { tab = b.dataset.tab; render(); }));
+
+  // which room the walker stands in
+  const WHERE = ['masterBath', 'masterCloset', 'master', 'bath', 'bath4', 'closet4', 'bed4', 'mamad', 'bed2', 'laundry', 'corridor', 'entrance', 'kitchen', 'balcony', 'living'];
+  let lastHere = '';
+  const hereName = document.getElementById('hereName');
+  setInterval(() => {
+    if (currentView !== 'walk') return;
+    const c = stage.camera.position, x = c.x / K + UCX, y = c.z / K + UCY;
+    let k = WHERE.find((r) => RP[r] && inPoly(x, y, RP[r].poly)) || null;
+    if (k === 'living' && x < 395 && y > 540 && y < 700) k = 'dining';
+    if (k && k !== lastHere) { lastHere = k; hereName.textContent = ROOMS[k].n; if (!ledger.hidden && tab === 'rooms') { room = k; render(); } }
+  }, 250);
+  document.getElementById('hereSpec').onclick = () => openSpec('rooms', lastHere || 'entrance');
+
+  // ===================== saving (image + model) =====================
+  const toast = document.getElementById('toast');
+  const say = (t) => { toast.textContent = t; clearTimeout(say.t); say.t = setTimeout(() => (toast.textContent = ''), 5000); };
+  const saveBox = document.getElementById('savebox');
+  let downloads = null; saveBox.hidden = true;
+  if (window.claude?.use) window.claude.use('downloads').then((d) => { downloads = d; saveBox.hidden = !d; }).catch(() => {});
+  const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return (u8) => { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = t[(c ^ u8[i]) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; }; })();
+  function zip(files) { // stored (uncompressed) zip
+    const enc = new TextEncoder(), parts = [], central = []; let off = 0;
+    for (const f of files) {
+      const name = enc.encode(f.name), data = f.data instanceof Uint8Array ? f.data : enc.encode(f.data), crc = CRC(data);
+      const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint32(14, crc, true); h.setUint32(18, data.length, true); h.setUint32(22, data.length, true); h.setUint16(26, name.length, true);
+      parts.push(new Uint8Array(h.buffer), name, data);
+      const c = new DataView(new ArrayBuffer(46)); c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint32(16, crc, true); c.setUint32(20, data.length, true); c.setUint32(24, data.length, true); c.setUint16(28, name.length, true); c.setUint32(42, off, true);
+      central.push(new Uint8Array(c.buffer), name); off += 30 + name.length + data.length;
+    }
+    const csize = central.reduce((s, p) => s + p.length, 0), e = new DataView(new ArrayBuffer(22));
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, csize, true); e.setUint32(16, off, true);
+    return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type: 'application/zip' });
+  }
+  async function offer(filename, data) {
+    if (!downloads) { say('שמירה לא זמינה בתצוגה הזו.'); return; }
+    try { await downloads.save({ filename, data }); say('נשמר: ' + filename); }
+    catch (e) { say(e?.code === 'declined' ? 'השמירה בוטלה.' : e?.code === 'rate_limited' ? 'חלון שמירה כבר פתוח.' : 'לא הצלחתי לשמור את הקובץ.'); }
+  }
+  document.getElementById('savePng').onclick = () => { stage._render?.(); stage.canvas.toBlob((b) => b && offer(`G-120_${currentView}.png`, b), 'image/png'); };
+  document.getElementById('saveObj').onclick = async () => {
+    say('מכין OBJ…');
+    const { OBJExporter } = await import('three/addons/exporters/OBJExporter.js');
+    const mats = stage._nameParts(), base = stage._basename;
+    const obj = 'mtllib ' + base + '.mtl\n' + new OBJExporter().parse(stage._object);
+    let mtl = '# Apartment 120 (type G), Bat Galim — materials named after the sale spec\n';
+    for (const m of mats) { const c = m.color || { r: 0.8, g: 0.8, b: 0.8 }; mtl += `newmtl ${m.name}\nKd ${c.r.toFixed(4)} ${c.g.toFixed(4)} ${c.b.toFixed(4)}\nKs 0.2 0.2 0.2\nNs ${Math.round((1 - (m.roughness ?? 0.5)) * 200)}\nd ${(m.opacity ?? 1).toFixed(4)}\n\n`; }
+    offer(base + '_obj.zip', zip([{ name: base + '.obj', data: obj }, { name: base + '.mtl', data: mtl }]));
+  };
+  document.getElementById('saveGlb').onclick = async () => {
+    say('מכין GLB…');
+    const { GLTFExporter } = await import('three/addons/exporters/GLTFExporter.js');
+    stage._nameParts();
+    const buf = await new GLTFExporter().parseAsync(stage._object, { binary: true });
+    offer(stage._basename + '_glb.zip', zip([{ name: stage._basename + '.glb', data: new Uint8Array(buf) }]));
+  };
+
+  // ===================== device adaptation =====================
+  const rail = document.getElementById('rail'), handle = document.getElementById('handle');
+  handle.onclick = () => { const on = rail.classList.toggle('expanded'); handle.setAttribute('aria-expanded', String(on)); };
+  // joystick (touch, walk view)
+  { const joy = document.getElementById('joy'), knob = document.getElementById('knob'); let id = null;
+    const move = (e) => { const rc = joy.getBoundingClientRect(), r = rc.width / 2; let dx = e.clientX - rc.left - r, dy = e.clientY - rc.top - r; const l = Math.hypot(dx, dy); if (l > r) { dx *= r / l; dy *= r / l; } knob.style.transform = `translate(${dx}px, ${dy}px)`; walker.setStick(-dy / r, dx / r); };
+    const end = () => { id = null; knob.style.transform = ''; walker.setStick(0, 0); };
+    joy.addEventListener('pointerdown', (e) => { e.stopPropagation(); e.preventDefault(); id = e.pointerId; joy.setPointerCapture(id); move(e); });
+    joy.addEventListener('pointermove', (e) => { if (e.pointerId === id) { e.stopPropagation(); move(e); } });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((t) => joy.addEventListener(t, end)); }
+  function showHint() {
+    if (document.documentElement.dataset.touch !== '1') return;
+    if (store.get('hint', '0') === '1') return; store.set('hint', '1');
+    const h = document.getElementById('hint'); h.hidden = false; h.style.opacity = 1;
+    setTimeout(() => { h.style.opacity = 0; setTimeout(() => (h.hidden = true), 700); }, 5000);
+  }
+  const DEV_NAMES = { desktop: 'מחשב', tablet: 'טאבלט', mobile: 'נייד' };
+  function applyDevice(reframe) {
+    const r = document.documentElement;
+    document.getElementById('devAuto').textContent = ': ' + DEV_NAMES[r.dataset.device] + (r.dataset.device === r.dataset.deviceAuto ? '' : ' (נבחר ידנית)');
+    let o = 'auto'; try { o = localStorage.getItem('g120_device') || 'auto'; } catch {}
+    pickSeg(document.getElementById('devSeg'), o);
+    stageNote(); pipe.setAO(!isMobile()); walker.fitFov();
+    if (reframe && currentView !== 'walk') show(currentView);
+  }
+  document.querySelectorAll('#devSeg button').forEach((b) => (b.onclick = () => {
+    try { b.dataset.v === 'auto' ? localStorage.removeItem('g120_device') : localStorage.setItem('g120_device', b.dataset.v); } catch {}
+    const before = dev(); window.__detectDevice(); applyDevice(before !== dev());
+  }));
+  let rzT = 0;
+  addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { const before = dev(); window.__detectDevice(); applyDevice(before !== dev() || currentView === 'cutaway'); }, 250); });
+  applyDevice(false);
+
+  document.querySelectorAll('#views button').forEach((b) => (b.onclick = () => show(b.dataset.view)));
+  addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h in VIEWS && h !== currentView) show(h); });
+  setFloor(floor);
+  const h0 = location.hash.slice(1);
+  show(h0 in VIEWS ? h0 : 'cutaway');
+  render();
+  window.__app = { M, stage, walker, show, setFloor, pipe, startMeasure, measureTap, applySun };
+</script>
+
+</body>
+</html>

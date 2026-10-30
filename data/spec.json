@@ -1,0 +1,752 @@
+{
+ "source": "מפרט מכר בת גלים, חיפה – דירה 120, דגם G, קומה 27, בניין 1 · צ.מ.ח המרמן & אפריקה התחדשות עירונית · 05.05.2026 (מותנה בהיתר)",
+ "areas": {
+  "unit_m2": 156.9,
+  "balconies_m2": [
+   22.6
+  ],
+  "page": "תוכנית מכר 1:50 (טבלת טיפוס G)"
+ },
+ "heights": {
+  "ceiling": 2.75,
+  "drop_min": 2.05,
+  "drop_model": 2.45,
+  "floor_to_floor": 3.2,
+  "page": 15,
+  "note": "גובה קומה 3.20 לפי מפלסי הקומות בתוכניות (81.20…94.00…97.20)"
+ },
+ "building": {
+  "floors": "קרקע, גלריה, 2–28, גג; קומה 27 במפלס +94.00",
+  "unit": 120,
+  "floor": 27,
+  "page": 4
+ },
+ "rooms": {
+  "entrance": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳",
+   "door": {
+    "type": "door",
+    "material": "פלדה לביטחון (רב-בריח)",
+    "page": 18
+   },
+   "page": 15
+  },
+  "living": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "opening": {
+    "type": "slider",
+    "material": "אלומיניום מזוגג, הזזה כנף על כנף",
+    "shutter": "electric",
+    "page": 18
+   },
+   "page": 15
+  },
+  "kitchen": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "ceramic",
+    "size_cm": [
+     10,
+     30
+    ],
+    "height_m": 0.55,
+    "note": "חיפוי כ-50–60 ס״מ מעל משטח ארון תחתון; שאר הקירות טיח וצבע",
+    "page": 15
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "page": 15
+  },
+  "corridor": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳",
+   "page": 15
+  },
+  "bed2": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "opening": {
+    "type": "window",
+    "material": "אלומיניום מזוגג, הזזה",
+    "shutter": "electric",
+    "page": 18
+   },
+   "page": 15
+  },
+  "laundry": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳",
+   "opening": {
+    "type": "window",
+    "material": "אלומיניום מזוגג, הזזה (אל המסתור)",
+    "shutter": "none",
+    "page": 19
+   },
+   "page": 15
+  },
+  "mistor": {
+   "floor": {
+    "material": "none",
+    "note": "ללא ריצוף (טבלה 2)",
+    "page": 15
+   },
+   "walls": {
+    "material": "plaster",
+    "note": "טיח או אחר; מסתור מאלומיניום בחזית",
+    "page": 18
+   },
+   "ceiling": "—",
+   "note": "דוד 150 ל׳ ומעבי מיזוג (עמ׳ 23, 26)",
+   "page": 15
+  },
+  "master": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "opening": {
+    "type": "window",
+    "material": "אלומיניום מזוגג, הזזה",
+    "shutter": "electric",
+    "page": 18
+   },
+   "page": 15
+  },
+  "masterCloset": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "page": 15
+  },
+  "masterBath": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     60,
+     60
+    ],
+    "options": [
+     "33×33",
+     "45×45",
+     "30×60",
+     "60×60",
+     "20×60/20×70"
+    ],
+    "choice": "buyer",
+    "note": "ריצוף פורצלן בחדרי רחצה; במקלחת ריצוף משופע",
+    "page": 16
+   },
+   "walls": {
+    "material": "ceramic/porcelain",
+    "size_cm": [
+     30,
+     60
+    ],
+    "options": [
+     "30×60",
+     "30×90",
+     "45×90",
+     "60×120"
+    ],
+    "height_m": 2.45,
+    "choice": "buyer",
+    "note": "חיפוי קירות לגובה תקרה/תקרת משנה או עד סיום אריח שלם",
+    "page": 15
+   },
+   "ceiling": "תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳",
+   "page": 15
+  },
+  "bath": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     60,
+     60
+    ],
+    "options": [
+     "33×33",
+     "45×45",
+     "30×60",
+     "60×60",
+     "20×60/20×70"
+    ],
+    "choice": "buyer",
+    "note": "ריצוף פורצלן בחדרי רחצה; במקלחת ריצוף משופע",
+    "page": 16
+   },
+   "walls": {
+    "material": "ceramic/porcelain",
+    "size_cm": [
+     30,
+     60
+    ],
+    "options": [
+     "30×60",
+     "30×90",
+     "45×90",
+     "60×120"
+    ],
+    "height_m": 2.45,
+    "choice": "buyer",
+    "note": "חיפוי קירות לגובה תקרה/תקרת משנה או עד סיום אריח שלם",
+    "page": 15
+   },
+   "ceiling": "תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳",
+   "page": 15
+  },
+  "mamad": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "בטון מזוין לפי הג״א",
+    "page": 15
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "opening": {
+    "type": "mamad",
+    "material": "דלת פלדה לפי הג״א נפתחת החוצה; חלון אלומיניום מזוגג + כנף פלדה",
+    "shutter": "steel",
+    "page": 18
+   },
+   "page": 15
+  },
+  "bed4": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "opening": {
+    "type": "window",
+    "material": "אלומיניום מזוגג, הזזה",
+    "shutter": "electric",
+    "page": 19
+   },
+   "page": 15
+  },
+  "closet4": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     100,
+     100
+    ],
+    "options": [
+     "80×80",
+     "100×100"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן סוג א׳, כ-80/80 או כ-100/100, לבחירה מספק החברה",
+    "page": 16
+   },
+   "walls": {
+    "material": "plaster + acrylic paint",
+    "note": "טיח + צבע אקרילי (סופרקריל או ש״ע), לבן",
+    "page": 16
+   },
+   "ceiling": "טיח + צבע; כ-2.75 מ׳ (מפרט 3.1)",
+   "page": 15
+  },
+  "bath4": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     60,
+     60
+    ],
+    "options": [
+     "33×33",
+     "45×45",
+     "30×60",
+     "60×60",
+     "20×60/20×70"
+    ],
+    "choice": "buyer",
+    "note": "ריצוף פורצלן בחדרי רחצה; במקלחת ריצוף משופע",
+    "page": 16
+   },
+   "walls": {
+    "material": "ceramic/porcelain",
+    "size_cm": [
+     30,
+     60
+    ],
+    "options": [
+     "30×60",
+     "30×90",
+     "45×90",
+     "60×120"
+    ],
+    "height_m": 2.45,
+    "choice": "buyer",
+    "note": "חיפוי קירות לגובה תקרה/תקרת משנה או עד סיום אריח שלם",
+    "page": 15
+   },
+   "ceiling": "תקרת משנה (גבס) למעבר תעלות מיזוג; מפרט: לא פחות מ-2.05 מ׳",
+   "page": 15
+  },
+  "balcony": {
+   "floor": {
+    "material": "porcelain",
+    "size_cm": [
+     33,
+     33
+    ],
+    "options": [
+     "33×33",
+     "20×60"
+    ],
+    "choice": "buyer",
+    "note": "פורצלן נגד החלקה, בשיפוע לניקוז",
+    "page": 16
+   },
+   "walls": {
+    "material": "חיפוי/ציפוי חיצוני לפי סעיף 2.6",
+    "page": 15
+   },
+   "ceiling": "מקורה",
+   "page": 15
+  }
+ },
+ "kitchen": {
+  "lower_cabinets_m": "כ-9 מ׳ כולל (תחתון + עליון + בילד-אין)",
+  "countertop": "אבן קיסר (קוורץ) כ-2 ס״מ, 5 דגמים",
+  "sink": "כיור אגן יחיד (סיליקוורץ/נירוסטה), סוללה פרח/מערבל נשלף",
+  "doors": "MDF פורמייקה, 6 גוונים, טריקה שקטה",
+  "page": 17
+ },
+ "sanitary": [
+  {
+   "room": "kitchen",
+   "item": "sink",
+   "type": "אגן יחיד, התקנה שטוחה/תחתונה",
+   "page": 20
+  },
+  {
+   "room": "bath",
+   "item": "bathtub",
+   "type": "אמבטיה אקרילית",
+   "size_cm": [
+    160,
+    70
+   ],
+   "page": 21
+  },
+  {
+   "room": "bath",
+   "item": "wc",
+   "type": "אסלה תלויה, ארגז שטיפה סמוי",
+   "page": 21
+  },
+  {
+   "room": "bath",
+   "item": "basin",
+   "type": "כיור אינטגרלי בארון (60–120 ס״מ)",
+   "page": 17
+  },
+  {
+   "room": "masterBath",
+   "item": "shower",
+   "type": "ריצוף משופע, סוללה רב-דרך + מוט",
+   "page": 21
+  },
+  {
+   "room": "masterBath",
+   "item": "wc",
+   "type": "אסלה תלויה, ארגז שטיפה סמוי",
+   "page": 21
+  },
+  {
+   "room": "masterBath",
+   "item": "basin",
+   "type": "כיור אינטגרלי בארון",
+   "page": 17
+  },
+  {
+   "room": "bath4",
+   "item": "shower",
+   "type": "ריצוף משופע, סוללה רב-דרך + מוט",
+   "page": 21
+  },
+  {
+   "room": "bath4",
+   "item": "wc",
+   "type": "אסלה תלויה, ארגז שטיפה סמוי",
+   "page": 21
+  },
+  {
+   "room": "bath4",
+   "item": "basin",
+   "type": "כיור אינטגרלי בארון",
+   "page": 17
+  },
+  {
+   "room": "laundry",
+   "item": "washer connection",
+   "type": "חיבור מים וניקוז למכונת כביסה + פתח 4״ למייבש",
+   "page": 21
+  }
+ ],
+ "openings": [
+  {
+   "room": "entrance",
+   "type": "door",
+   "material": "פלדה לביטחון",
+   "page": 18
+  },
+  {
+   "room": "living",
+   "type": "slider",
+   "material": "אלומיניום מזוגג נגרר כ.ע.כ",
+   "shutter": "electric",
+   "page": 18
+  },
+  {
+   "room": "living",
+   "type": "window",
+   "material": "אלומיניום מזוגג נגרר",
+   "shutter": "electric",
+   "page": 18
+  },
+  {
+   "room": "master",
+   "type": "window",
+   "material": "אלומיניום מזוגג נגרר",
+   "shutter": "electric",
+   "page": 18
+  },
+  {
+   "room": "bed2",
+   "type": "window",
+   "material": "אלומיניום מזוגג נגרר",
+   "shutter": "electric",
+   "page": 18
+  },
+  {
+   "room": "mamad",
+   "type": "mamad",
+   "material": "דלת ופלדה לפי הג״א + חלון",
+   "shutter": "steel",
+   "page": 18
+  },
+  {
+   "room": "bed4",
+   "type": "window",
+   "material": "אלומיניום מזוגג נגרר",
+   "shutter": "electric",
+   "page": 19
+  },
+  {
+   "room": "laundry",
+   "type": "window",
+   "material": "אלומיניום מזוגג נגרר",
+   "shutter": "none",
+   "page": 19
+  },
+  {
+   "room": "bath",
+   "type": "vent",
+   "material": "אוורור מכני, ללא חלון",
+   "page": 19
+  },
+  {
+   "room": "masterBath",
+   "type": "vent",
+   "material": "אוורור מכני, ללא חלון",
+   "page": 19
+  },
+  {
+   "room": "bath4",
+   "type": "vent",
+   "material": "אוורור מכני, ללא חלון",
+   "page": 19
+  }
+ ],
+ "electrical": [
+  {
+   "room": "entrance",
+   "lights": 1,
+   "sockets": 0,
+   "page": 24
+  },
+  {
+   "room": "living",
+   "lights": 1,
+   "sockets": 6,
+   "page": 24
+  },
+  {
+   "room": "kitchen",
+   "lights": 1,
+   "sockets": 4,
+   "page": 24
+  },
+  {
+   "room": "living",
+   "lights": 1,
+   "sockets": 1,
+   "note": "פינת אוכל",
+   "page": 24
+  },
+  {
+   "room": "corridor",
+   "lights": 2,
+   "sockets": 0,
+   "page": 24
+  },
+  {
+   "room": "master",
+   "lights": 1,
+   "sockets": 3,
+   "note": "+ הכנה למאוורר תקרה",
+   "page": 24
+  },
+  {
+   "room": "bed2",
+   "lights": 1,
+   "sockets": 3,
+   "page": 24
+  },
+  {
+   "room": "bed4",
+   "lights": 1,
+   "sockets": 3,
+   "page": 24
+  },
+  {
+   "room": "masterCloset",
+   "lights": 1,
+   "sockets": 0,
+   "page": 24
+  },
+  {
+   "room": "closet4",
+   "lights": 1,
+   "sockets": 0,
+   "page": 24
+  },
+  {
+   "room": "mamad",
+   "lights": 1,
+   "sockets": 3,
+   "page": 24
+  },
+  {
+   "room": "bath",
+   "lights": 1,
+   "sockets": 1,
+   "page": 24
+  },
+  {
+   "room": "masterBath",
+   "lights": 1,
+   "sockets": 1,
+   "page": 24
+  },
+  {
+   "room": "bath4",
+   "lights": 1,
+   "sockets": 1,
+   "page": 24
+  },
+  {
+   "room": "laundry",
+   "lights": 1,
+   "sockets": 2,
+   "page": 24
+  },
+  {
+   "room": "balcony",
+   "lights": 1,
+   "sockets": 1,
+   "page": 24
+  }
+ ],
+ "hvac": {
+  "type": "מיני-מרכזי אינוורטר (למעט חדרי רחצה ושרות), תעלות ותריסי פיזור, תריס אוויר חוזר",
+  "page": 26
+ },
+ "water_heater": {
+  "type": "דוד 150 ל׳ במסתור הכביסה, מערכת משותפת (סולארית/משאבת חום)",
+  "page": 23
+ },
+ "other": [
+  "מעקה מרפסת לפי האדריכל",
+  "גוש 10919, חלקות 37,39,40,41,43; תוכנית חפ/מק/2400 (עמ׳ 4)"
+ ],
+ "parking": {
+  "stalls": [
+   "349",
+   "349B"
+  ],
+  "tandem": true,
+  "storage": "המחסן הצמוד לחניה 335",
+  "level": "גלריה",
+  "source": "user",
+  "note": "שוריין במשא ומתן; במפרט 05.05.2026 רשום חניה ---- ומחסן ----"
+ }
+}
